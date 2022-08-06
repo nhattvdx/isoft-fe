@@ -82,6 +82,7 @@ export class AppMenuComponent implements OnInit {
         // }
         this.model = [
             {
+                // home
                 label: 'left_menu.home',
                 items: [
                     {
@@ -102,11 +103,13 @@ export class AppMenuComponent implements OnInit {
                 ],
             },
             {
+                // category
                 label: 'left_menu.categories',
                 items: [
                     {
+                        // employee
                         label: 'left_menu.employee_management',
-                        icon: 'pi pi-fw pi-list',
+                        icon: 'pi pi-fw pi-id-card',
                         items: [
                             {
                                 label: 'left_menu.employee',
@@ -114,39 +117,469 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/uikit/employee'],
                             },
                             {
+                                label: 'left_menu.branch',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/branch'],
+                            },
+                            {
+                                label: 'left_menu.store',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/store'],
+                            },
+                            {
+                                label: 'left_menu.employee_type',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/employee-type'],
+                            },
+                            {
+                                label: 'left_menu.specialized',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/specialized'],
+                            },
+                            {
                                 label: 'left_menu.department',
                                 icon: 'pi pi-fw pi-building',
                                 routerLink: ['/uikit/department'],
                             },
+                            {
+                                label: 'left_menu.title',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/title'],
+                            },
+                            {
+                                label: 'left_menu.job_title_details',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/job-title-details'],
+                            },
+                            {
+                                label: 'left_menu.timekeeping_position',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/timekeeping-position'],
+                            },
+                            {
+                                label: 'left_menu.shift',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/shift'],
+                            },
                         ],
                     },
-                    // {
-                    //     label: 'left_menu.province',
-                    //     icon: 'pi pi-fw pi-map',
-                    //     routerLink: ['/uikit/province'],
-                    // },
-                    // {
-                    //     label: 'left_menu.district',
-                    //     icon: 'pi pi-fw pi-map',
-                    //     routerLink: ['/uikit/district'],
-                    // },
-                    // {
-                    //     label: 'left_menu.ward',
-                    //     icon: 'pi pi-fw pi-map',
-                    //     routerLink: ['/uikit/ward'],
-                    // },
+                    {
+                        // relationship
+                        label: 'left_menu.relationship',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.relatives',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/relatives'],
+                            },
+                            {
+                                label: 'left_menu.relation',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/relation'],
+                            },
+                        ],
+                    },
+                    {
+                        // customer
+                        label: 'left_menu.customer',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.customers',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/customers'],
+                            },
+                            {
+                                label: 'left_menu.customer_type',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/customer-type'],
+                            },
+                        ],
+                    },
+                    {
+                        // timekeeping
+                        label: 'left_menu.timekeeping',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.timekeeping',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/timekeeping'],
+                            },
+                            {
+                                label: 'left_menu.timekeeping_history',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/timekeeping-history'],
+                            },
+                            {
+                                label: 'left_menu.timekeeping_report',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/timekeeping-report'],
+                            },
+                        ],
+                    },
+                    {
+                        // work flow
+                        label: 'left_menu.workflow_management',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.workflow_management',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/workflow'],
+                            },
+                            {
+                                label: 'left_menu.workflow_type',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/workflow-type'],
+                            },
+                        ],
+                    },
+                    {
+                        // sell
+                        label: 'left_menu.sell',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.cashier',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/cashier'],
+                            },
+                            {
+                                label: 'left_menu.seller',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/seller'],
+                            },
+                            {
+                                label: 'left_menu.warehouse',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/warehouse'],
+                            },
+                            {
+                                label: 'left_menu.website_orders',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/website-orders'],
+                            },
+                            {
+                                label: 'left_menu.list_of_goods',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/list-of-goods'],
+                            },
+                            {
+                                // setup
+                                label: 'left_menu.setup',
+                                icon: 'pi pi-fw pi-id-card',
+                                items: [
+                                    {
+                                        label: 'left_menu.room_table',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/setup/room-table'],
+                                    },
+                                    {
+                                        label: 'left_menu.quota',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/setup/quota'],
+                                    },
+                                    {
+                                        label: 'left_menu.combo',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/setup/combo'],
+                                    },
+                                    {
+                                        label: 'left_menu.menu_of_goods',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/setup/menu-of-goods',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.inventory_control',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/setup/inventory-control',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.defective_goods',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/setup/defective-goods',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.accounting_link',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/setup/accounting-link',
+                                        ],
+                                    },
+                                ],
+                            },
+                            {
+                                // report
+                                label: 'left_menu.report',
+                                icon: 'pi pi-fw pi-id-card',
+                                items: [
+                                    {
+                                        label: 'left_menu.payment_history',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/sell-report/payment-history',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.profit_before_tax',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/sell-report/profit-before-tax',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.profit_after_tax',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/sell-report/profit-after-tax',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.details_book',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/sell-report/sell-details-book',
+                                        ],
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        // accounting
+                        label: 'left_menu.accounting',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.arise',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/arise'],
+                            },
+                            {
+                                label: 'left_menu.account',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/account'],
+                            },
+                            {
+                                // category
+                                label: 'left_menu.category',
+                                icon: 'pi pi-fw pi-id-card',
+                                items: [
+                                    {
+                                        label: 'left_menu.type_of_document',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/category/type-of-document'],
+                                    },
+                                    {
+                                        label: 'left_menu.bills',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/category/bills'],
+                                    },
+                                    {
+                                        label: 'left_menu.end_of_term_ending',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/category/end-of-term-ending',
+                                        ],
+                                    },
+                                ],
+                            },
+                            {
+                                // overreach report
+                                label: 'left_menu.overreach_report',
+                                icon: 'pi pi-fw pi-id-card',
+                                items: [
+                                    {
+                                        label: 'left_menu.account_balance_sheet',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/account-balance-sheet-overreach',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.license',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/license-overreach',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.list_of_vouchers',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/list-of-vouchers-overreach',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.ledger',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/ledger-overreach'],
+                                    },
+                                    {
+                                        label: 'left_menu.sign_up_for_vouchers',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/sign-up-for-vouchers-overreach',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.accounting_balance_sheet',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/accounting-balance-sheet-overreach',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.cash_flow_table',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/cash-flow-table-overreach',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.state_obligations',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/state-obligations-overreach',
+                                        ],
+                                    },
+                                ],
+                            },
+                            {
+                                // internal report
+                                label: 'left_menu.internal_report',
+                                icon: 'pi pi-fw pi-id-card',
+                                items: [
+                                    {
+                                        label: 'left_menu.account_balance_sheet',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/account-balance-sheet-internal',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.license',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/license-internal'],
+                                    },
+                                    {
+                                        label: 'left_menu.list_of_vouchers',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/list-of-vouchers-internal',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.ledger',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: ['/uikit/ledger-internal'],
+                                    },
+                                    {
+                                        label: 'left_menu.sign_up_for_vouchers',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/sign-up-for-vouchers-internal',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.accounting_balance_sheet',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/accounting-balance-sheet-internal',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.cash_flow_table',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/cash-flow-table-internal',
+                                        ],
+                                    },
+                                    {
+                                        label: 'left_menu.state_obligations',
+                                        icon: 'pi pi-fw pi-id-card',
+                                        routerLink: [
+                                            '/uikit/state-obligations-internal',
+                                        ],
+                                    },
+                                ],
+                            },
+                            {
+                                label: 'left_menu.tools_fixed_assets',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/tools-fixed-assets'],
+                            },
+                        ],
+                    },
+                    {
+                        // document
+                        label: 'left_menu.document',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.incomming_text',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/incoming-text'],
+                            },
+                            {
+                                label: 'left_menu.text_go',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/text-go'],
+                            },
+                        ],
+                    },
+                    {
+                        // website
+                        label: 'left_menu.website',
+                        icon: 'pi pi-fw pi-id-card',
+                        items: [
+                            {
+                                label: 'left_menu.slider',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/slider-web'],
+                            },
+                            {
+                                label: 'left_menu.intro',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/intro-web'],
+                            },
+                            {
+                                label: 'left_menu.product',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/product-web'],
+                            },
+                            {
+                                label: 'left_menu.branch',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/branch-web'],
+                            },
+                            {
+                                label: 'left_menu.recruit',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/recruit-web'],
+                            },
+                            {
+                                label: 'left_menu.news',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/news-web'],
+                            },
+                            {
+                                label: 'left_menu.social_network',
+                                icon: 'pi pi-fw pi-id-card',
+                                routerLink: ['/uikit/social-network-web'],
+                            },
+                        ],
+                    },
                 ],
             },
-            // {
-            //     label: 'left_menu.basic_categories',
-            //     items: [
-            //         {
-            //             label: 'left_menu.news',
-            //             icon: 'pi pi-fw pi-book',
-            //             routerLink: ['/uikit/new-feed'],
-            //         },
-            //     ],
-            // },
             // {
             //     label: 'Pages',
             //     items: [
@@ -194,7 +627,7 @@ export class AppMenuComponent implements OnInit {
         const nodeElement = <HTMLDivElement>event.target;
         if (event.code === 'Enter' || event.code === 'Space') {
             nodeElement.click();
-            event.preventDefault();
+            // event.preventDefault();
         }
     }
 }
