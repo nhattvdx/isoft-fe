@@ -179,6 +179,7 @@ import { RecruitWebComponent } from './components/website-module/recruit-web/rec
 import { NewsWebComponent } from './components/website-module/news-web/news-web.component';
 import { SocialNetworkWebComponent } from './components/website-module/social-network-web/social-network-web.component';
 import { StoreFormComponent } from './components/employee-module/store/components/store-form/store-form.component';
+import { BranchFormComponent } from './components/employee-module/branch/components/branch-form/branch-form.component';
 export function createTranslateLoader(http: HttpBackend) {
     return new TranslateHttpLoader(
         new HttpClient(http),
@@ -321,6 +322,7 @@ export function createTranslateLoader(http: HttpBackend) {
 
         // employee component
         BranchComponent,
+        BranchFormComponent,
         DepartmentComponent,
         DepartmentFormComponent,
         EmployeeTypeComponent,
