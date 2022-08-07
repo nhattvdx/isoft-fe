@@ -1,0 +1,28 @@
+<p-toast></p-toast>
+<p-dialog *ngIf="TargetForm.value" [header]="title" [(visible)]="display"
+    (onHide)="onCancel.emit({})" [modal]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="TargetForm" class="card mb-0">
+        <div class="p-fluid p-formgrid grid mt-2">
+            <!--code-->
+            <div class="field col-12">
+                <label htmlFor="code" [translate]="'label.code'"></label>
+                <input pInputText id="code" [(ngModel)]="TargetForm.value.code" formControlName="code"
+                    [ngClass]="checkValidValidator('code')" />
+                <small *ngIf="checkValidValidator('code')" class="p-error"
+                    [innerHTML]="'info.invalid_code' | translate"></small>
+            </div>
+            <!--name-->
+            <div class="field col-12">
+                <label htmlFor="name" [translate]="'label.name'"></label>
+                <input pInputText id="name" [(ngModel)]="TargetForm.value.name" formControlName="name"
+                    [ngClass]="checkValidValidator('name')" />
+                <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.invalid_name' | translate"></small>
+            </div>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="onCancel.emit({})" [label]="'button.back' | translate" styleClass="p-button-outlined"></p-button>
+        <p-button icon="pi pi-check" (click)="onSubmit()" [label]="'button.save' | translate"></p-button>
+    </ng-template>
+</p-dialog>

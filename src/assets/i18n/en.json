@@ -75,7 +75,8 @@
         "product": "Product",
         "recruit": "Recruit",
         "news": "News",
-        "social_network": "Social network"
+        "social_network": "Social network",
+        "contract_type_management":"Loại nhân sự"
     },
     "label": {
         "empty": " ",

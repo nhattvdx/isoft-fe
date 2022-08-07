@@ -180,6 +180,12 @@ import { NewsWebComponent } from './components/website-module/news-web/news-web.
 import { SocialNetworkWebComponent } from './components/website-module/social-network-web/social-network-web.component';
 import { StoreFormComponent } from './components/employee-module/store/components/store-form/store-form.component';
 import { BranchFormComponent } from './components/employee-module/branch/components/branch-form/branch-form.component';
+import { EmployeeTypeFormComponent } from './components/employee-module/employee-type/employee-type-form/employee-type-form.component';
+import { SpecializedFormComponent } from './components/employee-module/specialized/specialized-form/specialized-form.component';
+import { TitleFormComponent } from './components/employee-module/title/title-form/title-form.component';
+import { ShiftFormComponent } from './components/employee-module/shift/shift-form/shift-form.component';
+import { TimekeepingPositionFormComponent } from './components/employee-module/timekeeping-position/timekeeping-position-form/timekeeping-position-form.component';
+import { JobTitleDetailsFormComponent } from './components/employee-module/job-title-details/job-title-details-form/job-title-details-form.component';
 export function createTranslateLoader(http: HttpBackend) {
     return new TranslateHttpLoader(
         new HttpClient(http),
@@ -396,7 +402,13 @@ export function createTranslateLoader(http: HttpBackend) {
         BranchWebComponent,
         RecruitWebComponent,
         NewsWebComponent,
-        SocialNetworkWebComponent
+        SocialNetworkWebComponent,
+        EmployeeTypeFormComponent,
+        SpecializedFormComponent,
+        TitleFormComponent,
+        ShiftFormComponent,
+        TimekeepingPositionFormComponent,
+        JobTitleDetailsFormComponent
     ],
     providers: [
         // { provide: LocationStrategy, useClass: HashLocationStrategy },

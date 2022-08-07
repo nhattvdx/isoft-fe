@@ -75,7 +75,8 @@
         "product": "Sản phẩm",
         "recruit": "Tuyển dụng",
         "news": "Tin tức",
-        "social_network": "Các mạng xã hội"
+        "social_network": "Các mạng xã hội",
+        "contract_type_management":"Loại nhân sự"
     },
     "label": {
         "empty": " ",
