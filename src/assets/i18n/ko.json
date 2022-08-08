@@ -75,7 +75,8 @@
         "product": "[KO]Product",
         "recruit": "[KO]Recruit",
         "news": "[KO]News",
-        "social_network": "[KO]Social network"
+        "social_network": "[KO]Social network",
+        "contract_type_management":"Loại nhân sự"
     },
     "label": {
         "empty": " ",
