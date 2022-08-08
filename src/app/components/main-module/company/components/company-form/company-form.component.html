@@ -30,8 +30,8 @@
         <!--charterCapital-->
         <div class="field col-12 sm:col-6">
             <label htmlFor="charterCapital" [translate]="'label.charter_capital'"></label>
-            <input pInputText id="charterCapital" [(ngModel)]="companyForm.value.charterCapital" formControlName="charterCapital"
-                [ngClass]="checkValidValidator('charterCapital')" />
+            <p-inputNumber id="charterCapital" [(ngModel)]="companyForm.value.charterCapital" formControlName="charterCapital"
+                [ngClass]="checkValidValidator('charterCapital')"></p-inputNumber>
             <small *ngIf="checkValidValidator('charterCapital')" class="p-error" [innerHTML]="'info.charter_capital' | translate"></small>
         </div>
 
@@ -187,7 +187,7 @@
             <label htmlFor="fileOfBusinessRegistrationCertificate" [translate]="'label.file_of_business'"></label>
             <p-button icon="pi pi-plus-circle" (click)="fileOfBusinessRegistrationCertificate.click()" [label]="'button.upload_file' | translate">
             </p-button>
-            <div *ngIf="!companyForm.value.fileOfBusinessRegistrationCertificate.includes('.pdf')">
+            <div *ngIf="companyForm.value.fileOfBusinessRegistrationCertificate && !companyForm.value.fileOfBusinessRegistrationCertificate.includes('.pdf')">
                 <img class="mt-4" src="{{ serverURLImage + '/' + companyForm.value.fileOfBusinessRegistrationCertificate }}"
                     alt="Image business registration certificate" width="200" height="200" />
             </div>

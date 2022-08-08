@@ -5,6 +5,7 @@
         "dashboard": "Dashboard",
         "categories": "Categories",
         "initial_declaration": "Initial declaration",
+        "odd_decimal": "Odd decimal",
         "employee_management": "Employee management",
         "employee": "Employee",
         "department": "Department",
@@ -147,7 +148,16 @@
         "last_login": "Last login",
         "user_management": "Employee management",
         "add_user": "Add new employee",
-        "edit_user": "Edit employee"
+        "edit_user": "Edit employee",
+        "quantity_define": "Odd decimal Quantity",
+        "unit_cost_define": "Original Decimal Unit Price",
+        "money_define": "Original Decimals to Money",
+        "currency_define": "Currency Foreign Currency",
+        "decimal_rate_define": "Odd Decimal Rate",
+        "day_type_define": "Day - month - year",
+        "decimal_unit_define": "Decimal (0.00)",
+        "thousand_unit_define": "Thousands of millions (1,000)",
+        "unit_type": "Unit type"
     },
     "button": {
         "sign_in": "Sign In",
@@ -170,10 +180,15 @@
     },
     "question": {
         "delete_user_header": "Delete personnel",
-        "delete_user_content": "Are you sure you want to delete this user?"
+        "delete_user_content": "Are you sure you want to delete this user?",
+        "delete_department_header": "Delete department",
+        "delete_department_content": "Are you sure you want to delete this department?"
     },
     "success": {
-        "change_pass_successfully": "Change password successfully"
+        "change_pass_successfully": "Change password successfully",
+        "create": "Create information successfully",
+        "update": "Update information successfully",
+        "delete": "Delete information successfully"
     },
     "error": {
         "0": "Something was wrong",

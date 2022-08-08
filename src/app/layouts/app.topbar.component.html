@@ -20,10 +20,6 @@
     </div>
 
     <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-        <!-- <a class="p-link layout-topbar-button">
-            <i class="pi pi-calendar"></i>
-            <span>Calendar</span>
-        </a> -->
         <a (click)="displayChangePassword = true; registFrm.reset()" class="p-link layout-topbar-button">
             <i class="pi pi-lock"></i>
             <span>Password</span>

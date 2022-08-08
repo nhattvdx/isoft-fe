@@ -65,17 +65,7 @@
                         </th>
                         <th style="width:300px">
                             <div class="flex justify-content-between align-items-center">
-                                <span [translate]="'label.province'"></span>
-                            </div>
-                        </th>
-                        <th style="width:300px">
-                            <div class="flex justify-content-between align-items-center">
-                                <span [translate]="'label.district'"></span>
-                            </div>
-                        </th>
-                        <th style="width:300px">
-                            <div class="flex justify-content-between align-items-center">
-                                <span [translate]="'label.ward'"></span>
+                                <span [translate]="'label.address'"></span>
                             </div>
                         </th>
                         <th *ngIf="isMobile"></th>
@@ -100,20 +90,13 @@
                             <span class="p-column-title" [translate]="'label.department'"></span>{{ user.departmentName }}
                         </td>
                         <td style="width:200px">
-                            <span class="p-column-title" [translate]="'label.role'"></span>
-                            {{getRoleName(user.userRoleId) | uppercase}}
+                            <span class="p-column-title" [translate]="'label.role'"></span>{{ user.userRoleName }}
                         </td>
                         <td style="width:200px">
                             <span class="p-column-title" [translate]="'label.last_login'"></span>{{ user.lastLogin | date : 'dd/MM/yyyy hh:mm:ss' }}
                         </td>
                         <td style="width:300px">
-                            <span class="p-column-title" [translate]="'label.province'"></span>{{ user.provinceName }}
-                        </td>
-                        <td style="width:300px">
-                            <span class="p-column-title" [translate]="'label.district'"></span>{{ user.districtName }}
-                        </td>
-                        <td style="width:300px">
-                            <span class="p-column-title" [translate]="'label.ward'"></span>{{ user.wardName }}
+                            <span class="p-column-title" [translate]="'label.address'"></span>{{ user.addressFull }}
                         </td>
                         <td *ngIf="isMobile">
                             <button pButton class="p-button-warning" icon="pi pi-pencil" (click)="getDetail(user.id)"></button>

@@ -277,6 +277,22 @@ const AppUtil = {
             ],
         };
     },
+    getBeginDeclareTypes(): any {
+        return {
+            dayType: [
+                { value: '-', label: '-' },
+                { value: '/', label: '/' },
+            ],
+            decimalUnit: [
+                { value: ',', label: '"," (comma)' },
+                { value: '.', label: '"." (dots)' },
+            ],
+            thousandUnit: [
+                { value: '.', label: '"." (dots)' },
+                { value: ',', label: '"," (comma)' },
+            ],
+        };
+    },
     getUserSortTypes(translateService: TranslateService): any {
         return this.translateList(
             translateService,

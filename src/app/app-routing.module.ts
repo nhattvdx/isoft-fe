@@ -79,7 +79,7 @@ import { SocialNetworkWebComponent } from './components/website-module/social-ne
                         // main module
                         { path: 'company-info', component: CompanyComponent },
                         {
-                            path: 'initial-declaration',
+                            path: 'odd-decimal',
                             component: BeginDeclareComponent,
                         },
                         // employee module

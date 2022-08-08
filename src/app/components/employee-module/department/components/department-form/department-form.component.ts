@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import * as _ from 'lodash';
 import { MessageService } from 'primeng/api';
 import { DepartmentService } from 'src/app/service/department.service';
 import AppConstant from 'src/app/utilities/app-constants';
-import AppData from 'src/app/utilities/app-data';
 import AppUtil from 'src/app/utilities/app-util';
 
 
@@ -15,9 +13,6 @@ import AppUtil from 'src/app/utilities/app-util';
     styles: [
         `
             :host ::ng-deep {
-                #phonePrefix .p-dropdown {
-                    width: 93px;
-                }
             }
         `,
     ],
@@ -32,9 +27,6 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
     title: string = '';
 
     departmentForm: FormGroup = new FormGroup({});
-
-    optionCountries = AppData.COUNTRIES;
-    countryCodes: any[] = [];
 
     isSubmitted = false;
     isInvalidForm = false;
@@ -77,7 +69,6 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        this.countryCodes = AppUtil.getCountries();
     }
 
     checkValidValidator(fieldName: string) {
@@ -145,9 +136,5 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
             newData.id = 0;
         }
         return newData;
-    }
-
-    getDayOfWeek(date: any) {
-        return new Date(date.year, date.month, date.day).getDay();
     }
 }

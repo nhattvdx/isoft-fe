@@ -84,11 +84,6 @@ export class BeginDeclareComponent implements OnInit {
             });
     }
 
-    getDetail(companyId) {
-        this.isEdit = true;
-        this.beginDeclareFormComponent.getDetail(companyId);
-    }
-
     onDelete(companyId) {
         let message;
         this.translateService

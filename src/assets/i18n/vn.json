@@ -5,6 +5,7 @@
         "dashboard": "Trang chủ",
         "categories": "Danh mục",
         "initial_declaration": "Khai báo ban đầu",
+        "odd_decimal": "Số lẻ thập phân",
         "employee_management": "Quản lý nhân sự",
         "employee": "Nhân viên",
         "department": "Phòng ban",
@@ -147,7 +148,16 @@
         "last_login": "Lần cuối đăng nhập",
         "user_management": "Quản lý nhân sự",
         "add_user": "Thêm mới một nhân sự",
-        "edit_user": "Chỉnh sửa một nhân sự"
+        "edit_user": "Chỉnh sửa một nhân sự",
+        "quantity_define": "Số lẻ thập phân Số lượng",
+        "unit_cost_define": "Số lẻ thập phân Đơn giá",
+        "money_define": "Số lẻ thập phân Thành tiền",
+        "currency_define": "Số lẻ thập phân Ngoại tệ",
+        "decimal_rate_define": "Số lẻ thập phân Tỷ giá",
+        "day_type_define": "Ngày - tháng - năm",
+        "decimal_unit_define": "Phần thập thân (0.00)",
+        "thousand_unit_define": "Hàng ngàn triệu (1,000)",
+        "unit_type": "Loại phân cách"
     },
     "button": {
         "sign_in": "Đăng nhập",
@@ -169,11 +179,16 @@
     "type": {
     },
     "success": {
-        "change_pass_successfully": "Đổi mật khẩu thành công"
+        "change_pass_successfully": "Đổi mật khẩu thành công",
+        "create": "Tạo thông tin thành công",
+        "update": "Cập nhật thông tin thành công",
+        "delete": "Xóa thông tin thành công"
     },
     "question": {
         "delete_user_header": "Xóa nhân sự",
-        "delete_user_content": "Bạn có chắc chắn muốn xóa nhân sự này?"
+        "delete_user_content": "Bạn có chắc chắn muốn xóa nhân sự này?",
+        "delete_department_header": "Xóa phòng ban",
+        "delete_department_content": "Bạn có chắc chắn muốn xóa phòng ban này?"
     },
     "error": {
         "0": "Đã có sự cố xảy ra. Vui lòng liên hệ nhà quản trị",

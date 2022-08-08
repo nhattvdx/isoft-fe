@@ -80,6 +80,14 @@ export class CompanyFormComponent implements OnInit {
             userUpdated: [0, [Validators.required]],
             websiteName: ['', [Validators.required]],
             note: ['', [Validators.required]],
+            quatity: [''],
+            unitCost: [''],
+            money: [''],
+            currency: [''],
+            decimalRate: [''],
+            dayType: [''],
+            decimalUnit: [''],
+            thousandUnit: [''],
         });
     }
 
@@ -128,6 +136,14 @@ export class CompanyFormComponent implements OnInit {
                 userUpdated: 0,
                 websiteName: this.formData.websiteName,
                 note: this.formData.note,
+                quatity: this.formData.quatity,
+                unitCost: this.formData.unitCost,
+                money: this.formData.money,
+                currency: this.formData.currency,
+                decimalRate: this.formData.decimalRate,
+                dayType: this.formData.dayType,
+                decimalUnit: this.formData.decimalUnit,
+                thousandUnit: this.formData.thousandUnit,
             });
             console.log(this.companyForm.value);
         });
@@ -170,6 +186,14 @@ export class CompanyFormComponent implements OnInit {
                     userUpdated: 0,
                     websiteName: this.formData.websiteName,
                     note: this.formData.note,
+                    quatity: this.formData.quatity,
+                    unitCost: this.formData.unitCost,
+                    money: this.formData.money,
+                    currency: this.formData.currency,
+                    decimalRate: this.formData.decimalRate,
+                    dayType: this.formData.dayType,
+                    decimalUnit: this.formData.decimalUnit,
+                    thousandUnit: this.formData.thousandUnit,
                 });
                 console.log(this.companyForm.value);
             });
@@ -277,6 +301,7 @@ export class CompanyFormComponent implements OnInit {
                 this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
             ).format(this.appConstant.FORMAT_DATE.T_DATE)
         );
+        newData.charterCapital = parseInt(newData.charterCapital);
         return newData;
     }
 

@@ -1,22 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ColumnFilter, Table } from 'primeng/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api'
 import { TypeData } from 'src/app/models/common.model';
 import { environment } from 'src/environments/environment';
 import AppUtil from 'src/app/utilities/app-util';
-import { User } from 'src/app/models/user.model';
-import { District } from 'src/app/models/district.model';
-import { Province } from 'src/app/models/province.model';
-import { Ward } from 'src/app/models/ward.model';
 import { TranslateService } from '@ngx-translate/core';
 import AppConstant from 'src/app/utilities/app-constants';
-import { Religion } from 'src/app/models/religion.model';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
-import { DepartmentService } from 'src/app/service/department.service';
+import { DepartmentService, PageFilterDepartment } from 'src/app/service/department.service';
 import { Department } from 'src/app/models/department.model';
-import { PageFilterUser } from 'src/app/service/user.service';
-
-type AOA = any[][];
 
 @Component({
     templateUrl: './department.component.html',
@@ -51,27 +42,20 @@ export class DepartmentComponent implements OnInit {
 
     first = 0;
 
-    @ViewChild('dt') table: Table;
-
-    @ViewChild('filter') filter: ElementRef;
-
-    public getParams: PageFilterUser = {
+    public getParams: PageFilterDepartment = {
         page: 1,
         pageSize: 5,
         sortField: 'id',
         isSort: true,
-        searchText: ''
+        searchText: '',
     };
     public totalRecords = 0;
     public totalPages = 0;
-    public myTarget: number;
 
     public isLoading: boolean = false;
-
     public lstDepartments: Department[] = [];
 
     display: boolean = false;
-
     isMobile = screen.width <= 1199;
 
     formData: any = {};
@@ -80,9 +64,6 @@ export class DepartmentComponent implements OnInit {
 
     pendingRequest: any;
 
-    districts: District[] = [];
-    provinces: Province[] = [];
-    wards: Ward[] = [];
     roles: any[] = [];
 
     constructor(
@@ -101,28 +82,10 @@ export class DepartmentComponent implements OnInit {
         });
     }
 
-    formatCurrency(value) {
-        return value.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        });
-    }
-
     onSearch(event) {
         if (event.key === 'Enter') {
             this.getDepartments();
         }
-    }
-
-    onChangeSort(event, type) {
-        if (type === 'sortType') {
-            this.getParams.isSort = event.value;
-        }
-        this.getDepartments();
-    }
-
-    clearFilter(columnFilter: ColumnFilter, field: string) {
-        columnFilter.clearFilter();
     }
 
     getDepartments(event?: any, isExport: boolean = false): void {
@@ -134,14 +97,14 @@ export class DepartmentComponent implements OnInit {
             this.getParams.page = event.first / event.rows + 1;
             this.getParams.pageSize = event.rows;
         }
-        // if (isExport) {
-        //     this.religionService
-        //         .getExcelReport(this.getParams)
-        //         .subscribe((res: any) => {
-        //             AppUtil.scrollToTop();
-        //             this.openDownloadFile(res.data, 'excel');
-        //         });
-        // }
+        if (isExport) {
+            this.departmentService
+                .getExcelReport(this.getParams)
+                .subscribe((res: any) => {
+                    AppUtil.scrollToTop();
+                    this.openDownloadFile(res.data, 'excel');
+                });
+        }
         // remove undefined value
         Object.keys(this.getParams).forEach(
             (k) => this.getParams[k] == null && delete this.getParams[k]
@@ -166,6 +129,23 @@ export class DepartmentComponent implements OnInit {
                 this.isEdit = true;
                 this.showDialog();
             });
+    }
+
+    private openDownloadFile(_fileName: string, _ft: string) {
+        try {
+            this.isLoading = false;
+            var _l = this.departmentService.getFolderPathDownload(
+                _fileName,
+                _ft
+            );
+            if (_l) window.open(_l);
+        } catch (ex) {
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Error Message',
+                detail: 'File invalid',
+            });
+        }
     }
 
     onDelete(departmentId) {

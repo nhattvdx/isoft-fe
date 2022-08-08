@@ -90,16 +90,6 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-home',
                         routerLink: ['/uikit'],
                     },
-                    {
-                        label: 'left_menu.company_info',
-                        icon: 'pi pi-fw pi-book',
-                        routerLink: ['/uikit/company-info'],
-                    },
-                    {
-                        label: 'left_menu.initial_declaration',
-                        icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['/uikit/initial-declaration'],
-                    },
                 ],
             },
             {
@@ -376,7 +366,9 @@ export class AppMenuComponent implements OnInit {
                                     {
                                         label: 'left_menu.type_of_document',
                                         icon: 'pi pi-fw pi-send',
-                                        routerLink: ['/uikit/category/type-of-document'],
+                                        routerLink: [
+                                            '/uikit/category/type-of-document',
+                                        ],
                                     },
                                     {
                                         label: 'left_menu.bills',
@@ -575,6 +567,23 @@ export class AppMenuComponent implements OnInit {
                                 label: 'left_menu.social_network',
                                 icon: 'pi pi-fw pi-star-fill',
                                 routerLink: ['/uikit/social-network-web'],
+                            },
+                        ],
+                    },
+                    {
+                        // initial declaration
+                        label: 'left_menu.initial_declaration',
+                        icon: 'pi pi-fw pi-check-square',
+                        items: [
+                            {
+                                label: 'left_menu.company_info',
+                                icon: 'pi pi-fw pi-book',
+                                routerLink: ['/uikit/company-info'],
+                            },
+                            {
+                                label: 'left_menu.odd_decimal',
+                                icon: 'pi pi-fw pi-circle-on',
+                                routerLink: ['/uikit/odd-decimal'],
                             },
                         ],
                     },

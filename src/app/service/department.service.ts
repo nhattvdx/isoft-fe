@@ -7,11 +7,7 @@ import { Page, TypeData } from '../models/common.model';
 import AppConstant from '../utilities/app-constants';
 import { Department } from '../models/department.model';
 
-export interface PageFilterDepartment extends Page {
-    provinceIds?: number[];
-    districtIds?: number[];
-    wardIds?: number[];
-}
+export interface PageFilterDepartment extends Page {}
 
 let _prefix = `${AppConstant.DEFAULT_URLS.API}/Departments`;
 

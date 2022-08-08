@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -39,147 +40,74 @@ export class BeginDeclareFormComponent implements OnInit {
     countryCodes: any[] = [];
 
     isSubmitted = false;
-    isInvalidForm = false;
-    failPassword: boolean = false;
-
-    invalidSignDate: boolean = false;
 
     serverURLImage = environment.serverURLImage;
     types: any = {};
+    unitType: any = {};
 
     constructor(
         private fb: FormBuilder,
         private translateService: TranslateService,
         private messageService: MessageService,
-        private companyService: CompanyService
+        private companyService: CompanyService,
+        private router: Router
     ) {
         this.companyForm = this.fb.group({
             id: [''],
-            name: ['', [Validators.required]],
-            accordingAccountingRegime: [0, [Validators.required]],
-            address: ['', [Validators.required]],
-            assignPerson: ['', [Validators.required]],
-            businessType: [0, [Validators.required]],
-            charterCapital: [0, [Validators.required]],
-            email: ['', [Validators.required]],
-            fax: ['', [Validators.required]],
-            fileLogo: ['', [Validators.required]],
-            fileOfBusinessRegistrationCertificate: ['', [Validators.required]],
-            methodCalcExportPrice: [0, [Validators.required]],
+            quatity: ['', [Validators.required]],
+            unitCost: ['', [Validators.required]],
+            money: ['', [Validators.required]],
+            currency: ['', [Validators.required]],
+            decimalRate: ['', [Validators.required]],
+            dayType: ['', [Validators.required]],
+            decimalUnit: ['', [Validators.required]],
+            thousandUnit: ['', [Validators.required]],
+            // others params
             mst: ['', [Validators.required]],
-            nameOfCEO: ['', [Validators.required]],
-            nameOfChiefAccountant: ['', [Validators.required]],
-            nameOfChiefSupplier: ['', [Validators.required]],
-            nameOfStorekeeper: ['', [Validators.required]],
-            nameOfTreasurer: ['', [Validators.required]],
-            noteOfCEO: ['', [Validators.required]],
-            noteOfChiefAccountant: ['', [Validators.required]],
-            noteOfChiefSupplier: ['', [Validators.required]],
-            phone: ['', [Validators.required]],
-            signDate: ['', [Validators.required]],
-            userUpdated: [0, [Validators.required]],
-            websiteName: ['', [Validators.required]],
-            note: ['', [Validators.required]],
         });
     }
 
     onReset() {
-        this.isInvalidForm = false;
         this.companyForm.reset();
     }
 
     ngOnInit() {
         this.countryCodes = this.appUtil.getCountries();
         this.getLastInfo();
-        this.types = this.appUtil.getCompanyTypes();
+        this.types = this.appUtil.getBeginDeclareTypes();
     }
 
     getLastInfo() {
         this.companyService.getLastCompanyInfo().subscribe((response: any) => {
-            this.formData = response.data;
-            this.companyForm.setValue({
-                id: this.formData.id,
-                name: this.formData.name,
-                accordingAccountingRegime:
-                    this.formData.accordingAccountingRegime,
-                address: this.formData.address,
-                assignPerson: this.formData.assignPerson,
-                businessType: this.formData.businessType,
-                charterCapital: this.formData.charterCapital,
-                email: this.formData.email,
-                fax: this.formData.fax,
-                fileLogo: this.formData.fileLogo,
-                fileOfBusinessRegistrationCertificate:
-                    this.formData.fileOfBusinessRegistrationCertificate,
-                methodCalcExportPrice: this.formData.methodCalcExportPrice,
-                mst: this.formData.mst,
-                nameOfCEO: this.formData.nameOfCeo,
-                nameOfChiefAccountant: this.formData.nameOfChiefAccountant,
-                nameOfChiefSupplier: this.formData.nameOfChiefSupplier,
-                nameOfStorekeeper: this.formData.nameOfStorekeeper,
-                nameOfTreasurer: this.formData.nameOfTreasurer,
-                noteOfCEO: this.formData.noteOfCeo,
-                noteOfChiefAccountant: this.formData.noteOfChiefAccountant,
-                noteOfChiefSupplier: this.formData.noteOfChiefSupplier,
-                phone: this.formData.phone,
-                signDate: moment(this.formData.signDate).format(
-                    this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
-                ),
-                userUpdated: 0,
-                websiteName: this.formData.websiteName,
-                note: this.formData.note,
-            });
-            console.log(this.companyForm.value);
+            if (response.data) {
+                this.formData = response.data;
+                this.companyForm.setValue({
+                    id: this.formData.id,
+                    quatity: this.formData.quatity,
+                    unitCost: this.formData.unitCost,
+                    money: this.formData.money,
+                    currency: this.formData.currency,
+                    decimalRate: this.formData.decimalRate,
+                    dayType: this.formData.dayType,
+                    decimalUnit: this.formData.decimalUnit,
+                    thousandUnit: this.formData.thousandUnit,
+                    mst: this.formData.mst,
+                });
+                this.unitType =
+                    this.companyForm.value.decimalUnit === ',' &&
+                    this.companyForm.value.thousandUnit === '.'
+                        ? 'en'
+                        : 'vn';
+            } else {
+                this.router.navigate(['/uikit/company-info']);
+            }
         });
     }
 
-    getDetail(companyId) {
-        console.log(companyId);
-        this.companyService
-            .getCompanyDetail(companyId)
-            .subscribe((response: Company) => {
-                this.formData = response;
-                this.companyForm.setValue({
-                    id: this.formData.id,
-                    name: this.formData.name,
-                    accordingAccountingRegime:
-                        this.formData.accordingAccountingRegime,
-                    address: this.formData.address,
-                    assignPerson: this.formData.assignPerson,
-                    businessType: this.formData.businessType,
-                    charterCapital: this.formData.charterCapital,
-                    email: this.formData.email,
-                    fax: this.formData.fax,
-                    fileLogo: this.formData.fileLogo,
-                    fileOfBusinessRegistrationCertificate:
-                        this.formData.fileOfBusinessRegistrationCertificate,
-                    methodCalcExportPrice: this.formData.methodCalcExportPrice,
-                    mst: this.formData.mst,
-                    nameOfCEO: this.formData.nameOfCeo,
-                    nameOfChiefAccountant: this.formData.nameOfChiefAccountant,
-                    nameOfChiefSupplier: this.formData.nameOfChiefSupplier,
-                    nameOfStorekeeper: this.formData.nameOfStorekeeper,
-                    nameOfTreasurer: this.formData.nameOfTreasurer,
-                    noteOfCEO: this.formData.noteOfCeo,
-                    noteOfChiefAccountant: this.formData.noteOfChiefAccountant,
-                    noteOfChiefSupplier: this.formData.noteOfChiefSupplier,
-                    phone: this.formData.phone,
-                    signDate: moment(this.formData.signDate).format(
-                        this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
-                    ),
-                    userUpdated: 0,
-                    websiteName: this.formData.websiteName,
-                    note: this.formData.note,
-                });
-                console.log(this.companyForm.value);
-            });
-    }
-
     checkValidValidator(fieldName: string) {
-        return ((this.companyForm.controls[fieldName].dirty ||
+        return (this.companyForm.controls[fieldName].dirty ||
             this.companyForm.controls[fieldName].touched) &&
-            this.companyForm.controls[fieldName].invalid) ||
-            (this.isInvalidForm && this.companyForm.controls[fieldName].invalid)
+            this.companyForm.controls[fieldName].invalid
             ? 'ng-invalid ng-dirty'
             : '';
     }
@@ -187,11 +115,9 @@ export class BeginDeclareFormComponent implements OnInit {
     checkValidMultiValidator(fieldNames: string[]) {
         for (let i = 0; i < fieldNames.length; i++) {
             if (
-                ((this.companyForm.controls[fieldNames[i]].dirty ||
+                (this.companyForm.controls[fieldNames[i]].dirty ||
                     this.companyForm.controls[fieldNames[i]].touched) &&
-                    this.companyForm.controls[fieldNames[i]].invalid) ||
-                (this.isInvalidForm &&
-                    this.companyForm.controls[fieldNames[i]].invalid)
+                this.companyForm.controls[fieldNames[i]].invalid
             ) {
                 return true;
             }
@@ -201,8 +127,6 @@ export class BeginDeclareFormComponent implements OnInit {
 
     onSubmit() {
         this.isSubmitted = true;
-        this.isInvalidForm = false;
-        this.invalidSignDate = false;
         if (this.companyForm.invalid) {
             this.messageService.add({
                 severity: 'error',
@@ -211,7 +135,6 @@ export class BeginDeclareFormComponent implements OnInit {
                     'info.please_check_again'
                 ),
             });
-            this.isInvalidForm = true;
             this.isSubmitted = false;
             return;
         }
@@ -220,23 +143,18 @@ export class BeginDeclareFormComponent implements OnInit {
             AppUtil.cleanObject(this.companyForm.value)
         );
 
-        if (this.invalidSignDate) {
-            this.showMessfail();
-            return;
-        }
-        console.log(newData);
-        this.onCancel.emit({});
-        if (this.isEdit) {
-            this.companyService
-                .updateCompany(newData, this.formData.id)
-                .subscribe((res) => {
-                    this.onCancel.emit({});
+        this.companyService
+            .updateCompany(newData, this.formData.id)
+            .subscribe((res) => {
+                this.messageService.add({
+                    severity: 'success',
+                    detail: this.appUtil.translate(
+                        this.translateService,
+                        'success.update'
+                    ),
                 });
-        } else {
-            this.companyService.createCompany(newData).subscribe((res) => {
                 this.onCancel.emit({});
             });
-        }
     }
 
     showMessfail() {
@@ -247,18 +165,7 @@ export class BeginDeclareFormComponent implements OnInit {
                 'info.please_check_again'
             ),
         });
-        this.isInvalidForm = true;
         this.isSubmitted = false;
-    }
-
-    onChangeSignDate(event) {
-        let signDate = this.appUtil.formatLocalTimezone(
-            moment(
-                event,
-                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
-            ).format(this.appConstant.FORMAT_DATE.T_DATE)
-        );
-        this.invalidSignDate = signDate === 'Invalid date';
     }
 
     onReloadCompanyInfo() {
@@ -271,40 +178,24 @@ export class BeginDeclareFormComponent implements OnInit {
         if (!(newData.id > 0)) {
             newData.id = 0;
         }
-        newData.signDate = this.appUtil.formatLocalTimezone(
-            moment(
-                newData.signDate,
-                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
-            ).format(this.appConstant.FORMAT_DATE.T_DATE)
-        );
+
         return newData;
     }
 
-    getDayOfWeek(date: any) {
-        return new Date(date.year, date.month, date.day).getDay();
-    }
-
-    doAttachFileBusiness(event: any): void {
-        let image: FormData = new FormData();
-        image.append('file', event.target?.files[0]);
-        this.companyService.uploadFiles(image).subscribe((res) => {
-            if (res.body) {
-                this.companyForm.controls[
-                    'fileOfBusinessRegistrationCertificate'
-                ].setValue(res.body.imageUrl);
-            }
-        });
-    }
-
-    doAttachFileLogo(event: any): void {
-        let image: FormData = new FormData();
-        image.append('file', event.target?.files[0]);
-        this.companyService.uploadFiles(image).subscribe((res) => {
-            if (res.body) {
-                this.companyForm.controls['fileLogo'].setValue(
-                    res.body.imageUrl
-                );
-            }
-        });
+    onChangeUnit(type) {
+        switch (type) {
+            case 'vn':
+                {
+                    this.companyForm.controls['decimalUnit'].setValue('.');
+                    this.companyForm.controls['thousandUnit'].setValue(',');
+                }
+                break;
+            case 'en':
+                {
+                    this.companyForm.controls['decimalUnit'].setValue(',');
+                    this.companyForm.controls['thousandUnit'].setValue('.');
+                }
+                break;
+        }
     }
 }
