@@ -3,12 +3,12 @@ import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { PageFilterUser, UserService } from 'src/app/service/user.service';
-import { User } from 'src/app/models/user.model';
 import { AuthData } from 'src/app/models/auth.model';
 import { AppConfig } from 'src/app/configs/appconfig';
 import { Product } from 'src/app/models/product';
 import { ConfigService } from 'src/app/service/app.config.service';
 import { ProductService } from 'src/app/service/productservice';
+import MiniSearch from 'minisearch';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -65,7 +65,6 @@ export class DashboardComponent implements OnInit {
     constructor(
         private productService: ProductService,
         private authService: AuthService,
-        private userService: UserService,
         public configService: ConfigService
     ) {}
 
@@ -78,9 +77,97 @@ export class DashboardComponent implements OnInit {
                 this.updateChartOptions();
             }
         );
-        this.productService
-            .getProductsSmall()
-            .then((data) => (this.products = data));
+        this.productService.getProductsSmall().then((data) => {
+            this.products = data;
+            // hạn chế của search like
+            // Khi không đánh index thì tốc độ tìm kiếm chậm.
+            // Kết quả tìm kiếm nhiều nhưng độ nhiễu cao, từ đồng nghĩa nhiều.
+            // Gặp vấn đề trong tìm kiếm tiếng việt có dấu và không dấu.
+
+            // https://www.npmjs.com/package/minisearch FTS
+            // full index search. Sẽ tăng số lượng kết quả search lên
+            // ngoài ra kết quả sẽ hiển thị score điểm giống nhau, và tên trường giống
+
+            // ưu điểm FTS
+            // Kết quả search trả về nhiều.
+            // Khi đánh index thì tốc độ search Nhanh
+            // Tối ưu hơn việc sử dụng LIKE khi thao tác với các trường text lớn.
+            // Nếu như người dùng nhập “co be mua dong” thì dùng mệnh đề LIKE sẽ không search ra được “Cô bé mùa Đông”, nhưng FTS có thể giải quyết vấn đề này
+            let miniSearch = new MiniSearch({
+                fields: ['code', 'name'], // fields to index for full-text search
+                storeFields: ['id', 'code', 'name'], // fields to return with search results
+            });
+            miniSearch.addAll(data);
+            // search. Sẽ tìm kiếm minisearch field theo từ khóa
+            // prefix = true để tự động gán keyword thiếu thành keyword đủ và tìm kiếm
+            let results = miniSearch.search('vbb', { prefix: true });
+            // autoSuggest. Sẽ tự động gán keyword thiếu thành keyword đủ và tìm kiếm
+            // let results = miniSearch.autoSuggest('Earri');
+            console.log(data, results);
+            // result FTS
+            // code: "vbb124btr"
+            // id: "1008"
+            // match:
+            // vbb124btr: ['code']
+            // name: "Game Controller"
+            // score: 0.9339516396985341
+            // terms: ['vbb124btr']
+        });
+
+        // Example FTS(full text search)
+        // A collection of documents we want to search among
+        const documents = [
+            {
+                id: 1,
+                title: 'Moby Dick',
+                text: 'Call me Ishmael. Some years ago...',
+            },
+            {
+                id: 2,
+                title: 'Zen and the Art of Motorcycle Maintenance',
+                text: 'I can see by my watch...',
+            },
+            {
+                id: 3,
+                title: 'Neuromancer',
+                text: 'The sky above the port was...',
+            },
+            {
+                id: 4,
+                title: 'Zen and the Art of Archery',
+                text: 'At first sight it must seem...',
+            },
+            // ...and more
+        ];
+
+        // Create the search engine, and set `title` and `text` as searchable fields
+        let miniSearch = new MiniSearch({ fields: ['title', 'text'] });
+
+        // Index all documents (this is fast!)
+        miniSearch.addAll(documents);
+
+        // Search with default options. It will return the id of the matching documents,
+        // along with a relevance score and match information
+        miniSearch.search('zen art motorcycle');
+        // => [ { id: 2, score: 2.77258, match: { ... } }, { id: 4, score: 1.38629, match: { ... } } ]
+
+        // Search only within specific fields
+        miniSearch.search('zen', { fields: ['title'] });
+
+        // Boost some fields to give them more importance (here "title")
+        miniSearch.search('zen', { boost: { title: 2 } });
+
+        // Prefix search (so that 'moto' will match 'motorcycle')
+        miniSearch.search('moto', { prefix: true });
+
+        // Fuzzy search, in this example, with a max edit distance of 0.2 * term length.
+        // The mispelled 'ismael' will match 'ishmael'.
+        miniSearch.search('ismael', { fuzzy: 0.2 });
+
+        // Get suggestions for a partial search
+        miniSearch.autoSuggest('zen ar');
+        // => [ { suggestion: 'zen archery art', terms: [ 'zen', 'archery', 'art' ], score: 1.73332 },
+        //      { suggestion: 'zen art', terms: [ 'zen', 'art' ], score: 1.21313 } ]
 
         this.basicData = {
             labels: [
