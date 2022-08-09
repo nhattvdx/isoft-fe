@@ -296,7 +296,7 @@ const AppUtil = {
     getUserSortTypes(translateService: TranslateService): any {
         return this.translateList(
             translateService,
-            ['label.id', 'label.username', 'label.code'],
+            ['label.id', 'label.full_name', 'label.birthday'],
             {}
         ).pipe(
             map((trans) => {
@@ -306,12 +306,12 @@ const AppUtil = {
                         label: trans['label.id'],
                     },
                     {
-                        code: 'username',
-                        label: trans['label.username'],
+                        code: 'fullName',
+                        label: trans['label.full_name'],
                     },
                     {
-                        code: 'code',
-                        label: trans['label.code'],
+                        code: 'birthday',
+                        label: trans['label.birthday'],
                     },
                 ];
             })
