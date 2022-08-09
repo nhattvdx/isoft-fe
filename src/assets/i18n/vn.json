@@ -87,6 +87,7 @@
         "name": "Tên",
         "manager_name": "Tên quản lý",
         "branch_management": "Quản lý chi nhánh",
+        "contract_type_management": "Quản lý hợp đồng nhân sự",
         "full_name": "Họ tên",
         "ascending": "Tăng dần",
         "descending": "Giảm dần",
