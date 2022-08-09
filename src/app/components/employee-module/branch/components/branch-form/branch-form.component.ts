@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from 'primeng/api';
-import { BranchService } from 'src/app/service/branch.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+import {MessageService} from 'primeng/api';
+import {BranchService} from 'src/app/service/branch.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -45,6 +46,7 @@ export class BranchFormComponent implements OnInit, OnChanges {
             }
         );
     }
+
     ngOnChanges(changes: SimpleChanges): void {
         if (
             this.isEdit &&
@@ -58,6 +60,7 @@ export class BranchFormComponent implements OnInit, OnChanges {
                 name: this.formData.name,
                 managerName: this.formData.managerName,
             });
+            console.log('this.branchForm', this.branchForm)
         } else {
             this.title = AppUtil.translate(this.translateService, 'label.add_branch');
         }
@@ -73,10 +76,10 @@ export class BranchFormComponent implements OnInit, OnChanges {
 
     checkValidValidator(fieldName: string) {
         return ((this.branchForm.controls[fieldName].dirty ||
-            this.branchForm.controls[fieldName].touched) &&
+                this.branchForm.controls[fieldName].touched) &&
             this.branchForm.controls[fieldName].invalid) ||
-            (this.isInvalidForm &&
-                this.branchForm.controls[fieldName].invalid)
+        (this.isInvalidForm &&
+            this.branchForm.controls[fieldName].invalid)
             ? 'ng-invalid ng-dirty'
             : '';
     }
@@ -85,7 +88,7 @@ export class BranchFormComponent implements OnInit, OnChanges {
         for (let i = 0; i < fieldNames.length; i++) {
             if (
                 ((this.branchForm.controls[fieldNames[i]].dirty ||
-                    this.branchForm.controls[fieldNames[i]].touched) &&
+                        this.branchForm.controls[fieldNames[i]].touched) &&
                     this.branchForm.controls[fieldNames[i]].invalid) ||
                 (this.isInvalidForm &&
                     this.branchForm.controls[fieldNames[i]].invalid)
@@ -115,17 +118,31 @@ export class BranchFormComponent implements OnInit, OnChanges {
         let newData = this.cleanObject(
             AppUtil.cleanObject(this.branchForm.value)
         );
-        console.log(newData);
-        this.onCancel.emit({});
+        // this.onCancel.emit({});
         if (this.isEdit) {
             this.branchService
                 .updateBranch(newData, this.formData.id)
-                .subscribe((res) => {
+                .subscribe((res: any) => {
+                    if (res?.status === 400) {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Thông báo',
+                            detail: res?.error?.msg || ''
+                        })
+                        return
+                    }
                     this.onCancel.emit({});
                 });
         } else {
-            this.branchService.createBranch(newData).subscribe((res) => {
-                this.onCancel.emit({});
+            this.branchService.createBranch(newData).subscribe((res: any) => {
+                if (res?.code === 400) {
+                    this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                    return
+                }else{
+                    this.onCancel.emit({});
+                }
+            }, err => {
+                console.log('err', err)
             });
         }
     }

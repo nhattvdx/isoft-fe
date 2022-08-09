@@ -131,6 +131,7 @@ export class BranchComponent implements OnInit {
             .getBranchDetail(branchId)
             .subscribe((response: Branch) => {
                 this.formData = response;
+                console.log('response',response)
                 this.isEdit = true;
                 this.showDialog();
             });
