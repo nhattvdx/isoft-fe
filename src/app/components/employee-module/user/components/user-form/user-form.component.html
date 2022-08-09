@@ -5,8 +5,7 @@
         <!-- Setting Account -->
         <div class="flex flex-wrap">
             <h4 class="m-0 mr-2" [translate]="'label.account'"></h4>
-            <!-- 'userRoleId', -->
-            <div class="flex align-items-center" *ngIf="(isInvalidForm && checkValidMultiValidator(['username', 'fullName', 'code', 'provinceIdWork', 'districtIdWork', 'wardIdWork']))">
+            <div class="flex align-items-center" *ngIf="(isInvalidForm && checkValidMultiValidator(['username', 'userRoleIds', 'fullName', 'code', 'provinceIdWork', 'districtIdWork', 'wardIdWork']))">
                 <span class="p-error" style="margin-top: 2px;" [translate]="'info.enter_account_info' | translate"></span>
             </div>
         </div>
@@ -17,21 +16,21 @@
                 <input pInputText id="username" [(ngModel)]="userForm.value.username" formControlName="username"
                     [ngClass]="checkValidValidator('username')" [readonly]="isEdit" />
                 <small *ngIf="checkValidValidator('username')" class="p-error"
-                    [innerHTML]="'info.invalid_username' | translate"></small>
+                    [innerHTML]="'info.username' | translate"></small>
             </div>
             <!--fullName-->
             <div class="field col-12 md:col-3">
                 <label htmlFor="fullName" [translate]="'label.full_name'"></label>
                 <input pInputText id="fullName" [(ngModel)]="userForm.value.fullName" formControlName="fullName"
                     [ngClass]="checkValidValidator('fullName')" />
-                <small *ngIf="checkValidValidator('fullName')" class="p-error" [innerHTML]="'info.invalid_full_name' | translate"></small>
+                <small *ngIf="checkValidValidator('fullName')" class="p-error" [innerHTML]="'info.full_name' | translate"></small>
             </div>
             <!--code-->
             <div class="field col-12 md:col-3">
                 <label htmlFor="code" [translate]="'label.code'"></label>
                 <input pInputText id="code" [(ngModel)]="userForm.value.code" formControlName="code"
                     [ngClass]="checkValidValidator('code')" />
-                <small *ngIf="checkValidValidator('code')" class="p-error" [innerHTML]="'info.invalid_code' | translate"></small>
+                <small *ngIf="checkValidValidator('code')" class="p-error" [innerHTML]="'info.code' | translate"></small>
             </div>
             <!--role-->
             <div class="field col-12 md:col-3">
@@ -41,38 +40,42 @@
                     [(ngModel)]="userForm.value.userRoleIds" [formControlName]="'userRoleIds'"
                     [ngClass]="checkValidValidator('userRoleIds')">
                 </p-multiSelect>
+                <small *ngIf="checkValidValidator('userRoleIds')" class="p-error" [innerHTML]="'info.role' | translate"></small>
             </div>
             <!--province-->
             <div class="field col-12 md:col-3">
                 <label htmlFor="provinceId" [translate]="'label.province'"></label>
                 <p-dropdown id="provinceId" [options]="provinces" [optionLabel]="'name'" [optionValue]="'id'" showClear="true"
                     [(ngModel)]="userForm.value.provinceId" [formControlName]="'provinceId'" [appendTo]="'body'" [placeholder]="'label.empty' | translate"
-                    [filter]="true" filterBy="name"
+                    [filter]="true" filterBy="name" [ngClass]="checkValidValidator('provinceId')"
                     (onChange)="getDistrict($event)"></p-dropdown>
+                <small *ngIf="checkValidValidator('provinceId')" class="p-error" [innerHTML]="'info.province' | translate"></small>
             </div>
             <!--district-->
             <div class="field col-12 md:col-3">
                 <label htmlFor="districtId" [translate]="'label.district'"></label>
                 <p-dropdown id="districtId" [options]="districts" [optionLabel]="'name'" [optionValue]="'id'" showClear="true"
                     [(ngModel)]="userForm.value.districtId" [formControlName]="'districtId'" [appendTo]="'body'" [placeholder]="'label.empty' | translate"
-                    [filter]="true" filterBy="name"
+                    [filter]="true" filterBy="name" [ngClass]="checkValidValidator('districtId')"
                     (onChange)="getWard($event)"></p-dropdown>
+                <small *ngIf="checkValidValidator('districtId')" class="p-error" [innerHTML]="'info.district' | translate"></small>
             </div>
             <!--ward-->
             <div class="field col-12 md:col-3">
                 <label htmlFor="wardId" [translate]="'label.ward'"></label>
                 <p-dropdown id="wardId" [options]="wards" [optionLabel]="'name'" [optionValue]="'id'" showClear="true"
                     [(ngModel)]="userForm.value.wardId" [formControlName]="'wardId'" [appendTo]="'body'" [placeholder]="'label.empty' | translate"
-                    [filter]="true" filterBy="name"></p-dropdown>
+                    [filter]="true" filterBy="name" [ngClass]="checkValidValidator('wardId')"></p-dropdown>
+                <small *ngIf="checkValidValidator('wardId')" class="p-error" [innerHTML]="'info.ward' | translate"></small>
             </div>
             <!-- Phòng ban công tác -->
             <div class="field col-12 md:col-3">
                 <label htmlFor="departmentId" [translate]="'Phòng ban công tác'"></label>
                 <p-dropdown id="departmentId" [options]="departments" [optionLabel]="'name'" [optionValue]="'id'"
-                    [(ngModel)]="userForm.value.departmentId" [formControlName]="'departmentId'"
+                    [(ngModel)]="userForm.value.departmentId" [formControlName]="'departmentId'" [placeholder]="'label.empty' | translate"
                     [ngClass]="checkValidValidator('departmentId')" [filter]="true" filterBy="name"></p-dropdown>
                 <small *ngIf="checkValidValidator('departmentId')" class="p-error"
-                    [translate]="'Nhập thông tin phòng ban công tác'"></small>
+                    [translate]="'info.department' | translate"></small>
             </div>
         </div>
 
@@ -81,7 +84,7 @@
         <div class="flex flex-wrap">
             <h4 class="m-0 mr-2" [translate]="'label.change_password_if_need'"></h4>
             <div class="flex align-items-center" *ngIf="isInvalidForm || (!isEdit && checkValidMultiValidator(['password', 'confirmPassword']))">
-                <span class="p-error" style="margin-top: 2px;" [translate]="'info.enter_account_info' | translate"></span>
+                <span class="p-error" style="margin-top: 2px;" [translate]="'info.enter_password_info' | translate"></span>
             </div>
         </div>
         <div class="p-fluid p-formgrid grid mt-2">
@@ -94,7 +97,7 @@
                     [formControlName]="'password'" [maxlength]="'32'" [pattern]="appConstant.PATTERNS.PASSWORD" />
                 <small class="p-error"
                     *ngIf="(!isEdit && checkValidValidator('password')) || userForm.get('password').hasError('pattern')"
-                    [innerHTML]="'info.invalid_password' | translate"></small>
+                    [innerHTML]="'info.password' | translate"></small>
             </div>
             <!--confirmPassword-->
             <div class="field col-12 md:col-3">
