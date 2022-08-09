@@ -122,17 +122,27 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
       let newData = this.cleanObject(
           AppUtil.cleanObject(this.MajorForm.value)
       );
-      console.log(newData);
-      this.onCancel.emit({});
+      // console.log(newData);
+      // this.onCancel.emit({});
       if (this.isEdit) {
           this.MajorService
               .updateMajor(newData, this.formData.id)
-              .subscribe((res) => {
-                  this.onCancel.emit({});
+              .subscribe((res:any) => {
+                  if (res?.code === 400) {
+                      this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                      return
+                  }else{
+                      this.onCancel.emit({});
+                  }
               });
       } else {
-          this.MajorService.createMajor(newData).subscribe((res) => {
-              this.onCancel.emit({});
+          this.MajorService.createMajor(newData).subscribe((res:any) => {
+              if (res?.code === 400) {
+                  this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                  return
+              }else{
+                  this.onCancel.emit({});
+              }
           });
       }
   }

@@ -1,6 +1,7 @@
 export interface PositionDetail {
     id: number;
     name?: string;
-    code?: string;
+    positionId?: number;
+    positionName?: string;
     isDelete?: boolean;
 }

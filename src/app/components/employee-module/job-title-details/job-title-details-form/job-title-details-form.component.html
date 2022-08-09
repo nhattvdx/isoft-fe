@@ -5,11 +5,10 @@
         <div class="p-fluid p-formgrid grid mt-2">
             <!--code-->
             <div class="field col-12">
-                <label htmlFor="code" [translate]="'label.code'"></label>
-                <input pInputText id="code" [(ngModel)]="PositionDetailForm.value.code" formControlName="code"
-                    [ngClass]="checkValidValidator('code')" />
-                <small *ngIf="checkValidValidator('code')" class="p-error"
-                    [innerHTML]="'info.invalid_code' | translate"></small>
+                <label htmlFor="code" [translate]="'label.position'"></label>
+                <p-dropdown id="provinceId" [options]="positions" [optionLabel]="'name'" [optionValue]="'id'" showClear="true"
+                            [formControlName]="'positionId'" [appendTo]="'body'" [placeholder]="'label.empty' | translate"
+                            [filter]="true" filterBy="name"></p-dropdown>
             </div>
             <!--name-->
             <div class="field col-12">
