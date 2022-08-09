@@ -16,6 +16,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import AppConstant from 'src/app/utilities/app-constants';
 import { AuthService } from 'src/app/service/auth.service';
 import { PageFilterUser, UserService } from 'src/app/service/user.service';
+import { UserRoleService } from 'src/app/service/user-role.service';
 
 type AOA = any[][];
 
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit {
         pageSize: 5,
         sortField: 'id',
         isSort: true,
-        keyword: ''
+        keyword: '',
     };
     public totalRecords = 0;
     public totalPages = 0;
@@ -91,7 +92,7 @@ export class UserComponent implements OnInit {
         private readonly provinceService: ProvinceService,
         private readonly wardService: WardService,
         private readonly translateService: TranslateService,
-        private readonly authService: AuthService,
+        private readonly userRoleService: UserRoleService,
         private readonly confirmationService: ConfirmationService
     ) {}
 
@@ -99,7 +100,7 @@ export class UserComponent implements OnInit {
         this.getListDistrict();
         this.getListProvince();
         this.getListWard();
-        // this.getListRole();
+        this.getListRole();
         AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
             this.sortFields = res;
         });
@@ -243,11 +244,9 @@ export class UserComponent implements OnInit {
     }
 
     getListRole() {
-        this.authService.getListRole().subscribe((response: any) => {
-            this.roles = response.data.filter(
-                (x) => x.code.toString().toLowerCase() !== 'employer'
-            );
+        this.userRoleService.getAllUserRole().subscribe((response: any) => {
             console.log(this.roles);
+            this.roles = response.data;
         });
     }
 

@@ -34,13 +34,14 @@
                 <small *ngIf="checkValidValidator('code')" class="p-error" [innerHTML]="'info.invalid_code' | translate"></small>
             </div>
             <!--role-->
-            <!-- <div class="field col-12 md:col-3">
-                <label htmlFor="userRoleId" [translate]="'label.role'"></label>
-                <p-dropdown id="userRoleId" [options]="roles" [optionLabel]="'title'" [optionValue]="'id'" [appendTo]="'body'"
-                    [(ngModel)]="userForm.value.userRoleId" [formControlName]="'userRoleId'"
-                    [ngClass]="checkValidValidator('userRoleId')">
-                </p-dropdown>
-            </div> -->
+            <div class="field col-12 md:col-3">
+                {{userForm.value.userRoleIds}}
+                <label htmlFor="userRoleIds" [translate]="'label.role'"></label>
+                <p-multiSelect id="userRoleIds" [options]="roles" [optionLabel]="'title'" [optionValue]="'id'" [appendTo]="'body'"
+                    [(ngModel)]="userForm.value.userRoleIds" [formControlName]="'userRoleIds'"
+                    [ngClass]="checkValidValidator('userRoleIds')">
+                </p-multiSelect>
+            </div>
             <!--province-->
             <div class="field col-12 md:col-3">
                 <label htmlFor="provinceId" [translate]="'label.province'"></label>

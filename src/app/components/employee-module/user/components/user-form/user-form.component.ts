@@ -20,9 +20,6 @@ import { WardService } from 'src/app/service/ward.service';
     styles: [
         `
             :host ::ng-deep {
-                #phonePrefix .p-dropdown {
-                    width: 93px;
-                }
             }
         `,
     ],
@@ -71,10 +68,7 @@ export class UserFormComponent implements OnInit, OnChanges {
                 provinceId: ['0'],
                 districtId: ['0'],
                 wardId: ['0'],
-                // userRoleId: [
-                //     AppConstant.ROLE_TYPE.ADMIN,
-                //     [Validators.required],
-                // ],
+                userRoleIds: [[Validators.required]],
                 avatar: [''],
                 departmentId: ['', Validators.required],
             },
@@ -113,7 +107,11 @@ export class UserFormComponent implements OnInit, OnChanges {
                 provinceId: this.formData.provinceId,
                 districtId: this.formData.districtId,
                 wardId: this.formData.wardId,
-                // userRoleId: this.formData.userRoleId,
+                userRoleIds: Array.from(this.formData.userRoleIds)
+                    .map((x: string) => {
+                        return parseInt(x);
+                    })
+                    .filter((x) => x),
                 departmentId: this.formData.departmentId,
                 avatar: this.formData.avatar,
             });
@@ -229,12 +227,11 @@ export class UserFormComponent implements OnInit, OnChanges {
         if (!(newData.id > 0)) {
             newData.id = 0;
         }
-        // newData.userRoleId = parseInt(newData.userRoleId) || 0;
         newData.districtId = parseInt(newData.districtId) || 0;
         newData.provinceId = parseInt(newData.provinceId) || 0;
         newData.wardId = parseInt(newData.wardId) || 0;
-        newData.unemployeeTime = parseInt(newData.unemployeeTime) || 0;
         newData.avatar = newData.avatar || '';
+        newData.userRoleIds = newData.userRoleIds.filter((x) => x).join(',');
         // delete params form
         delete newData.confirmPassword;
         return newData;
