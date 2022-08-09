@@ -85,6 +85,8 @@
         "id": "ID",
         "code": "Code",
         "name": "Name",
+        "manager_name": "Manager name",
+        "branch_management": "Branch Management",
         "full_name": "Full Name",
         "ascending": "Ascending",
         "descending": "Descending",

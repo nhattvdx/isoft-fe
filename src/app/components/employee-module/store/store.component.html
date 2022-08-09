@@ -43,6 +43,11 @@
                                 <span [translate]="'label.name'"></span>
                             </div>
                         </th>
+                        <th style="width:700px">
+                            <div class="flex justify-content-between align-items-center">
+                                <span [translate]="'label.manager_name'"></span>
+                            </div>
+                        </th>
                         <th *ngIf="isMobile"></th>
                         <th *ngIf="!isMobile" style="width:200px" alignFrozen="right" pFrozenColumn [frozen]="true"></th>
 					</tr>
@@ -57,6 +62,9 @@
                         </td>
                         <td style="width:700px">
                             <span class="p-column-title" [translate]="'label.name'"></span>{{ user.name }}
+                        </td>
+                        <td style="width:700px">
+                            <span class="p-column-title" [translate]="'label.manager_name'"></span>{{ user.managerName }}
                         </td>
                         <td *ngIf="isMobile">
                             <button pButton class="p-button-warning" icon="pi pi-pencil" (click)="getDetail(user.id)"></button>

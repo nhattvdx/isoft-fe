@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { Page, TypeData } from '../models/common.model';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
+import {Page, TypeData} from '../models/common.model';
 import AppConstant from '../utilities/app-constants';
-import { Branch } from '../models/branch.model';
+import {Branch} from '../models/branch.model';
 
 export interface PageFilterBranch extends Page {
 }
@@ -16,10 +16,11 @@ let _prefix = `${AppConstant.DEFAULT_URLS.API}/Branchs`;
     providedIn: 'root',
 })
 export class BranchService {
-    constructor(private readonly httpClient: HttpClient) {}
+    constructor(private readonly httpClient: HttpClient) {
+    }
 
     public getListBranch(params: any): Observable<TypeData<Branch>> {
-        return this.httpClient.get(`${_prefix}`, { params }).pipe(
+        return this.httpClient.get(`${_prefix}`, {params}).pipe(
             map((Branch: TypeData<Branch>) => {
                 return Branch;
             })
@@ -83,7 +84,7 @@ export class BranchService {
     deleteFiles(paths): Observable<any> {
         let data = [];
         for (let i = 0; i < paths.length; i++) {
-            data.push({ imageUrl: paths[i] });
+            data.push({imageUrl: paths[i]});
         }
         const url: string = `${_prefix}/deleteImages`;
         return this.httpClient.post(url, data).pipe(

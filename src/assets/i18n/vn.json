@@ -85,6 +85,8 @@
         "id": "ID",
         "code": "Mã",
         "name": "Tên",
+        "manager_name": "Tên quản lý",
+        "branch_management": "Quản lý chi nhánh",
         "full_name": "Họ tên",
         "ascending": "Tăng dần",
         "descending": "Giảm dần",
