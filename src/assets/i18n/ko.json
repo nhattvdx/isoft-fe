@@ -204,8 +204,8 @@
         "invalid_old_password": "[KO]Enter old password information",
         "invalid_new_password": "[KO]Enter new password information",
         "invalid_confirm_password": "[KO]Enter confirm password information",
-        "invalid_code": "[KO]Invalid code",
-        "invalid_name": "[KO]Invalid name"
+        "code": "[KO]Invalid code",
+        "name": "[KO]Invalid name"
     },
     "warning": {
 

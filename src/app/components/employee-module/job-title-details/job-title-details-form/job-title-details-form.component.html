@@ -15,7 +15,7 @@
                 <label htmlFor="name" [translate]="'label.name'"></label>
                 <input pInputText id="name" [(ngModel)]="PositionDetailForm.value.name" formControlName="name"
                     [ngClass]="checkValidValidator('name')" />
-                <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.invalid_name' | translate"></small>
+                <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.name' | translate"></small>
             </div>
         </div>
     </form>

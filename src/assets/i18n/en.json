@@ -217,8 +217,8 @@
         "invalid_old_password": "Enter old password information",
         "invalid_new_password": "Enter new password information",
         "invalid_confirm_password": "Enter confirm password information",
-        "invalid_code": "Invalid code",
-        "invalid_name": "Invalid name"
+        "code": "Invalid code",
+        "name": "Invalid name"
     },
     "warning": {
 

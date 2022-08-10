@@ -217,8 +217,8 @@
         "invalid_old_password": "Nhập thông tin mật khẩu cũ",
         "invalid_new_password": "Nhập thông tin mật khẩu mới",
         "invalid_confirm_password": "Nhập thông tin nhập lại mật khẩu",
-        "invalid_code": "Invalid code",
-        "invalid_name": "Invalid name"
+        "code": "Thông tin mã không đúng",
+        "name": "Thông tin tên không đúng"
     },
     "warning": {
 

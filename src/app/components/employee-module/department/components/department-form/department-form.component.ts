@@ -30,7 +30,7 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
 
     isSubmitted = false;
     isInvalidForm = false;
-    failPassword: boolean = false;
+    existCode: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -76,7 +76,8 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
             this.departmentForm.controls[fieldName].touched) &&
             this.departmentForm.controls[fieldName].invalid) ||
             (this.isInvalidForm &&
-                this.departmentForm.controls[fieldName].invalid)
+                this.departmentForm.controls[fieldName].invalid) ||
+            (fieldName === 'code' && this.existCode)
             ? 'ng-invalid ng-dirty'
             : '';
     }
@@ -116,16 +117,18 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
             AppUtil.cleanObject(this.departmentForm.value)
         );
         console.log(newData);
-        this.onCancel.emit({});
         if (this.isEdit) {
             this.departmentService
                 .updateDepartment(newData, this.formData.id)
-                .subscribe((res) => {
-                    this.onCancel.emit({});
+                .subscribe((res: any) => {
+                    if (res.status != 603) this.onCancel.emit({});
+                    else this.existCode = true;
                 });
         } else {
-            this.departmentService.createDepartment(newData).subscribe((res) => {
-                this.onCancel.emit({});
+            this.departmentService.createDepartment(newData).subscribe((res: any) => {
+                console.log(res);
+                if (res.status != 603) this.onCancel.emit({});
+                else this.existCode = true;
             });
         }
     }
@@ -136,5 +139,13 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
             newData.id = 0;
         }
         return newData;
+    }
+
+    onChangeCode() {
+        console.log('on change code');
+        if(this.existCode) {
+            this.existCode = false;
+            console.log('exist code ', this.existCode);
+        }
     }
 }

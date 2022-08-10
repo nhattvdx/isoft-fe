@@ -8,7 +8,7 @@
             <input pInputText id="name" [(ngModel)]="companyForm.value.name" formControlName="name"
                 [ngClass]="checkValidValidator('name')" />
             <small *ngIf="checkValidValidator('name')" class="p-error"
-                [innerHTML]="'info.invalid_name' | translate"></small>
+                [innerHTML]="'info.name' | translate"></small>
         </div>
 
         <!--address-->

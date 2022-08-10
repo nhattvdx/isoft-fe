@@ -20,6 +20,13 @@ import { WardService } from 'src/app/service/ward.service';
     styles: [
         `
             :host ::ng-deep {
+                .p-dropdown.p-dropdown-clearable .p-dropdown-label {
+                    min-height: 37px;
+                }
+
+                .p-dropdown {
+                    min-height: 39px;
+                }
             }
         `,
     ],
@@ -271,5 +278,9 @@ export class UserFormComponent implements OnInit, OnChanges {
         } else {
             this.wards = [];
         }
+    }
+
+    doRegist(value) {
+        console.log('do regist' + value);
     }
 }

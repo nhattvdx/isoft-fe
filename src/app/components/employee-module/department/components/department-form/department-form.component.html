@@ -7,16 +7,16 @@
             <div class="field col-12">
                 <label htmlFor="code" [translate]="'label.code'"></label>
                 <input pInputText id="code" [(ngModel)]="departmentForm.value.code" formControlName="code"
-                    [ngClass]="checkValidValidator('code')" />
+                    [ngClass]="checkValidValidator('code')" (ngModelChange)="onChangeCode()" />
                 <small *ngIf="checkValidValidator('code')" class="p-error"
-                    [innerHTML]="'info.invalid_code' | translate"></small>
+                    [innerHTML]="'info.code' | translate"></small>
             </div>
             <!--name-->
             <div class="field col-12">
                 <label htmlFor="name" [translate]="'label.name'"></label>
                 <input pInputText id="name" [(ngModel)]="departmentForm.value.name" formControlName="name"
                     [ngClass]="checkValidValidator('name')" />
-                <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.invalid_name' | translate"></small>
+                <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.name' | translate"></small>
             </div>
         </div>
     </form>
