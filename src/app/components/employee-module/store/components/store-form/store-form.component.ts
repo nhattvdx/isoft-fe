@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from 'primeng/api';
-import { StoreService } from 'src/app/service/store.service';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+import {MessageService} from 'primeng/api';
+import {StoreService} from 'src/app/service/store.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
 
@@ -45,6 +45,7 @@ export class StoreFormComponent implements OnInit, OnChanges {
             }
         );
     }
+
     ngOnChanges(changes: SimpleChanges): void {
         if (
             this.isEdit &&
@@ -73,10 +74,10 @@ export class StoreFormComponent implements OnInit, OnChanges {
 
     checkValidValidator(fieldName: string) {
         return ((this.storeForm.controls[fieldName].dirty ||
-            this.storeForm.controls[fieldName].touched) &&
+                this.storeForm.controls[fieldName].touched) &&
             this.storeForm.controls[fieldName].invalid) ||
-            (this.isInvalidForm &&
-                this.storeForm.controls[fieldName].invalid)
+        (this.isInvalidForm &&
+            this.storeForm.controls[fieldName].invalid)
             ? 'ng-invalid ng-dirty'
             : '';
     }
@@ -85,7 +86,7 @@ export class StoreFormComponent implements OnInit, OnChanges {
         for (let i = 0; i < fieldNames.length; i++) {
             if (
                 ((this.storeForm.controls[fieldNames[i]].dirty ||
-                    this.storeForm.controls[fieldNames[i]].touched) &&
+                        this.storeForm.controls[fieldNames[i]].touched) &&
                     this.storeForm.controls[fieldNames[i]].invalid) ||
                 (this.isInvalidForm &&
                     this.storeForm.controls[fieldNames[i]].invalid)
@@ -115,17 +116,27 @@ export class StoreFormComponent implements OnInit, OnChanges {
         let newData = this.cleanObject(
             AppUtil.cleanObject(this.storeForm.value)
         );
-        console.log(newData);
-        this.onCancel.emit({});
+        // console.log(newData);
+        // this.onCancel.emit({});
         if (this.isEdit) {
             this.storeService
                 .updateStore(newData, this.formData.id)
-                .subscribe((res) => {
-                    this.onCancel.emit({});
+                .subscribe((res: any) => {
+                    if (res?.code === 400) {
+                        this.messageService.add({severity: 'error', detail: res?.msg || ''})
+                        return
+                    } else {
+                        this.onCancel.emit({});
+                    }
                 });
         } else {
-            this.storeService.createStore(newData).subscribe((res) => {
-                this.onCancel.emit({});
+            this.storeService.createStore(newData).subscribe((res: any) => {
+                if (res?.code === 400) {
+                    this.messageService.add({severity: 'error', detail: res?.msg || ''})
+                    return
+                } else {
+                    this.onCancel.emit({});
+                }
             });
         }
     }
