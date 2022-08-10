@@ -146,7 +146,7 @@ export class JobTitleDetailsFormComponent implements OnInit, OnChanges {
                 .updatePositionDetail(newData, this.formData.id)
                 .subscribe((res: any) => {
                     if (res?.code === 400) {
-                        this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                        this.messageService.add({severity: 'error', detail: res?.msg || ''})
                         return
                     } else {
                         this.onCancel.emit({});
@@ -155,7 +155,7 @@ export class JobTitleDetailsFormComponent implements OnInit, OnChanges {
         } else {
             this.PositionDetailService.createPositionDetail(newData).subscribe((res: any) => {
                 if (res?.code === 400) {
-                    this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                    this.messageService.add({severity: 'error', detail: res?.msg || ''})
                     return
                 } else {
                     this.onCancel.emit({});

@@ -127,16 +127,17 @@ export class BranchFormComponent implements OnInit, OnChanges {
                         this.messageService.add({
                             severity: 'error',
                             summary: 'Thông báo',
-                            detail: res?.msg || ''
+                            detail: res?.error?.msg || ''
                         })
                         return
+                    }else{
+                        this.onCancel.emit({});
                     }
-                    this.onCancel.emit({});
                 });
         } else {
             this.branchService.createBranch(newData).subscribe((res: any) => {
                 if (res?.code === 400) {
-                    this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                    this.messageService.add({severity: 'error', detail: res?.msg || ''})
                     return
                 }else{
                     this.onCancel.emit({});
