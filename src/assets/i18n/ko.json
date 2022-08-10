@@ -158,7 +158,8 @@
         "decimal_unit_define": "[KO]Decimal (0.00)",
         "thousand_unit_define": "[KO]Thousands of millions (1,000)",
         "unit_type": "[KO]Unit type",
-        "birthday": "[KO]Birthday"
+        "birthday": "[KO]Birthday",
+        "store_management": "재고 관리"
     },
     "button": {
         "sign_in": "[KO]Sign In",
@@ -183,7 +184,9 @@
         "delete_user_header": "[KO]Delete personnel",
         "delete_user_content": "[KO]Are you sure you want to delete this user?",
         "delete_department_header": "[KO]Delete department",
-        "delete_department_content": "[KO]Are you sure you want to delete this department?"
+        "delete_department_content": "[KO]Are you sure you want to delete this department?",
+        "delete_branch_content": "선택한 브랜치를 삭제하시겠습니까?",
+        "delete_branch_header": "분기 삭제"
     },
     "success": {
         "change_pass_successfully": "[KO]Change password successfully",

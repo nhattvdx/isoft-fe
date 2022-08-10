@@ -171,7 +171,8 @@
         "decimal_unit_define": "Decimal (0.00)",
         "thousand_unit_define": "Thousands of millions (1,000)",
         "unit_type": "Unit type",
-        "birthday": "Birthday"
+        "birthday": "Birthday",
+        "store_management": "Store management"
     },
     "button": {
         "sign_in": "Sign In",
@@ -196,7 +197,9 @@
         "delete_user_header": "Delete personnel",
         "delete_user_content": "Are you sure you want to delete this user?",
         "delete_department_header": "Delete department",
-        "delete_department_content": "Are you sure you want to delete this department?"
+        "delete_department_content": "Are you sure you want to delete this department?",
+        "delete_branch_content": "Do you want to delete the selected branch?",
+        "delete_branch_header": "분기 삭제"
     },
     "success": {
         "change_pass_successfully": "Change password successfully",

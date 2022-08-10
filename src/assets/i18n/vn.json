@@ -171,7 +171,8 @@
         "decimal_unit_define": "Phần thập thân (0.00)",
         "thousand_unit_define": "Hàng ngàn triệu (1,000)",
         "unit_type": "Loại phân cách",
-        "birthday": "Ngày sinh"
+        "birthday": "Ngày sinh",
+        "store_management": "Quản lý kho"
     },
     "button": {
         "sign_in": "Đăng nhập",
@@ -202,7 +203,9 @@
         "delete_user_header": "Xóa nhân sự",
         "delete_user_content": "Bạn có chắc chắn muốn xóa nhân sự này?",
         "delete_department_header": "Xóa phòng ban",
-        "delete_department_content": "Bạn có chắc chắn muốn xóa phòng ban này?"
+        "delete_department_content": "Bạn có chắc chắn muốn xóa phòng ban này?",
+        "delete_branch_content": "Bạn có muốn xoá chi nhánh đã chọn không?",
+        "delete_branch_header": "Delete branch"
     },
     "error": {
         "0": "Đã có sự cố xảy ra. Vui lòng liên hệ nhà quản trị",
