@@ -131,7 +131,7 @@ export class TitleFormComponent implements OnInit, OnChanges {
                 .updatePosition(newData, this.formData.id)
                 .subscribe((res: any) => {
                     if (res?.code === 400) {
-                        this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                        this.messageService.add({severity: 'error', detail: res?.msg || ''})
                         return
                     } else {
                         this.onCancel.emit({});
@@ -140,7 +140,7 @@ export class TitleFormComponent implements OnInit, OnChanges {
         } else {
             this.PositionService.createPosition(newData).subscribe((res: any) => {
                 if (res?.code === 400) {
-                    this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                    this.messageService.add({severity: 'error', detail: res?.msg || ''})
                     return
                 } else {
                     this.onCancel.emit({});
