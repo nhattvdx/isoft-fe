@@ -123,11 +123,11 @@ export class BranchFormComponent implements OnInit, OnChanges {
             this.branchService
                 .updateBranch(newData, this.formData.id)
                 .subscribe((res: any) => {
-                    if (res?.status === 400) {
+                    if (res?.code === 400) {
                         this.messageService.add({
                             severity: 'error',
                             summary: 'Thông báo',
-                            detail: res?.error?.msg || ''
+                            detail: res?.msg || ''
                         })
                         return
                     }

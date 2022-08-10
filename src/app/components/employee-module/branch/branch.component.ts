@@ -138,13 +138,14 @@ export class BranchComponent implements OnInit {
     }
 
     onDelete(branchId) {
-        let message;
-        this.translateService
-            .get('question.delete_branch_content')
-            .subscribe((res) => {
-                message = res;
-            });
+        let message = "Bạn có muốn xoá bản ghi đã chọn?";
+        // this.translateService
+        //     .get('question.delete_branch_content')
+        //     .subscribe((res) => {
+        //         message = res;
+        //     });
         this.confirmationService.confirm({
+            header: "Xoá bản ghi!",
             message: message,
             accept: () => {
                 this.branchService
