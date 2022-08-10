@@ -17,6 +17,12 @@ import AppConstant from 'src/app/utilities/app-constants';
 import { AuthService } from 'src/app/service/auth.service';
 import { PageFilterUser, UserService } from 'src/app/service/user.service';
 import { UserRoleService } from 'src/app/service/user-role.service';
+import { BranchService } from 'src/app/service/branch.service';
+import { MajorService } from 'src/app/service/major.service';
+import { StoreService } from 'src/app/service/store.service';
+import { PositionDetailService } from 'src/app/service/position-detail.service';
+import { TargetService } from 'src/app/service/target.service';
+import { SymbolService } from 'src/app/service/symbol.service';
 
 type AOA = any[][];
 
@@ -84,6 +90,12 @@ export class UserComponent implements OnInit {
     provinces: Province[] = [];
     wards: Ward[] = [];
     roles: any[] = [];
+    branches: any[] = [];
+    majors: any[] = [];
+    warehouses: any[] = [];
+    positionDetails: any[] = [];
+    targets: any[] = [];
+    symbols: any[] = [];
 
     constructor(
         private messageService: MessageService,
@@ -93,6 +105,12 @@ export class UserComponent implements OnInit {
         private readonly wardService: WardService,
         private readonly translateService: TranslateService,
         private readonly userRoleService: UserRoleService,
+        private readonly branchService: BranchService,
+        private readonly majorService: MajorService,
+        private readonly warehouseService: StoreService,
+        private readonly positionDetailService: PositionDetailService,
+        private readonly targetService: TargetService,
+        private readonly symbolService: SymbolService,
         private readonly confirmationService: ConfirmationService
     ) {}
 
@@ -101,6 +119,12 @@ export class UserComponent implements OnInit {
         this.getListProvince();
         this.getListWard();
         this.getListRole();
+        this.getListBranch();
+        this.getListMajor();
+        this.getListWarehouse();
+        this.getListPositionDetail();
+        this.getListTarget();
+        this.getListSymbol();
         AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
             this.sortFields = res;
         });
@@ -247,6 +271,42 @@ export class UserComponent implements OnInit {
         this.userRoleService.getAllUserRole().subscribe((response: any) => {
             console.log(this.roles);
             this.roles = response.data;
+        });
+    }
+
+    getListBranch() {
+        this.branchService.getAllBranch().subscribe((response: any) => {
+            this.branches = response.data;
+        });
+    }
+
+    getListMajor() {
+        this.majorService.getAllMajor().subscribe((response: any) => {
+            this.majors = response.data;
+        });
+    }
+
+    getListWarehouse() {
+        this.warehouseService.getAllStore().subscribe((response: any) => {
+            this.warehouses = response.data;
+        });
+    }
+
+    getListPositionDetail() {
+        this.positionDetailService.getAllPositionDetail().subscribe((response: any) => {
+            this.positionDetails = response.data;
+        });
+    }
+
+    getListTarget() {
+        this.targetService.getAllTarget().subscribe((response: any) => {
+            this.targets = response.data;
+        });
+    }
+
+    getListSymbol() {
+        this.symbolService.getAllSymbol().subscribe((response: any) => {
+            this.symbols = response.data;
         });
     }
 
