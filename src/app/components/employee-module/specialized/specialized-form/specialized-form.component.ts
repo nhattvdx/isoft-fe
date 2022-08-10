@@ -129,7 +129,7 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
               .updateMajor(newData, this.formData.id)
               .subscribe((res:any) => {
                   if (res?.code === 400) {
-                      this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                      this.messageService.add({severity: 'error', detail: res?.msg || ''})
                       return
                   }else{
                       this.onCancel.emit({});
@@ -138,7 +138,7 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
       } else {
           this.MajorService.createMajor(newData).subscribe((res:any) => {
               if (res?.code === 400) {
-                  this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                  this.messageService.add({severity: 'error', detail: res?.msg || ''})
                   return
               }else{
                   this.onCancel.emit({});

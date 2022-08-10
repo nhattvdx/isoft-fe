@@ -138,12 +138,19 @@ export class StoreComponent implements OnInit {
 
     onDelete(storeId) {
         let message;
+        let header;
         this.translateService
             .get('question.delete_store_content')
             .subscribe((res) => {
                 message = res;
             });
+        this.translateService
+            .get('question.delete_store_header')
+            .subscribe((res) => {
+                header = res;
+            });
         this.confirmationService.confirm({
+            header: header,
             message: message,
             accept: () => {
                 this.storeService
