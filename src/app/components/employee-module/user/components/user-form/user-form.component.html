@@ -73,7 +73,7 @@
                             <!--warehouse-->
                             <div class="field col-12 md:col-6 flex flex-column">
                                 <label htmlFor="warehouseId" [translate]="'label.warehouse'"></label>
-                                <p-dropdown id="warehouseId" [options]="branches" [optionLabel]="'name'" [optionValue]="'id'"
+                                <p-dropdown id="warehouseId" [options]="warehouses" [optionLabel]="'name'" [optionValue]="'id'"
                                     [appendTo]="'body'" [(ngModel)]="userForm.value.warehouseId" [formControlName]="'warehouseId'"
                                     [placeholder]="'label.empty' | translate" [ngClass]="checkValidValidator('warehouseId')">
                                 </p-dropdown>
