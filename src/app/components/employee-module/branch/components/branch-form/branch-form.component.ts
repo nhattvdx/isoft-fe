@@ -126,8 +126,7 @@ export class BranchFormComponent implements OnInit, OnChanges {
                     if (res?.code === 400) {
                         this.messageService.add({
                             severity: 'error',
-                            summary: 'Thông báo',
-                            detail: res?.error?.msg || ''
+                            detail: res?.msg || ''
                         })
                         return
                     }else{

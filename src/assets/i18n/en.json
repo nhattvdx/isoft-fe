@@ -198,7 +198,9 @@
         "phone": "Phone",
         "gender": "Gender",
         "male": "Male",
-        "female": "Female"
+        "female": "Female",
+        "edit_branch": "Edit branch",
+        "add_branch": "Add branch"
     },
     "button": {
         "sign_in": "Sign In",

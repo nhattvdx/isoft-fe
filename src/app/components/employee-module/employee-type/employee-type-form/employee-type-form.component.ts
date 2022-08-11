@@ -119,21 +119,38 @@ export class EmployeeTypeFormComponent implements OnInit {
             this.isSubmitted = false;
             return;
         }
-
         let newData = this.cleanObject(
             AppUtil.cleanObject(this.ContractTypeForm.value)
         );
-        console.log(newData);
-        this.onCancel.emit({});
         if (this.isEdit) {
             this.ContractTypeService
                 .updateContractType(newData, this.formData.id)
                 .subscribe((res) => {
-                    this.onCancel.emit({});
+                    var result = res as any;
+                    if(result && !result.succeeded){
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: result?.message || ''
+                        })
+                        return;
+                    }
+                    else {
+                        this.onCancel.emit({});
+                    }
                 });
         } else {
             this.ContractTypeService.createContractType(newData).subscribe((res) => {
-                this.onCancel.emit({});
+                var result = res as any;
+                if(result && !result.succeeded){
+                    this.messageService.add({
+                        severity: 'error',
+                        detail: result?.message || ''
+                    })
+                    return
+                }
+                else {
+                    this.onCancel.emit({});
+                }
             });
         }
     }

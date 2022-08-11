@@ -198,7 +198,9 @@
         "phone": "Số điện thoại",
         "gender": "Giới tính",
         "male": "Nam",
-        "female": "nữ"
+        "female": "nữ",
+        "edit_branch": "Sửa thông tin chi nhánh",
+        "add_branch": "Thêm chi nhánh"
     },
     "button": {
         "sign_in": "Đăng nhập",

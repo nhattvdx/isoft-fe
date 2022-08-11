@@ -180,7 +180,9 @@
         "phone": "[KO]Phone",
         "gender": "[KO]Gender",
         "male": "[KO]Male",
-        "female": "[KO]Female"
+        "female": "[KO]Female",
+        "edit_branch": "[KO]Edit branch",
+        "add_branch": "[KO]Add branch"
     },
     "button": {
         "sign_in": "[KO]Sign In",
