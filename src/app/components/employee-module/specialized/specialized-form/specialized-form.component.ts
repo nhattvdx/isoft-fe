@@ -48,7 +48,8 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
           {
               id: [''],
               code: ['', [Validators.required]],
-              name: ['', [Validators.required]]
+              name: ['', [Validators.required]],
+              note: ['']
           }
       );
   }
@@ -63,6 +64,7 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
               id: this.formData.id,
               code: this.formData.code,
               name: this.formData.name,
+              note: this.formData.note,
           });
       } else {
           this.title = AppUtil.translate(this.translateService, 'label.add_Major');
