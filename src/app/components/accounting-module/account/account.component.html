@@ -1,7 +1,27 @@
-<div class="grid">
+<div class="grid account-component">
     <div class="col-12">
         <div class="card card-table">
-            <p>account works</p>
+            <is-table #accountTable
+                [showHeaderButton]="true"
+                [showHeaderDropdown]="true"
+                [headerDropdownOptions]="accountTypeList"
+                (expandChange)="onExpandChange($event)"
+                (excelActionChange)="onExcelActionChange($event)"
+            >
+                <ng-template [pTemplate]="columnType.Expand.toString()">
+                    <is-table #accountTableChild 
+                        [styleClass]="'account-component__first-child-table'"
+                        (expandChange)="onExpandChildNodeChange($event)"
+                    >
+                        <ng-template [pTemplate]="columnType.Expand.toString()">
+                            <is-table #accountTableSecondChild 
+                                [styleClass]="'account-component__second-child-table'"
+                            >
+                            </is-table>
+                        </ng-template>
+                    </is-table>
+                </ng-template>
+             </is-table>
         </div>
     </div>
 </div>
