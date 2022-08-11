@@ -198,7 +198,11 @@
         "phone": "Phone",
         "gender": "Gender",
         "male": "Male",
-        "female": "Female"
+        "female": "Female",
+        "status": "Status",
+        "job_status": "Job status",
+        "salary_leave_share_holder_number": "Salary leave holder number",
+        "facebook": "Facebook"
     },
     "button": {
         "sign_in": "Sign In",

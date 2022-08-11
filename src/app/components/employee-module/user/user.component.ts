@@ -23,6 +23,7 @@ import { StoreService } from 'src/app/service/store.service';
 import { PositionDetailService } from 'src/app/service/position-detail.service';
 import { TargetService } from 'src/app/service/target.service';
 import { SymbolService } from 'src/app/service/symbol.service';
+import { ContractTypeService } from 'src/app/service/contract-type.service';
 
 type AOA = any[][];
 
@@ -88,6 +89,7 @@ export class UserComponent implements OnInit {
 
     districts: District[] = [];
     provinces: Province[] = [];
+    nativeProvinces: Province[] = [];
     wards: Ward[] = [];
     roles: any[] = [];
     branches: any[] = [];
@@ -96,6 +98,7 @@ export class UserComponent implements OnInit {
     positionDetails: any[] = [];
     targets: any[] = [];
     symbols: any[] = [];
+    contractTypes: any[] = [];
 
     constructor(
         private messageService: MessageService,
@@ -111,6 +114,7 @@ export class UserComponent implements OnInit {
         private readonly positionDetailService: PositionDetailService,
         private readonly targetService: TargetService,
         private readonly symbolService: SymbolService,
+        private readonly contractTypeService: ContractTypeService,
         private readonly confirmationService: ConfirmationService
     ) {}
 
@@ -125,6 +129,7 @@ export class UserComponent implements OnInit {
         this.getListPositionDetail();
         this.getListTarget();
         this.getListSymbol();
+        this.getListContractType();
         AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
             this.sortFields = res;
         });
@@ -258,6 +263,7 @@ export class UserComponent implements OnInit {
             .getListProvince()
             .subscribe((response: Province[]) => {
                 this.provinces = response;
+                this.nativeProvinces = this.provinces;
             });
     }
 
@@ -293,9 +299,11 @@ export class UserComponent implements OnInit {
     }
 
     getListPositionDetail() {
-        this.positionDetailService.getAllPositionDetail().subscribe((response: any) => {
-            this.positionDetails = response.data;
-        });
+        this.positionDetailService
+            .getAllPositionDetail()
+            .subscribe((response: any) => {
+                this.positionDetails = response.data;
+            });
     }
 
     getListTarget() {
@@ -307,6 +315,12 @@ export class UserComponent implements OnInit {
     getListSymbol() {
         this.symbolService.getAllSymbol().subscribe((response: any) => {
             this.symbols = response.data;
+        });
+    }
+
+    getListContractType() {
+        this.contractTypeService.getAllContractType().subscribe((response: any) => {
+            this.contractTypes = response.data;
         });
     }
 

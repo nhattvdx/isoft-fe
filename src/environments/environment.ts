@@ -4,10 +4,10 @@
 
 export const environment = {
     production: false,
-    // serverURL: 'http://127.0.0.1:5191',
-    // serverURLImage: 'http://127.0.0.1:5191',
-    serverURL: 'http://isoft.asianasa.com:8080',
-    serverURLImage: 'http://isoft.asianasa.com:8080',
+    serverURL: 'http://127.0.0.1:5191',
+    serverURLImage: 'http://127.0.0.1:5191',
+    // serverURL: 'http://isoft.asianasa.com:8080',
+    // serverURLImage: 'http://isoft.asianasa.com:8080',
 };
 
 /*

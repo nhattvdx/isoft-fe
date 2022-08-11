@@ -180,7 +180,11 @@
         "phone": "[KO]Phone",
         "gender": "[KO]Gender",
         "male": "[KO]Male",
-        "female": "[KO]Female"
+        "female": "[KO]Female",
+        "status": "[KO]Status",
+        "job_status": "[KO]Job status",
+        "salary_leave_share_holder_number": "[KO]Salary leave holder number",
+        "facebook": "Facebook"
     },
     "button": {
         "sign_in": "[KO]Sign In",

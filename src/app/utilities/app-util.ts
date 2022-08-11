@@ -277,6 +277,45 @@ const AppUtil = {
             ],
         };
     },
+    getUserTypes(): any {
+        return {
+            unionMember: [
+                { value: 1, label: 'Không có' },
+                { value: 2, label: 'Đoàn viên' },
+                { value: 3, label: 'Đảng viên' },
+            ],
+            isDemobilized: [
+                { value: false, label: 'Không có' },
+                { value: true, label: 'Bộ đội xuất ngũ' },
+            ],
+            literacy: [
+                {
+                    value: 1,
+                    label: 'Tốt nghiệp THPT',
+                },
+                { value: 2, label: 'Tốt nghiệp THCS' },
+                {
+                    value: 3,
+                    label: 'Tốt nghiệp tiểu học',
+                },
+                { value: 4, label: 'chưa học xong tiểu học' },
+            ],
+            literacyDetail: [
+                { value: 1, label: 'Chưa qua đào tạo' },
+                { value: 2, label: 'CNKT Không có bằng' },
+                { value: 3, label: 'Sơ cấp' },
+                { value: 4, label: 'trung cấp' },
+                { value: 5, label: 'cao đẳng' },
+                { value: 6, label: 'Đại học' },
+                { value: 7, label: 'Thạc sĩ' },
+                { value: 8, label: 'Tiến sĩ' },
+            ],
+            status: [
+                { value: false, label: 'Kích hoạt' },
+                { value: true, label: 'Nghỉ việc' },
+            ],
+        };
+    },
     getBeginDeclareTypes(): any {
         return {
             dayType: [

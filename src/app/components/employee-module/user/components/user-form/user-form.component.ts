@@ -19,6 +19,8 @@ import { Major } from 'src/app/models/major.model';
 import { Store } from 'src/app/models/store.model';
 import { PositionDetail } from 'src/app/models/position-detail.model';
 import { Target } from 'src/app/models/target.model';
+import { ContractType } from 'src/app/models/contract-type.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-user-form',
@@ -42,12 +44,15 @@ export class UserFormComponent implements OnInit, OnChanges {
     public appUtil = AppUtil;
     @Input('formData') formData: any = {};
     @Input('provinces') provinces: Province[] = [];
-    @Input('branches') branches: Branch[] = [];
+    @Input('nativeProvinces') nativeProvinces: Province[] = [];
+    @Input('branches')
+    branches: Branch[] = [];
     @Input('majors') majors: Major[] = [];
     @Input('warehouses') warehouses: Store[] = [];
     @Input('positionDetails') positionDetails: PositionDetail[] = [];
     @Input('targets') targets: Target[] = [];
     @Input('symbols') symbols: Symbol[] = [];
+    @Input('contractTypes') contractTypes: ContractType[] = [];
     @Input('roles')
     roles: any[] = [];
     @Input('isReset') isReset: boolean = false;
@@ -55,11 +60,15 @@ export class UserFormComponent implements OnInit, OnChanges {
     @Input('display') display: boolean = false;
     @Output() onCancel = new EventEmitter();
 
+    serverURLImage = environment.serverURLImage;
+
     optionCountries = AppData.COUNTRIES;
     title: string = '';
 
     districts: District[] = [];
     wards: Ward[] = [];
+    nativeDistricts: District[] = [];
+    nativeWards: Ward[] = [];
     userForm: FormGroup = new FormGroup({});
 
     countryCodes: any[] = [];
@@ -68,6 +77,8 @@ export class UserFormComponent implements OnInit, OnChanges {
     isInvalidForm = false;
 
     departments: any[] = [];
+
+    types: any = {};
 
     constructor(
         private fb: FormBuilder,
@@ -81,34 +92,62 @@ export class UserFormComponent implements OnInit, OnChanges {
         this.userForm = this.fb.group(
             {
                 id: [''],
-                username: ['', [Validators.required]],
+                status: [''],
+                username: [''],
                 password: [''],
                 confirmPassword: [''],
-                fullName: ['', [Validators.required]],
-                phone: ['', [Validators.required]],
-                birthday: ['', [Validators.required]],
-                code: ['', [Validators.required]],
-                provinceId: ['', [Validators.required]],
-                districtId: ['', [Validators.required]],
-                wardId: ['', [Validators.required]],
-                branchId: ['', [Validators.required]],
-                userRoleIds: ['', [Validators.required]],
-                warehouseId: ['', [Validators.required]],
+                fullName: [''],
+                phone: [''],
+                birthday: [''],
+                code: ['', [ Validators.required ]],
+                provinceId: [''],
+                districtId: [''],
+                wardId: [''],
+                branchId: [''],
+                userRoleIds: [''],
+                warehouseId: [''],
                 avatar: [''],
-                departmentId: ['', Validators.required],
-                positionDetailId: ['', Validators.required],
-                targetId: ['', Validators.required],
-                symbolId: ['', Validators.required],
-                language: ['', Validators.required],
-                gender: ['', Validators.required],
-                note: ['', Validators.required],
-                literacy: ['', Validators.required],
-                literacyDetail: ['', Validators.required],
-                majorId: ['', Validators.required],
-                certificateOther: ['', Validators.required],
-                personalTaxCode: ['', Validators.required],
-                socialInsuranceCreated: ['', Validators.required],
-                socialInsuranceCode: ['', Validators.required],
+                departmentId: [''],
+                positionDetailId: [''],
+                targetId: [''],
+                symbolId: [''],
+                language: [''],
+                gender: [''],
+                note: [''],
+                email: [''],
+                facebook: [''],
+                address: [''],
+                bankAccount: [''],
+                bank: [''],
+                shareHolderCode: [''],
+                noOfLeaveDate: [''],
+                sendSalaryDate: [''],
+                contractTypeId: [''],
+                salary: [''],
+                socialInsuranceSalary: [''],
+                numberWorkdays: [''],
+                dayOff: [''],
+                identify: [''],
+                identifyCreatedDate: [''],
+                identifyCreatedPlace: [''],
+                identifyExpiredDate: [''],
+                nativeProvinceId: [''],
+                nativeDistrictId: [''],
+                nativeWardId: [''],
+                placeOfPermanent: [''],
+                ethnicGroup: [''],
+                nation: [''],
+                religion: [''],
+                licensePlates: [''],
+                unionMember: [''],
+                isDemobilized: [''],
+                literacy: [''],
+                literacyDetail: [''],
+                majorId: [''],
+                certificateOther: [''],
+                personalTaxCode: [''],
+                socialInsuranceCreated: [''],
+                socialInsuranceCode: [''],
             },
             {
                 validators: this.validateConfirmPassword.bind(this),
@@ -137,6 +176,7 @@ export class UserFormComponent implements OnInit, OnChanges {
             this.userForm.get('confirmPassword').updateValueAndValidity();
             this.userForm.setValue({
                 id: this.formData.id,
+                status: this.formData.status,
                 username: this.formData.username,
                 password: '',
                 confirmPassword: '',
@@ -157,6 +197,39 @@ export class UserFormComponent implements OnInit, OnChanges {
                 language: this.formData.language,
                 gender: this.formData.gender,
                 note: this.formData.note,
+                email: this.formData.email,
+                facebook: this.formData.facebook,
+                address: this.formData.address,
+                bankAccount: this.formData.bankAccount,
+                bank: this.formData.bank,
+                shareHolderCode: this.formData.shareHolderCode,
+                noOfLeaveDate: this.formData.noOfLeaveDate,
+                sendSalaryDate: moment(this.formData.sendSalaryDate).format(
+                    this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+                ),
+                contractTypeId: this.formData.contractTypeId,
+                salary: this.formData.salary,
+                socialInsuranceSalary: this.formData.socialInsuranceSalary,
+                numberWorkdays: this.formData.numberWorkdays,
+                dayOff: this.formData.dayOff,
+                identify: this.formData.identify,
+                identifyCreatedDate: moment(
+                    this.formData.identifyCreatedDate
+                ).format(this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE),
+                identifyCreatedPlace: this.formData.identifyCreatedPlace,
+                identifyExpiredDate: moment(
+                    this.formData.identifyExpiredDate
+                ).format(this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE),
+                nativeProvinceId: this.formData.nativeProvinceId,
+                nativeDistrictId: this.formData.nativeDistrictId,
+                nativeWardId: this.formData.nativeWardId,
+                placeOfPermanent: this.formData.placeOfPermanent,
+                ethnicGroup: this.formData.ethnicGroup,
+                nation: this.formData.nation,
+                religion: this.formData.religion,
+                licensePlates: this.formData.licensePlates,
+                unionMember: this.formData.unionMember,
+                isDemobilized: this.formData.isDemobilized,
                 userRoleIds: Array.from(this.formData.userRoleIds)
                     .map((x: string) => {
                         return parseInt(x);
@@ -168,7 +241,6 @@ export class UserFormComponent implements OnInit, OnChanges {
                 majorId: this.formData.majorId,
                 certificateOther: this.formData.certificateOther,
                 avatar: this.formData.avatar,
-
                 // tax code
                 personalTaxCode: this.formData.personalTaxCode,
                 socialInsuranceCreated: moment(
@@ -179,6 +251,11 @@ export class UserFormComponent implements OnInit, OnChanges {
             if (this.formData.provinceId > 0) {
                 this.getDistrict({
                     value: this.formData.provinceId,
+                });
+            }
+            if (this.formData.nativeProvinceId > 0) {
+                this.getNativeDistrict({
+                    value: this.formData.nativeProvinceId,
                 });
             }
         } else {
@@ -206,6 +283,7 @@ export class UserFormComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.countryCodes = AppUtil.getCountries();
         this.getDepartmentList();
+        this.types = this.appUtil.getUserTypes();
     }
 
     validateConfirmPassword(formGroup: FormGroup) {
@@ -295,6 +373,7 @@ export class UserFormComponent implements OnInit, OnChanges {
         newData.avatar = newData.avatar || '';
         newData.userRoleIds = newData.userRoleIds.filter((x) => x).join(',');
         newData.gender = parseInt(newData.gender) || 0;
+        newData.isDemobilized = newData.isDemobilized == true;
         // delete params form
         delete newData.confirmPassword;
 
@@ -307,6 +386,24 @@ export class UserFormComponent implements OnInit, OnChanges {
         newData.socialInsuranceCreated = this.appUtil.formatLocalTimezone(
             moment(
                 newData.socialInsuranceCreated,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
+        newData.sendSalaryDate = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.sendSalaryDate,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
+        newData.identifyCreatedDate = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.identifyCreatedDate,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
+        newData.identifyExpiredDate = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.identifyExpiredDate,
                 this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
             ).format(this.appConstant.FORMAT_DATE.T_DATE)
         );
@@ -323,7 +420,6 @@ export class UserFormComponent implements OnInit, OnChanges {
                 .getDistrictForProvince(id.value)
                 .subscribe((response: District[]) => {
                     this.districts = response;
-                    console.log(response);
                     if (
                         this.districts !== undefined &&
                         this.districts.length > 0
@@ -334,7 +430,28 @@ export class UserFormComponent implements OnInit, OnChanges {
                     }
                 });
         } else {
+            this.districts = [];
             this.wards = [];
+        }
+    }
+    getNativeDistrict(id) {
+        if (id.value > 0) {
+            this.districtService
+                .getDistrictForProvince(id.value)
+                .subscribe((response: District[]) => {
+                    this.nativeDistricts = response;
+                    if (
+                        this.nativeDistricts !== undefined &&
+                        this.nativeDistricts.length > 0
+                    ) {
+                        this.getNativeWard({
+                            value: this.userForm.value.nativeDistrictId,
+                        });
+                    }
+                });
+        } else {
+            this.nativeDistricts = [];
+            this.nativeWards = [];
         }
     }
     getWard(id) {
@@ -349,7 +466,28 @@ export class UserFormComponent implements OnInit, OnChanges {
         }
     }
 
-    doRegist(value) {
-        console.log('do regist' + value);
+    getNativeWard(id) {
+        if (id.value > 0) {
+            this.wardService
+                .getWardForDistrict(id.value)
+                .subscribe((response: Ward[]) => {
+                    this.nativeWards = response;
+                });
+        } else {
+            this.nativeWards = [];
+        }
+    }
+
+    doAttachFile(event: any): void {
+        let image: FormData = new FormData();
+        image.append('file', event.target?.files[0]);
+        this.userService
+            .uploadFiles(image)
+            .subscribe((res) => {
+                console.log(res);
+                if(res && res.body) {
+                    this.userForm.controls['avatar'].setValue(res.body.imageUrl);
+                }
+            });
     }
 }

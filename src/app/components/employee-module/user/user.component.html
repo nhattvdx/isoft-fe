@@ -125,8 +125,8 @@
 </div>
 
 <app-user-form #userForm [formData]="formData" [isReset]="isReset" [branches]="branches" [majors]="majors" [positionDetails]="positionDetails"
-    [warehouses]="warehouses" [targets]="targets" [symbols]="symbols" [display]="display" (onCancel)="display = false; getUsers(null, false); isReset = false;"
-    [isEdit]="isEdit" [provinces]="provinces" [roles]="roles"></app-user-form>
+    [warehouses]="warehouses" [targets]="targets" [symbols]="symbols" [contractTypes]="contractTypes" [display]="display" (onCancel)="display = false; getUsers(null, false); isReset = false;"
+    [isEdit]="isEdit" [provinces]="provinces" [nativeProvinces]="nativeProvinces" [roles]="roles"></app-user-form>
 
 <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{'min-width': '45vw'}">
     <ng-template pTemplate="header">

@@ -28,6 +28,7 @@ export interface PageFilterUser extends Page {
 }
 
 let _prefix = `${AppConstant.DEFAULT_URLS.API}/Users`;
+let _prefixUpload = `${AppConstant.DEFAULT_URLS.API}/ReportDownload`;
 
 @Injectable({
     providedIn: 'root',
@@ -90,24 +91,11 @@ export class UserService {
 
     uploadFiles(formData): Observable<any> {
         return this.httpClient
-            .post(`${_prefix}/uploadImage`, formData, {
+            .post(`${_prefixUpload}/uploadImage`, formData, {
                 reportProgress: true,
                 observe: 'events',
             })
             .pipe(catchError(this.errorMgmt));
-    }
-
-    deleteFiles(paths): Observable<any> {
-        let data = [];
-        for (let i = 0; i < paths.length; i++) {
-            data.push({ imageUrl: paths[i] });
-        }
-        const url: string = `${_prefix}/deleteImages`;
-        return this.httpClient.post(url, data).pipe(
-            map((imageUrl: string) => {
-                return imageUrl;
-            })
-        );
     }
 
     errorMgmt(error: HttpErrorResponse) {
@@ -125,28 +113,6 @@ export class UserService {
 
     getExcelReport(param: PageFilterUser): Observable<{ dt: string }> {
         let url: string = `${_prefix}/export-excel-user`;
-
-        return this.httpClient.get(url).pipe(
-            map((data: { dt: string }) => {
-                return data;
-            })
-        );
-    }
-
-    getExcelReportUserWeb(param: PageFilterUser): Observable<{ dt: string }> {
-        let url: string = `${_prefix}/export-excel-user-web`;
-
-        return this.httpClient.get(url).pipe(
-            map((data: { dt: string }) => {
-                return data;
-            })
-        );
-    }
-
-    getExcelReportEmployerWeb(
-        param: PageFilterUser
-    ): Observable<{ dt: string }> {
-        let url: string = `${_prefix}/export-excel-employer-web`;
 
         return this.httpClient.get(url).pipe(
             map((data: { dt: string }) => {
