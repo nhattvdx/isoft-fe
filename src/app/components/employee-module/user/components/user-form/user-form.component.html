@@ -4,8 +4,11 @@
         <div class="col-12 md:col-3 flex justify-content-center">
             <div class="md:fixed flex flex-column">
                 <div class="flex justify-content-center">
-                    <img class="cursor-pointer" style="border-radius: 50%;" src="{{ serverURLImage + '/' + userForm.value.avatar }}" alt="Avatar"
+                    <img *ngIf="userForm.value.avatar" class="cursor-pointer" style="border-radius: 50%;" src="{{ serverURLImage + '/' + userForm.value.avatar }}" alt="Avatar"
                         width="150" height="150" (click)="uploadFile.click()" />
+                    <img *ngIf="!userForm.value.avatar" class="cursor-pointer" style="border-radius: 50%;"
+                        src="assets/layout/images/user.png" alt="Avatar" width="150" height="150"
+                        (click)="uploadFile.click()" />
                     <input #uploadFile class="hidden" type="file" (change)="doAttachFile($event)" />
                 </div>
                 <!--status-->
