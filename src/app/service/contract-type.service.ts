@@ -56,7 +56,6 @@ export class ContractTypeService {
     }
 
     public updateContractType(ContractType: ContractType, id: number): Observable<ContractType> {
-        console.log(ContractType);
         const url: string = `${_prefix}/${id}`;
         return this.httpClient.put(url, ContractType).pipe(
             map((ContractType: ContractType) => {

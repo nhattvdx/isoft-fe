@@ -18,6 +18,12 @@
                     [ngClass]="checkValidValidator('name')" />
                 <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.name' | translate"></small>
             </div>
+            <!--note-->
+            <div class="field col-12">
+                <label htmlFor="name" [translate]="'label.name'"></label>
+                <textarea pInputTextarea id="note" [(ngModel)]="MajorForm.value.note" formControlName="note" rows="3"
+                          [ngClass]="checkValidValidator('name')"></textarea>
+            </div>
         </div>
     </form>
 

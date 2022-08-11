@@ -202,7 +202,9 @@
         "status": "Status",
         "job_status": "Job status",
         "salary_leave_share_holder_number": "Salary leave holder number",
-        "facebook": "Facebook"
+        "facebook": "Facebook",
+        "edit_branch": "Edit branch",
+        "add_branch": "Add branch"
     },
     "button": {
         "sign_in": "Sign In",

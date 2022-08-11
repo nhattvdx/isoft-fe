@@ -1,0 +1,22 @@
+.is-table {
+    .table-header {
+        margin-bottom: 20px;
+        display: flex;
+        
+        &__button {
+        }
+        &__dropdown {
+        }
+        &__search {
+            margin-left: 430px !important;
+        }
+    }
+    .excel-dropdown {
+        ::ng-deep {
+            .p-dropdown {
+                width: 102px !important;
+            }
+        }
+        
+    }
+}

@@ -184,7 +184,9 @@
         "status": "[KO]Status",
         "job_status": "[KO]Job status",
         "salary_leave_share_holder_number": "[KO]Salary leave holder number",
-        "facebook": "Facebook"
+        "facebook": "Facebook",
+        "edit_branch": "[KO]Edit branch",
+        "add_branch": "[KO]Add branch"
     },
     "button": {
         "sign_in": "[KO]Sign In",
