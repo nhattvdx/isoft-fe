@@ -15,7 +15,7 @@ export class AccountComponent implements OnInit, AfterViewInit {
     @ViewChild('accountTable', { static: false }) accountTableView: IsTableComponent;
     @ViewChild('accountTableChild', { static: false }) accountTableChildView: IsTableComponent;
     @ViewChild('accountTableSecondChild', { static: false }) accountTableSecondChildView: IsTableComponent;
-    
+
 
     columnType = IsTableColumnType;
     queryParam: Page = {
@@ -70,7 +70,7 @@ export class AccountComponent implements OnInit, AfterViewInit {
                     }),
                     new IsTableColumn(
                         <IIsTableColumn>{
-                            header: 'label.accountCode',
+                            header: 'label.account_code',
                             field: 'code',
                         }),
                     new IsTableColumn(
@@ -120,7 +120,7 @@ export class AccountComponent implements OnInit, AfterViewInit {
                     }),
                     new IsTableColumn(
                         <IIsTableColumn>{
-                            header: 'label.accountCode',
+                            header: 'label.account_code',
                             field: 'code',
                         }),
                     new IsTableColumn(
@@ -223,7 +223,7 @@ export class AccountComponent implements OnInit, AfterViewInit {
                         }),
                     new IsTableColumn(
                         <IIsTableColumn>{
-                            header: 'label.accountCode',
+                            header: 'label.account_code',
                             field: 'code',
                         }),
                     new IsTableColumn(
@@ -274,7 +274,7 @@ export class AccountComponent implements OnInit, AfterViewInit {
                         }),
                     new IsTableColumn(
                         <IIsTableColumn>{
-                            header: 'label.accountCode',
+                            header: 'label.account_code',
                             field: 'code',
                         }),
                     new IsTableColumn(

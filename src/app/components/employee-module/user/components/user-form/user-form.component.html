@@ -555,7 +555,7 @@
 
                             <!--bank-->
                             <div class="field col-12 md:col-6 flex flex-column">
-                                <label htmlFor="bank" [translate]="'label.bank'"></label>
+                                <label htmlFor="bank" [translate]="'label.bank_name'"></label>
                                 <input pInputText id="bank" [(ngModel)]="userForm.value.bank" formControlName="bank"
                                     [ngClass]="checkValidValidator('bank')" />
                                 <small *ngIf="checkValidValidator('bank')" class="p-error"
@@ -632,7 +632,7 @@
 
                             <!--numberWorkdays-->
                             <div class="field col-12 sm:col-4 flex flex-column">
-                                <label htmlFor="numberWorkdays" [translate]="'label.number_workdays'"></label>
+                                <label htmlFor="numberWorkdays" [translate]="'label.number_of_workdays'"></label>
                                 <p-inputNumber id="numberWorkdays" [(ngModel)]="userForm.value.numberWorkdays"
                                     formControlName="numberWorkdays" [ngClass]="checkValidValidator('numberWorkdays')">
                                 </p-inputNumber>
