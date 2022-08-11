@@ -1,0 +1,105 @@
+<div [class]="styleClass" class="is-table">
+  <div class="table-header">
+    <div class="table-header__button m-0 p-0 w-9rem" *ngIf="showHeaderButton">
+      <p-button [label]="'Tài khoản'" icon="pi pi-plus" (click)="onHeaderButtonClick()"></p-button>
+    </div>
+    <div class="table-header__dropdown m-0 p-0 w-10rem" *ngIf="showHeaderDropdown">
+      <p-dropdown 
+        [options]="headerDropdownOptions" 
+        appendTo="body" optionLabel="name"
+        (ngModelChange)="onChangeHeaderDropdown($event)"
+      >
+        <ng-template let-data pTemplate="selectedItem">
+          <span>{{data?.name | translate}}</span>
+        </ng-template>
+        <ng-template let-data pTemplate="item">
+          <span>{{data?.name | translate}}</span>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    
+    <div class="table-header__search m-0 p-0 w-15rem" *ngIf="isTable.isSearchable">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input class="w-100" pInputText type="text" (input)="pTableView.filterGlobal($event.target.value, 'contains')"
+          placeholder="Search" />
+      </span>
+    </div>
+
+  </div>
+  <p-table #pTableView [columns]="isTable.columns" [dataKey]="isTable.dataKey" [value]="isTable.data"
+    responsiveLayout="scroll">
+
+    <!-- Header -->
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" pSortableColumn="{{col.isSortable ? col.field : ''}}" [ngClass]="col.styleClass">
+          <span [translate]="col.header"></span>
+          <p-sortIcon *ngIf="col.isSortable" [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- Body -->
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded"
+      (onRowCollapse)="onRowCollapse($event)">
+      <tr>
+        <td *ngFor="let col of columns" [ngClass]="col.styleClass">
+          <ng-container [ngSwitch]="col.type">
+            <ng-container *ngSwitchCase="columnType.Expand">
+              <ng-container *ngIf="rowData[col.field]" [ngTemplateOutlet]="ExpandButtonTemplate"></ng-container>
+            </ng-container>
+            <ng-container *ngSwitchCase="columnType.AccountAction">
+              <div class="d-flex">
+                <button pButton type="button" icon="pi pi-times" class="p-button p-button-rounded p-button-danger mr-1" [disabled]="!rowData[col.innerFields[1]]"></button>
+                <button pButton type="button" icon="pi pi-pencil" class="p-button p-button-rounded mr-1" ></button>
+                <button pButton type="button" icon="pi pi-plus" class="p-button p-button-rounded mr-1" [disabled]="!rowData[col.innerFields[0]]"></button>
+                <p-dropdown 
+                  [options]="excelActions" 
+                  [readOnly]="true" 
+                  appendTo="body"
+                  placeholder="Excel" 
+                  class="excel-dropdown" optionLabel="name"
+                  (ngModelChange)="onChangeExcelAction($event)"
+                >
+                  <ng-template let-data pTemplate="selectedItem">
+                    <span>{{data?.name | translate}}</span>
+                  </ng-template>
+                  <ng-template let-data pTemplate="item">
+                    <span>{{data.name | translate}}</span>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+            </ng-container>
+
+            <ng-container *ngSwitchDefault>
+              {{rowData[col.field] == null || rowData[col.field] == undefined ? '' : rowData[col.field].toString()}}
+            </ng-container>
+          </ng-container>
+          <ng-template #ExpandButtonTemplate>
+            <button type="button" pButton pRipple class="p-button-text p-button-rounded p-button-plain"
+              [pRowToggler]="rowData" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+              (click)="onExpand(rowData)">
+            </button>
+          </ng-template>
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- Row Expanded -->
+    <ng-template pTemplate="rowexpansion" let-expandData="$implicit">
+      <tr>
+        <td [colSpan]="isTable.columns.length">
+          <ng-container *ngFor="let template of templates">
+            <ng-container [ngSwitch]="template.getType()">
+              <ng-container *ngSwitchCase="columnType.Expand.toString()">
+                <ng-container *ngTemplateOutlet="expandTemplate"></ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+
+    </ng-template>
+  </p-table>
+</div>
