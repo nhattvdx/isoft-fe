@@ -34,7 +34,8 @@ h1, h2, h3, h4, h5, h6, .p-dialog .p-dialog-header,
     border-radius: 8px;
 }
 
-.p-multiselect {
+.p-multiselect,
+p-inputMask .p-inputtext {
     width: 100%;
 }
 

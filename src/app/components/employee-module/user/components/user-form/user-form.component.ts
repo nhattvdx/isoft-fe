@@ -13,6 +13,12 @@ import { UserService } from 'src/app/service/user.service';
 import { DepartmentService } from 'src/app/service/department.service';
 import { DistrictService } from 'src/app/service/district.service';
 import { WardService } from 'src/app/service/ward.service';
+import { Branch } from 'src/app/models/branch.model';
+import * as moment from 'moment';
+import { Major } from 'src/app/models/major.model';
+import { Store } from 'src/app/models/store.model';
+import { PositionDetail } from 'src/app/models/position-detail.model';
+import { Target } from 'src/app/models/target.model';
 
 @Component({
     selector: 'app-user-form',
@@ -33,21 +39,29 @@ import { WardService } from 'src/app/service/ward.service';
 })
 export class UserFormComponent implements OnInit, OnChanges {
     public appConstant = AppConstant;
+    public appUtil = AppUtil;
     @Input('formData') formData: any = {};
     @Input('provinces') provinces: Province[] = [];
-
-    @Input('roles') roles: any[] = [];
+    @Input('branches') branches: Branch[] = [];
+    @Input('majors') majors: Major[] = [];
+    @Input('warehouses') warehouses: Store[] = [];
+    @Input('positionDetails') positionDetails: PositionDetail[] = [];
+    @Input('targets') targets: Target[] = [];
+    @Input('symbols') symbols: Symbol[] = [];
+    @Input('roles')
+    roles: any[] = [];
     @Input('isReset') isReset: boolean = false;
     @Input('isEdit') isEdit: boolean = false;
     @Input('display') display: boolean = false;
     @Output() onCancel = new EventEmitter();
+
+    optionCountries = AppData.COUNTRIES;
     title: string = '';
 
     districts: District[] = [];
     wards: Ward[] = [];
     userForm: FormGroup = new FormGroup({});
 
-    optionCountries = AppData.COUNTRIES;
     countryCodes: any[] = [];
 
     isSubmitted = false;
@@ -71,13 +85,30 @@ export class UserFormComponent implements OnInit, OnChanges {
                 password: [''],
                 confirmPassword: [''],
                 fullName: ['', [Validators.required]],
+                phone: ['', [Validators.required]],
+                birthday: ['', [Validators.required]],
                 code: ['', [Validators.required]],
                 provinceId: ['', [Validators.required]],
                 districtId: ['', [Validators.required]],
                 wardId: ['', [Validators.required]],
+                branchId: ['', [Validators.required]],
                 userRoleIds: ['', [Validators.required]],
+                warehouseId: ['', [Validators.required]],
                 avatar: [''],
                 departmentId: ['', Validators.required],
+                positionDetailId: ['', Validators.required],
+                targetId: ['', Validators.required],
+                symbolId: ['', Validators.required],
+                language: ['', Validators.required],
+                gender: ['', Validators.required],
+                note: ['', Validators.required],
+                literacy: ['', Validators.required],
+                literacyDetail: ['', Validators.required],
+                majorId: ['', Validators.required],
+                certificateOther: ['', Validators.required],
+                personalTaxCode: ['', Validators.required],
+                socialInsuranceCreated: ['', Validators.required],
+                socialInsuranceCode: ['', Validators.required],
             },
             {
                 validators: this.validateConfirmPassword.bind(this),
@@ -110,17 +141,40 @@ export class UserFormComponent implements OnInit, OnChanges {
                 password: '',
                 confirmPassword: '',
                 fullName: this.formData.fullName,
+                phone: this.formData.phone,
+                birthday: moment(this.formData.birthday).format(
+                    this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+                ),
                 code: this.formData.code,
                 provinceId: this.formData.provinceId,
                 districtId: this.formData.districtId,
                 wardId: this.formData.wardId,
+                branchId: this.formData.branchId,
+                warehouseId: this.formData.warehouseId,
+                positionDetailId: this.formData.positionDetailId,
+                targetId: this.formData.targetId,
+                symbolId: this.formData.symbolId,
+                language: this.formData.language,
+                gender: this.formData.gender,
+                note: this.formData.note,
                 userRoleIds: Array.from(this.formData.userRoleIds)
                     .map((x: string) => {
                         return parseInt(x);
                     })
                     .filter((x) => x),
                 departmentId: this.formData.departmentId,
+                literacy: this.formData.literacy,
+                literacyDetail: this.formData.literacyDetail,
+                majorId: this.formData.majorId,
+                certificateOther: this.formData.certificateOther,
                 avatar: this.formData.avatar,
+
+                // tax code
+                personalTaxCode: this.formData.personalTaxCode,
+                socialInsuranceCreated: moment(
+                    this.formData.socialInsuranceCreated
+                ).format(this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE),
+                socialInsuranceCode: this.formData.socialInsuranceCode,
             });
             if (this.formData.provinceId > 0) {
                 this.getDistrict({
@@ -237,10 +291,25 @@ export class UserFormComponent implements OnInit, OnChanges {
         newData.districtId = parseInt(newData.districtId) || 0;
         newData.provinceId = parseInt(newData.provinceId) || 0;
         newData.wardId = parseInt(newData.wardId) || 0;
+        newData.branchId = parseInt(newData.branchId) || 0;
         newData.avatar = newData.avatar || '';
         newData.userRoleIds = newData.userRoleIds.filter((x) => x).join(',');
+        newData.gender = parseInt(newData.gender) || 0;
         // delete params form
         delete newData.confirmPassword;
+
+        newData.birthday = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.birthday,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
+        newData.socialInsuranceCreated = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.socialInsuranceCreated,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
         return newData;
     }
 

@@ -28,42 +28,42 @@
 				</ng-template>
 				<ng-template pTemplate="header">
 					<tr>
-                        <th style="width:80px">
+                        <th class="w-1">
                             <div class="flex align-items-center">
                                 <span [translate]="'label.number_order'"></span>
                             </div>
                         </th>
-                        <th style="width:400px">
+                        <th class="w-3">
                             <div class="flex align-items-center">
                                 <span [translate]="'label.position'"></span>
                             </div>
                         </th>
-                        <th style="width:700px">
+                        <th class="w-5">
                             <div class="flex justify-content-between align-items-center">
                                 <span [translate]="'label.name'"></span>
                             </div>
                         </th>
-                        <th *ngIf="isMobile"></th>
-                        <th *ngIf="!isMobile" style="width:200px" alignFrozen="right" pFrozenColumn [frozen]="true"></th>
+                        <th *ngIf="isMobile" class="w-3"></th>
+                        <th *ngIf="!isMobile"  class="w-3" alignFrozen="right" pFrozenColumn [frozen]="true"></th>
 					</tr>
 				</ng-template>
 				<ng-template pTemplate="body" let-user>
 					<tr>
-                        <td style="width:80px">
+                        <td class="w-1">
                             <span class="p-column-title" [translate]="'label.number_order'"></span>{{ user.id }}
                         </td>
-                        <td style="width:400px">
+                        <td class="w-3">
                             <span class="p-column-title" [translate]="'label.position'"></span>{{ user.positionName }}
                         </td>
-                        <td style="width:700px">
+                        <td class="w-5">
                             <span class="p-column-title" [translate]="'label.name'"></span>{{ user.name }}
                         </td>
-                        <td *ngIf="isMobile">
+                        <td *ngIf="isMobile" class="w-3">
                             <button pButton class="p-button-warning" icon="pi pi-pencil" (click)="getDetail(user.id)"></button>
                             <button pButton class="p-button-danger" icon="pi pi-trash" (click)="onDelete(user.id)"></button>
                         </td>
-                        <td *ngIf="!isMobile" style="width:200px" alignFrozen="right" pFrozenColumn [frozen]="true"
-                                class="flex justify-content-start md:justify-content-center">
+                        <td *ngIf="!isMobile" alignFrozen="right" pFrozenColumn [frozen]="true"
+                                class="w-3 flex justify-content-start md:justify-content-center">
                             <button pButton class="p-button-warning" icon="pi pi-pencil" (click)="getDetail(user.id)"></button>
                             <button pButton class="p-button-danger" icon="pi pi-trash" (click)="onDelete(user.id)"></button>
                         </td>

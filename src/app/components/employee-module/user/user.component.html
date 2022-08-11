@@ -124,8 +124,8 @@
 	</div>
 </div>
 
-<app-user-form #userForm [formData]="formData" [isReset]="isReset"
-    [display]="display" (onCancel)="display = false; getUsers(null, false); isReset = false;"
+<app-user-form #userForm [formData]="formData" [isReset]="isReset" [branches]="branches" [majors]="majors" [positionDetails]="positionDetails"
+    [warehouses]="warehouses" [targets]="targets" [symbols]="symbols" [display]="display" (onCancel)="display = false; getUsers(null, false); isReset = false;"
     [isEdit]="isEdit" [provinces]="provinces" [roles]="roles"></app-user-form>
 
 <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{'min-width': '45vw'}">

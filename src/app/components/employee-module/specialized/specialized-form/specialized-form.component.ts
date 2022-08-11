@@ -48,7 +48,8 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
           {
               id: [''],
               code: ['', [Validators.required]],
-              name: ['', [Validators.required]]
+              name: ['', [Validators.required]],
+              note: ['']
           }
       );
   }
@@ -63,6 +64,7 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
               id: this.formData.id,
               code: this.formData.code,
               name: this.formData.name,
+              note: this.formData.note,
           });
       } else {
           this.title = AppUtil.translate(this.translateService, 'label.add_Major');
@@ -129,7 +131,7 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
               .updateMajor(newData, this.formData.id)
               .subscribe((res:any) => {
                   if (res?.code === 400) {
-                      this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                      this.messageService.add({severity: 'error', detail: res?.msg || ''})
                       return
                   }else{
                       this.onCancel.emit({});
@@ -138,7 +140,7 @@ export class SpecializedFormComponent implements OnInit, OnChanges {
       } else {
           this.MajorService.createMajor(newData).subscribe((res:any) => {
               if (res?.code === 400) {
-                  this.messageService.add({severity: 'error', summary: 'Thông báo', detail: res?.msg || ''})
+                  this.messageService.add({severity: 'error', detail: res?.msg || ''})
                   return
               }else{
                   this.onCancel.emit({});
