@@ -13,3 +13,10 @@ export interface TypeData<T> {
     nextStt: number;
     totalItems: number;
 }
+
+export interface NameValue<T> {
+    name: string;
+    value: T;
+}
+
+export interface NameValueOfInt extends NameValue<number> {}
