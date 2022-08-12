@@ -1,3 +1,68 @@
+// only project
+@media (max-width: 991px) {
+    .layout-wrapper.layout-static .layout-main-container {
+        margin-left: 0 !important;
+        padding: 3.6rem 0 0 0;
+    }
+
+    .card-table {
+        height: auto !important;
+    }
+
+    .p-paginator .p-paginator-first,
+    .p-paginator .p-paginator-prev,
+    .p-paginator .p-paginator-next,
+    .p-paginator .p-paginator-last {
+        min-width: 2rem !important;
+        height: 2rem !important;
+    }
+
+    .p-paginator .p-paginator-pages .p-paginator-page {
+        min-width: 2rem !important;
+        height: 2rem !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .layout-wrapper.layout-static.layout-static-sidebar-inactive .layout-main-container {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .layout-wrapper.layout-overlay .layout-main-container {
+        padding-left: 0 !important;
+    }
+}
+.layout-wrapper.layout-static .layout-main-container {
+    margin-left: 245px;
+}
+
+.layout-sidebar {
+    left: 0;
+    top: 5.1rem;
+    height: calc(100vh - 0.1rem);
+    border-radius: 0;
+}
+
+.layout-main-container {
+    padding: 3.6rem 0 0 4rem;
+    border-radius: 0;
+}
+
+.card-table {
+    min-height: calc(100vh) !important;
+    border-radius: 0;
+}
+
+.grid {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.card {
+    margin-bottom: 0;
+}
+
 // Suggested location to add your overrides so that migration would be easy by just updating the SASS folder in the future
 @media screen and (max-width: 769px) {
     .p-dialog .p-dialog-footer {
@@ -34,6 +99,10 @@ h1, h2, h3, h4, h5, h6, .p-dialog .p-dialog-header,
     border-radius: 8px;
 }
 
+.p-tabview-title {
+    color: var(--primary-color);
+}
+
 .p-multiselect,
 .p-inputnumber,
 .p-inputnumber-input,
@@ -43,6 +112,27 @@ p-inputMask .p-inputtext {
 
 .p-component {
     font-family: noto-sans-cjk-kr, sans-serif !important;
+}
+
+.p-paginator {
+    margin-top: 6px;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none !important;
+}
+
+.p-orderlist .p-orderlist-controls {
+    padding: 0 !important;
+    padding-right: 0.5rem !important;
+}
+
+.p-orderlist .p-orderlist-list {
+    padding: 0 !important;
+}
+
+.p-orderlist .p-orderlist-list {
+    border-radius: 6px;
 }
 
 .layout-topbar .layout-topbar-logo {
