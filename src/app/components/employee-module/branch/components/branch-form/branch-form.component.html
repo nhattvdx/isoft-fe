@@ -45,6 +45,8 @@
                         <label htmlFor="code" class="text-color" [translate]="'label.code'"></label>
                         <input pInputText id="code" [(ngModel)]="branchForm.value.code" formControlName="code"
                                [ngClass]="checkValidValidator('code')"/>
+                        <small *ngIf="checkValidValidator('code')" class="p-error"
+                               [innerHTML]="'info.code' | translate"></small>
                     </div>
                 </div>
                 <div class="p-fluid formgrid grid mt-4">
@@ -52,6 +54,7 @@
                         <label htmlFor="name" class="text-color" [translate]="'label.name'"></label>
                         <input pInputText id="name" [(ngModel)]="branchForm.value.name" formControlName="name"
                                [ngClass]="checkValidValidator('name')"/>
+                        <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.name' | translate"></small>
                     </div>
                 </div>
                 <div class="p-fluid formgrid grid mt-4">
@@ -60,6 +63,7 @@
                         <input pInputText id="managerName" [(ngModel)]="branchForm.value.managerName"
                                formControlName="managerName"
                                [ngClass]="checkValidValidator('managerName')"/>
+                        <small *ngIf="checkValidValidator('managerName')" class="p-error" [innerHTML]="'info.manager_name' | translate"></small>
                     </div>
                 </div>
                 <div class="w-full col-12 flex align-items-center justify-content-center mt-5">

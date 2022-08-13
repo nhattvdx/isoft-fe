@@ -91,6 +91,9 @@ import {
 } from "./components/document-module/incoming-text/component/incoming-text-form.component";
 import {TextGoFormComponent} from "./components/document-module/text-go/component/text-go-form.component";
 import {BranchFormComponent} from "./components/employee-module/branch/components/branch-form/branch-form.component";
+import {
+    DepartmentFormComponent
+} from "./components/employee-module/department/components/department-form/department-form.component";
 
 @NgModule({
     imports: [
@@ -138,6 +141,10 @@ import {BranchFormComponent} from "./components/employee-module/branch/component
                         {
                             path: 'department',
                             component: DepartmentComponent,
+                        },
+                        {
+                            path: 'department/:id',
+                            component: DepartmentFormComponent,
                         },
                         {
                             path: 'title',

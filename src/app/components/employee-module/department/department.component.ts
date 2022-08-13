@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MessageService, ConfirmationService } from 'primeng/api'
-import { TypeData } from 'src/app/models/common.model';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MessageService, ConfirmationService} from 'primeng/api'
+import {TypeData} from 'src/app/models/common.model';
+import {environment} from 'src/environments/environment';
 import AppUtil from 'src/app/utilities/app-util';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import AppConstant from 'src/app/utilities/app-constants';
-import { DepartmentFormComponent } from './components/department-form/department-form.component';
-import { DepartmentService, PageFilterDepartment } from 'src/app/service/department.service';
-import { Department } from 'src/app/models/department.model';
+import {DepartmentFormComponent} from './components/department-form/department-form.component';
+import {DepartmentService, PageFilterDepartment} from 'src/app/service/department.service';
+import {Department} from 'src/app/models/department.model';
+import {Router} from "@angular/router";
 
 @Component({
     templateUrl: './department.component.html',
@@ -70,8 +71,10 @@ export class DepartmentComponent implements OnInit {
         private messageService: MessageService,
         private readonly departmentService: DepartmentService,
         private readonly translateService: TranslateService,
-        private readonly confirmationService: ConfirmationService
-    ) {}
+        private readonly confirmationService: ConfirmationService,
+        private router: Router
+    ) {
+    }
 
     ngOnInit() {
         AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
@@ -122,13 +125,18 @@ export class DepartmentComponent implements OnInit {
     }
 
     getDetail(departmentId) {
-        this.departmentService
-            .getDepartmentDetail(departmentId)
-            .subscribe((response: Department) => {
-                this.formData = response;
-                this.isEdit = true;
-                this.showDialog();
-            });
+        // this.departmentService
+        //     .getDepartmentDetail(departmentId)
+        //     .subscribe((response: Department) => {
+        //         this.formData = response;
+        //         this.isEdit = true;
+        //         this.showDialog();
+        //     });
+        this.router.navigate([`/uikit/department/${departmentId}`]).then()
+    }
+
+    onAddDepartment() {
+        this.router.navigate([`/uikit/department/create`]).then()
     }
 
     private openDownloadFile(_fileName: string, _ft: string) {

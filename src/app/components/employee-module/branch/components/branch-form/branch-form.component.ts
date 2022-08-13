@@ -147,7 +147,7 @@ export class BranchFormComponent implements OnInit, OnChanges {
         // this.onCancel.emit({});
         if (this.isEdit) {
             this.branchService
-                .updateBranch(newData, this.formData.id)
+                .updateBranch(newData, this.branchForm.value.id)
                 .subscribe((res: any) => {
                     if (res?.code === 400) {
                         this.messageService.add({
@@ -157,6 +157,8 @@ export class BranchFormComponent implements OnInit, OnChanges {
                         return
                     } else {
                         this.onCancel.emit({});
+                        this.router.navigate([`/uikit/branch`]).then()
+                        this.messageService.add({severity:'success',detail:'Cập nhật thành công'})
                     }
                 });
         } else {
@@ -166,6 +168,8 @@ export class BranchFormComponent implements OnInit, OnChanges {
                     return
                 } else {
                     this.onCancel.emit({});
+                    this.router.navigate([`/uikit/branch`]).then()
+                    this.messageService.add({severity:'success',detail:'Thêm mới thành công'})
                 }
             }, err => {
                 console.log('err', err)
