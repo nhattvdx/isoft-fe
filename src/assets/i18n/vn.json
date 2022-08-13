@@ -250,6 +250,8 @@
         "excel": "Excel",
         "edit_branch": "Sửa thông tin chi nhánh",
         "add_branch": "Thêm chi nhánh",
+        "month":"Tháng",
+        "recording_date":"Ngày ghi sổ",
         "incoming_text_management": "Quản lý công văn đến",
         "incoming_text_name": "Tên văn bản",
         "incoming_text_to_date": "Ngày đến",

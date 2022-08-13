@@ -1,9 +1,18 @@
 import { AriseComponent } from './components/accounting-module/arise/arise.component';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpBackend, HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+    HttpBackend,
+    HttpClient,
+    HttpClientModule,
+    HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+import {
+    LocationStrategy,
+    HashLocationStrategy,
+    PathLocationStrategy,
+} from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -188,6 +197,9 @@ import { TimekeepingPositionFormComponent } from './components/employee-module/t
 import { JobTitleDetailsFormComponent } from './components/employee-module/job-title-details/job-title-details-form/job-title-details-form.component';
 import { IsTableComponent } from './shared/is-table/is-table.component';
 import { DirectivesModule } from './shared/directives/directives.module';
+import { PipesModule } from './shared/pipes/pipes.module';
+import { AriseFilterComponent } from './components/accounting-module/arise/arise-filter/arise-filter.component';
+import { AddLedgerComponent } from './components/accounting-module/arise/add-ledger/add-arise.component';
 import {
     IncomingTextFormComponent
 } from "./components/document-module/incoming-text/component/incoming-text-form.component";
@@ -293,6 +305,7 @@ export function createTranslateLoader(http: HttpBackend) {
         TreeTableModule,
         VirtualScrollerModule,
         StyleClassModule,
+        PipesModule,
         TranslateModule.forRoot({
             defaultLanguage: 'vn',
             loader: {
@@ -301,7 +314,7 @@ export function createTranslateLoader(http: HttpBackend) {
                 deps: [HttpBackend],
             },
         }),
-        DirectivesModule
+        DirectivesModule,
     ],
     declarations: [
         // others component
@@ -390,6 +403,8 @@ export function createTranslateLoader(http: HttpBackend) {
 
         // accounting module
         AriseComponent,
+        AriseFilterComponent,
+        AddLedgerComponent,
         AccountComponent,
         ToolsFixedAssetsComponent,
 
@@ -420,6 +435,7 @@ export function createTranslateLoader(http: HttpBackend) {
 
         // Shared Components
         IsTableComponent,
+        AddLedgerComponent,
           TextGoFormComponent
     ],
     providers: [
