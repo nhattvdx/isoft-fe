@@ -1,9 +1,18 @@
 import { AriseComponent } from './components/accounting-module/arise/arise.component';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpBackend, HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+    HttpBackend,
+    HttpClient,
+    HttpClientModule,
+    HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+import {
+    LocationStrategy,
+    HashLocationStrategy,
+    PathLocationStrategy,
+} from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -188,10 +197,9 @@ import { TimekeepingPositionFormComponent } from './components/employee-module/t
 import { JobTitleDetailsFormComponent } from './components/employee-module/job-title-details/job-title-details-form/job-title-details-form.component';
 import { IsTableComponent } from './shared/is-table/is-table.component';
 import { DirectivesModule } from './shared/directives/directives.module';
-import {
-    IncomingTextFormComponent
-} from "./components/document-module/incoming-text/component/incoming-text-form.component";
+import { IncomingTextFormComponent } from './components/document-module/incoming-text/component/incoming-text-form.component';
 import { TextGoFormComponent } from './components/document-module/text-go/component/text-go-form.component';
+import { RoomTableFormComponent } from './components/sell-module/setup-module/room-table/component/room-table-form/room-table-form.component';
 export function createTranslateLoader(http: HttpBackend) {
     return new TranslateHttpLoader(
         new HttpClient(http),
@@ -301,7 +309,7 @@ export function createTranslateLoader(http: HttpBackend) {
                 deps: [HttpBackend],
             },
         }),
-        DirectivesModule
+        DirectivesModule,
     ],
     declarations: [
         // others component
@@ -375,6 +383,7 @@ export function createTranslateLoader(http: HttpBackend) {
 
         // setup module
         RoomTableComponent,
+        RoomTableFormComponent,
         QuotaComponent,
         ComboComponent,
         MenuOfGoodsComponent,
@@ -420,7 +429,7 @@ export function createTranslateLoader(http: HttpBackend) {
 
         // Shared Components
         IsTableComponent,
-          TextGoFormComponent
+        TextGoFormComponent,
     ],
     providers: [
         // { provide: LocationStrategy, useClass: HashLocationStrategy },
