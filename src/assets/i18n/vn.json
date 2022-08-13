@@ -249,7 +249,9 @@
         "import": "Nhập",
         "excel": "Excel",
         "edit_branch": "Sửa thông tin chi nhánh",
-        "add_branch": "Thêm chi nhánh"
+        "add_branch": "Thêm chi nhánh",
+        "month":"Tháng",
+        "recording_date":"Ngày ghi sổ"
     },
     "button": {
         "sign_in": "Đăng nhập",

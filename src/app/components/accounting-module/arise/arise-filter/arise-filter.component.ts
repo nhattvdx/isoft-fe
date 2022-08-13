@@ -1,6 +1,15 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+} from '@angular/core';
+import { CaseTypeEnum } from 'src/app/enums/case.type';
 import { TransferModel } from 'src/app/models/arise-search.model';
 import { Arise } from 'src/app/models/arise.model';
+import { ChartOfAccount } from 'src/app/models/case.model';
 import { LedgerRequestModel, Page } from 'src/app/models/common.model';
 import { DocumentModel } from 'src/app/models/document.model';
 import { Ledger } from 'src/app/models/ledger.model';
@@ -22,51 +31,34 @@ import { UnitConvertionPipe } from 'src/app/shared/pipes';
 import { Helper } from 'src/app/utilities/helper.help';
 // get the height
 @Component({
-    selector: 'app-arise',
-    templateUrl: './arise.component.html',
-    styleUrls: ['./arise.component.scss'],
+    selector: 'app-arise-filter',
+    templateUrl: './arise-filter.component.html',
+    //styleUrls: ['./arise.component.scss'],
     providers: [UnitConvertionPipe],
 })
-export class AriseComponent implements OnInit {
-    //#region Các khai báo mang tính toàn cục
-    @Input() public ariseForm: Arise;
-    public arise: Arise;
-    public arises: Arise[] = [];
-    public totalRecords = 0;
-    public newLedger: Ledger = new Ledger();
-    private ledgerNextStt: number = 0;
-    public ledgersCollection: Ledger[] = [];
-    public ledgerRequestModel: LedgerRequestModel = {
-        page: 0,
-        pageSize: 20,
-        filterMonth: new Date().getMonth() + 1,
-        documentType: 'PT', // phieu thu tien mat
-        isInternal: 1,
-    };
-    paramToGetLedgers = {
+export class AriseFilterComponent implements OnInit {
+    @Input() filter = {
         keyword: null,
         documentType: null,
         documentTypeCode: '',
         documentMonth: new Date().getMonth() + 1,
+        documentMonthStr: `${new Date().getMonth() + 1}`,
         payer: null,
         address: null,
         documentDay: this.convertDateInString(),
         transferModelTypeData: 1,
         page: 0,
-        pagesize: 20,
+        pageSize: 20,
     };
-    private isMustInputDebitSecondDetails = false;
-    private isMustInputCreditSecondDetails = false;
-    //#region Khai báo các cờ kiểm tra
-    public TAB_INDEX_COUNT = 1;
-    public IGNORE_ACCOUNT_VALIDATE = true;
-    public FOCUS_DELAY_IN_MS = 200;
-    public documentList: DocumentModel[] = [];
-    public titleDoc: string = null;
-    transferModel: TransferModel = new TransferModel();
-    public paging: Page = { page: 1, pageSize: 100, searchText: '' };
-    public createType = 0;
-    isMobile = screen.width <= 1199;
+    @Output(    ) filterChange = new EventEmitter();
+    documentList: DocumentModel[] = [];
+    months = Array.from({ length: 12 }, (_, i) => `${i + 1}`);
+    titleDoc: string = null;
+    internalTypes = [
+        { name: '1. HT', value: 1 },
+        { name: '2. NB', value: 2 },
+        { name: '3. Cả hai', value: 3 },
+    ];
     constructor(
         private readonly ariseService: AriseService,
         private readonly caseService: CaseService,
@@ -88,46 +80,30 @@ export class AriseComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        let winWidth = screen.width;
-        //this.searchLedgers();
+        this.getDocumentTypeList();
     }
-    public searchLedgers() {
-        this.transferModel.typeData = this.newLedger.isInternal;
-        this.ledgerRequestModel.filterMonth =
-            this.paramToGetLedgers.documentMonth;
-        this.ledgerRequestModel.isInternal = this.newLedger.isInternal;
-        this.ledgerRequestModel.documentType =
-            this.paramToGetLedgers.documentTypeCode;
-        // this.paramToGetLedgers.documentType.code;
-        this.ledgerRequestModel.searchText = this.paramToGetLedgers.keyword;
-        this.getLedgerCollection();
-    }
-    private getLedgerCollection() {
-        this.broadcasterService.broadcast(Helper.GLOBAL_LOADING, true);
-        this.ledgerService
-                .getLedgerCollection(this.ledgerRequestModel)
+    getDocumentTypeList() {
+        try {
+            this.documentService
+                .getDocuments({ page: 0, pagesize: 100 })
                 .subscribe((resp) => {
-                    this.ledgersCollection = [...resp.data];
-                    this.totalRecords = resp.data.length;
-                    //this.initDescriptionLoop();
-
-                    if (this.createType == 0) {
-                        this.ledgerNextStt = resp.nextStt;
-                        this.newLedger.order = resp.nextStt;
-                        // this.updateDocumentType();
-                    } else if (this.createType == 1) {
-                        //this.focusTaiKhoanNo();
-                    } else if (this.createType == 2) {
-                        //this.focusLoaiHoaDon();
-                    } else if (this.createType == 3) {
-                        //this.focusThanhTien();
-                    }
-                    console.log(`getLedgerCollection`, resp.data);
+                    this.documentList = [...resp.data];
+                    var docType = this.documentList.find((x) => x.code == 'PT');
+                    this.filter.documentMonthStr =
+                        'Tháng ' + this.filter.documentMonth;
+                    this.filter.documentType = docType;
+                    this.filter.documentTypeCode = docType.code;
+                    this.titleDoc = docType.title || 'Họ tên';
                 });
+
+            // await this.getLedgerCollection();
+        } catch (e) {
+        } finally {
+            // this.broadcasterService.broadcast(Helper.GLOBAL_LOADING, false);
+        }
     }
-    filterChange(paramToGetLedgers) {
-        this.paramToGetLedgers = { ...paramToGetLedgers };
-        console.log(paramToGetLedgers);
+    search() {
+        this.filterChange.emit(this.filter);
     }
     convertDateInString(crrDate: string | Date = new Date()) {
         crrDate = new Date(crrDate);
