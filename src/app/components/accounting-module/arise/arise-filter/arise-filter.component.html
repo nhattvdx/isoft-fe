@@ -1,0 +1,45 @@
+<div class="flex text-sm gap-5">
+    <div class="flex align-items-center gap-1">
+        <label style="font-weight: bold;" [translate]="'left_menu.license'"></label>
+        <p-dropdown [options]="documentList" [(ngModel)]="filter.documentType" optionLabel="name" [showClear]="true">
+        </p-dropdown>
+    </div>
+    <div class="flex align-items-center gap-1">
+        <label style="font-weight: bold;" [translate]="'label.month'"></label>
+        <p-dropdown [options]="months" [(ngModel)]="filter.documentMonthStr" [showClear]="true"
+            [style]="{'float':'right', 'width':'95%'}">
+            <ng-template pTemplate="selectedItem">
+                <div class="month-item month-item-value">
+                    <div>Tháng {{filter.documentMonthStr}}</div>
+                </div>
+            </ng-template>
+            <ng-template let-month pTemplate="item">
+                <div class="month-item">
+                    <div>Tháng {{month}}</div>
+                </div>
+            </ng-template>
+        </p-dropdown>
+    </div>
+    <div class="flex align-items-center gap-1">
+        <label style="font-weight: bold;" [translate]="'label.internal'"></label>
+        <p-dropdown [options]="internalTypes" [(ngModel)]="filter.transferModelTypeData" optionLabel="name"
+            [showClear]="true">
+            <ng-template let-item pTemplate="item">
+                <div>
+                    <div>{{item.name}}</div>
+                </div>
+            </ng-template>
+        </p-dropdown>
+    </div>
+    <div class="flex align-items-center gap-1">
+        <label style="font-weight: bold;" [translate]="'label.recording_date'"></label>
+        <p-inputMask [(ngModel)]="filter.documentDay" mask="99/99/9999"></p-inputMask>
+    </div>
+    <div class="flex align-items-center gap-1">
+        <label style="font-weight: bold;" [translate]="'label.key_word'"></label>
+        <input type="text" [(ngModel)]="filter.keyword" pInputText />
+    </div>
+    <div class="">
+        <button pButton type="button" [translate]="'label.search'" (click)="search()"></button>
+    </div>
+</div>

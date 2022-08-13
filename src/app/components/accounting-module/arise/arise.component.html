@@ -1,7 +1,98 @@
-<div class="grid">
-    <div class="col-12">
-        <div class="card card-table">
-            <p>arise works</p>
-        </div>
+<div class="card card-table">
+    <h5 [translate]="'left_menu.arise'"></h5>
+    <app-arise-filter [filter]="paramToGetLedgers" (filterChange)="filterChange($event)"></app-arise-filter>
+    <div style="height: 30vh !important">
+        <p-table #dt1 [value]="ledgersCollection" dataKey="id" [rows]="5" [rowHover]="true" [paginator]="true"
+            [responsiveLayout]="isMobile? 'stack': 'scroll'" [totalRecords]="totalRecords"
+            [rowsPerPageOptions]="[5, 10, 25, 50]" [showCurrentPageReport]="true" [lazy]="true" scrollDirection="both"
+            [scrollable]="!isMobile" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            styleClass="p-datatable-sm" style="height: 50vh;">
+            <ng-template pTemplate="header">
+                <tr class="">
+                    <th></th>
+                    <th>
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th>Ngày</th>
+                    <th>Ctgs</th>
+                    <th>Mã</th>
+                    <th>Ngày</th>
+                    <th>
+                        Diễn giải
+                    </th>
+                    <th>TK Nợ</th>
+                    <th>CTiết</th>
+                    <th>TK Có</th>
+                    <th>CTiết</th>
+                    <th>
+                        Số lượng
+                    </th>
+                    <th>
+                        Đơn giá
+                    </th>
+                    <th>
+                        Số tiền
+                    </th>
+                    <th>
+                        Nguyên tệ
+                    </th>
+                    <th>
+                        Tỷ giá
+                    </th>
+                    <th>Hđơn</th>
+                    <th>Số HĐ</th>
+                    <th>
+                        Ngày HĐ
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td class="w-1">
+                        <span class="p-column-title" [translate]="'label.number_order'"></span>{{ user.id }}
+                    </td>
+                    <td class="w-3">
+                        <span class="p-column-title" [translate]="'label.code'"></span>{{ user.code }}
+                    </td>
+                    <td class="w-5">
+                        <span class="p-column-title" [translate]="'label.name'"></span>{{ user.name }}
+                    </td>
+                    <td *ngIf="isMobile" class="w-3">
+                        <button pButton class="p-button-warning" icon="pi pi-pencil"
+                            (click)="getDetail(user.id)"></button>
+                        <button pButton class="p-button-danger" icon="pi pi-trash" (click)="onDelete(user.id)"></button>
+                    </td>
+                    <td *ngIf="!isMobile" alignFrozen="right" pFrozenColumn [frozen]="true"
+                        class="w-3 flex justify-content-start md:justify-content-center">
+                        <button pButton class="p-button-warning" icon="pi pi-pencil"
+                            (click)="getDetail(user.id)"></button>
+                        <button pButton class="p-button-danger" icon="pi pi-trash" (click)="onDelete(user.id)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td class="w-full pt-4 pb-4">No ContractType found.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td class="w-full pt-4 pb-4">Loading ContractType data. Please wait.</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
+    <app-add-ledger></app-add-ledger>
 </div>
+
+<!-- DATA TABLE -->
+<!-- <ledger-data-table [LedgersCollection]="ledgersCollection" [selectedRecord]="selectedRecord"
+    (submit)="onChangeLedger($event)" (delete)="deleteLedgers($event)" (onCheckChangeEmit)="onCheckChangeItem($event)">
+</ledger-data-table> -->
+<!-- END DATA TABLE -->
+
+<!-- <app-pnpc id="PNPC" hidden *ngIf="isPrintNK === true" [company]="company" [ledgers]="ledgers"></app-pnpc>
+<app-pxn id="PXN" hidden *ngIf="isPrintNX === true" [company]="company" [ledgers]="ledgers"></app-pxn> -->

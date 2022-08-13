@@ -1,17 +1,10 @@
-import { NgModule } from "@angular/core";
-import { IsTemplateDirective } from "./is-template.directive";
+import { NgModule } from '@angular/core';
+import { AutofocusDirective } from './autofocus.directive';
+import { IsTemplateDirective } from './is-template.directive';
 
 @NgModule({
-    declarations: [
-        IsTemplateDirective
-    ],
-    providers: [
-        IsTemplateDirective
-    ],
-    exports: [
-        IsTemplateDirective
-    ]
+    declarations: [IsTemplateDirective, AutofocusDirective],
+    providers: [IsTemplateDirective, AutofocusDirective],
+    exports: [IsTemplateDirective, AutofocusDirective],
 })
-export class DirectivesModule {
-
-}
+export class DirectivesModule {}
