@@ -188,6 +188,10 @@ import { TimekeepingPositionFormComponent } from './components/employee-module/t
 import { JobTitleDetailsFormComponent } from './components/employee-module/job-title-details/job-title-details-form/job-title-details-form.component';
 import { IsTableComponent } from './shared/is-table/is-table.component';
 import { DirectivesModule } from './shared/directives/directives.module';
+import {
+    IncomingTextFormComponent
+} from "./components/document-module/incoming-text/component/incoming-text-form.component";
+import { TextGoFormComponent } from './components/document-module/text-go/component/text-go-form.component';
 export function createTranslateLoader(http: HttpBackend) {
     return new TranslateHttpLoader(
         new HttpClient(http),
@@ -396,6 +400,7 @@ export function createTranslateLoader(http: HttpBackend) {
 
         // document module
         IncomingTextComponent,
+        IncomingTextFormComponent,
         TextGoComponent,
 
         // website module
@@ -414,7 +419,8 @@ export function createTranslateLoader(http: HttpBackend) {
         JobTitleDetailsFormComponent,
 
         // Shared Components
-        IsTableComponent
+        IsTableComponent,
+          TextGoFormComponent
     ],
     providers: [
         // { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -1,11 +1,12 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {BranchService} from 'src/app/service/branch.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
 import {HttpErrorResponse} from "@angular/common/http";
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -35,7 +36,9 @@ export class BranchFormComponent implements OnInit, OnChanges {
         private fb: FormBuilder,
         private translateService: TranslateService,
         private messageService: MessageService,
-        private branchService: BranchService
+        private branchService: BranchService,
+        private router: Router,
+        private route: ActivatedRoute,
     ) {
         this.branchForm = this.fb.group(
             {
@@ -72,6 +75,16 @@ export class BranchFormComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        const param = this.route.snapshot.paramMap.get('id')
+        switch (param) {
+            case 'create':
+                this.isEdit = false
+                break
+            default:
+                this.isEdit = true
+                this.getBranchDetail(param)
+                break
+        }
     }
 
     checkValidValidator(fieldName: string) {
@@ -97,6 +110,19 @@ export class BranchFormComponent implements OnInit, OnChanges {
             }
         }
         return false;
+    }
+
+    getBranchDetail(id) {
+        this.branchService.getBranchDetail(id).subscribe((res) => {
+            this.branchForm.setValue({
+                id: res?.id,
+                code: res?.code,
+                name: res?.name,
+                managerName: res?.managerName,
+            });
+        }, error => {
+            this.messageService.add({severity: 'error', detail: 'Lỗi lấy dữ liệu'})
+        })
     }
 
     onSubmit() {
@@ -129,7 +155,7 @@ export class BranchFormComponent implements OnInit, OnChanges {
                             detail: res?.msg || ''
                         })
                         return
-                    }else{
+                    } else {
                         this.onCancel.emit({});
                     }
                 });
@@ -138,13 +164,17 @@ export class BranchFormComponent implements OnInit, OnChanges {
                 if (res?.code === 400) {
                     this.messageService.add({severity: 'error', detail: res?.msg || ''})
                     return
-                }else{
+                } else {
                     this.onCancel.emit({});
                 }
             }, err => {
                 console.log('err', err)
             });
         }
+    }
+
+    onBack() {
+        this.router.navigate([`/uikit/branch`]).then()
     }
 
     cleanObject(data) {
