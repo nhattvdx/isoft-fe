@@ -1,4 +1,4 @@
-    <div class="grid">
+    <div class="grid p-2 pt-4 pb-4">
         <div class="col-6 sm:col-4">
             <div class="card card-hover mb-3">
                 <span class="block text-green-500 font-bold mb-3">{{'label.total_amount' | translate}}</span>
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="flex gap-8 flex-column sm:flex-row">
+            <div class="flex gap-8 flex-column sm:flex-row mt-2">
                 <div class="card w-full">
                     <h5>Multi Axis</h5>
                     <p-chart type="bar" [data]="multiAxisData" [options]="multiAxisOptions"></p-chart>
@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="flex gap-8 flex-column sm:flex-row">
+            <div class="flex gap-8 flex-column sm:flex-row mt-2">
                 <div class="card w-full">
                     <h5>Doughnut</h5>
                     <p-chart type="doughnut" [data]="doughnutData" [options]="chartOptions"></p-chart>
