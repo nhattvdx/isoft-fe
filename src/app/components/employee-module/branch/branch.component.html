@@ -22,7 +22,7 @@
                             <button pButton [label]="'button.export' | translate" class="p-button-warning mb-2 mr-2" icon="pi pi-download"
                                 (click)="getBranchs(null, true)"></button>
                             <!-- add button -->
-                            <button pButton [label]="'button.add' | translate" class="mb-2" icon="pi pi-user-plus" (click)="isEdit = false; showDialog()"></button>
+                            <button pButton [label]="'button.add' | translate" class="mb-2" icon="pi pi-user-plus" (click)="onAddBranch()"></button>
                         </div>
 					</div>
 				</ng-template>
@@ -92,8 +92,8 @@
 	</div>
 </div>
 
-<app-branch-form #branchForm [formData]="formData" [isReset]="isReset"
-    [display]="display" (onCancel)="display = false; getBranchs(null, false); isReset = false;" [isEdit]="isEdit"></app-branch-form>
+<!--<app-branch-form #branchForm [formData]="formData" [isReset]="isReset"-->
+<!--    [display]="display" (onCancel)="display = false; getBranchs(null, false); isReset = false;" [isEdit]="isEdit"></app-branch-form>-->
 
 <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{'min-width': '45vw'}">
     <!-- <ng-template pTemplate="header">

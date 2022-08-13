@@ -17,7 +17,7 @@
                         <div class="flex justify-content-between md:justify-content-end mt-2 md:mt-0">
                             <button pButton [label]="'button.export' | translate" class="p-button-warning mb-2 mr-2" icon="pi pi-download"
                                 (click)="getDepartments(null, true)"></button>
-                            <button pButton [label]="'button.add' | translate" class="mb-2" icon="pi pi-user-plus" (click)="isEdit = false; showDialog()"></button>
+                            <button pButton [label]="'button.add' | translate" class="mb-2" icon="pi pi-user-plus" (click)="onAddDepartment()"></button>
                         </div>
 					</div>
 				</ng-template>
@@ -79,8 +79,8 @@
 	</div>
 </div>
 
-<app-department-form #departmentForm [formData]="formData" [isReset]="isReset"
-    [display]="display" (onCancel)="display = false; getDepartments(null, false); isReset = false;" [isEdit]="isEdit"></app-department-form>
+<!--<app-department-form #departmentForm [formData]="formData" [isReset]="isReset"-->
+<!--    [display]="display" (onCancel)="display = false; getDepartments(null, false); isReset = false;" [isEdit]="isEdit"></app-department-form>-->
 
 <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{'min-width': '45vw'}">
     <ng-template pTemplate="header">

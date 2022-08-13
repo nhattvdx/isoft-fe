@@ -6,6 +6,7 @@ import AppConstant from 'src/app/utilities/app-constants';
 import AppData from 'src/app/utilities/app-data';
 import AppUtil from 'src/app/utilities/app-util';
 import { ContractTypeService } from 'src/app/service/contract-type.service';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-employee-type-form',
@@ -43,7 +44,9 @@ export class EmployeeTypeFormComponent implements OnInit {
         private fb: FormBuilder,
         private translateService: TranslateService,
         private messageService: MessageService,
-        private ContractTypeService: ContractTypeService
+        private ContractTypeService: ContractTypeService,
+        private router: Router,
+        private route: ActivatedRoute,
     ) {
         this.ContractTypeForm = this.fb.group(
             {
@@ -77,6 +80,16 @@ export class EmployeeTypeFormComponent implements OnInit {
 
     ngOnInit() {
         this.countryCodes = AppUtil.getCountries();
+        const param = this.route.snapshot.paramMap.get('id')
+        switch (param) {
+            case 'create':
+                this.isEdit = false
+                break
+            default:
+                this.isEdit = true
+                this.getContractTypeDetail(param)
+                break
+        }
     }
 
     checkValidValidator(fieldName: string) {
@@ -103,7 +116,17 @@ export class EmployeeTypeFormComponent implements OnInit {
         }
         return false;
     }
-
+    getContractTypeDetail(id) {
+        this.ContractTypeService.getContractTypeDetail(id).subscribe((res) => {
+            this.ContractTypeForm.setValue({
+                id: res?.id,
+                code: res?.code,
+                name: res?.name,
+            });
+        }, error => {
+            this.messageService.add({severity: 'error', detail: 'Lỗi lấy dữ liệu'})
+        })
+    }
     onSubmit() {
         this.isSubmitted = true;
         this.isInvalidForm = false;
@@ -124,7 +147,7 @@ export class EmployeeTypeFormComponent implements OnInit {
         );
         if (this.isEdit) {
             this.ContractTypeService
-                .updateContractType(newData, this.formData.id)
+                .updateContractType(newData, this.ContractTypeForm.value.id)
                 .subscribe((res) => {
                     var result = res as any;
                     if(result && !result.succeeded){
@@ -136,6 +159,8 @@ export class EmployeeTypeFormComponent implements OnInit {
                     }
                     else {
                         this.onCancel.emit({});
+                        this.router.navigate([`/uikit/employee-type`]).then()
+                        this.messageService.add({severity:'success',detail:'Cập nhật thành công'})
                     }
                 });
         } else {
@@ -150,6 +175,8 @@ export class EmployeeTypeFormComponent implements OnInit {
                 }
                 else {
                     this.onCancel.emit({});
+                    this.router.navigate([`/uikit/employee-type`]).then()
+                    this.messageService.add({severity:'success',detail:'Thêm mới thành công'})
                 }
             });
         }
@@ -165,5 +192,9 @@ export class EmployeeTypeFormComponent implements OnInit {
 
     getDayOfWeek(date: any) {
         return new Date(date.year, date.month, date.day).getDay();
+    }
+
+    onBack() {
+        this.router.navigate([`/uikit/employee-type`]).then()
     }
 }

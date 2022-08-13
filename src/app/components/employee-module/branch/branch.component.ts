@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MessageService, ConfirmationService } from 'primeng/api'
-import { TypeData } from 'src/app/models/common.model';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MessageService, ConfirmationService} from 'primeng/api'
+import {TypeData} from 'src/app/models/common.model';
+import {environment} from 'src/environments/environment';
 import AppUtil from 'src/app/utilities/app-util';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import AppConstant from 'src/app/utilities/app-constants';
-import { BranchFormComponent } from './components/branch-form/branch-form.component';
-import { PageFilterBranch, BranchService } from 'src/app/service/branch.service';
-import { Branch } from 'src/app/models/branch.model';
+import {BranchFormComponent} from './components/branch-form/branch-form.component';
+import {PageFilterBranch, BranchService} from 'src/app/service/branch.service';
+import {Branch} from 'src/app/models/branch.model';
+import {Router} from '@angular/router';
 
 @Component({
     templateUrl: './branch.component.html',
@@ -68,8 +69,10 @@ export class BranchComponent implements OnInit {
         private messageService: MessageService,
         private readonly branchService: BranchService,
         private readonly translateService: TranslateService,
-        private readonly confirmationService: ConfirmationService
-    ) {}
+        private readonly confirmationService: ConfirmationService,
+        private router: Router
+    ) {
+    }
 
     ngOnInit() {
         AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
@@ -127,14 +130,19 @@ export class BranchComponent implements OnInit {
     }
 
     getDetail(branchId) {
-        this.branchService
-            .getBranchDetail(branchId)
-            .subscribe((response: Branch) => {
-                this.formData = response;
-                console.log('response',response)
-                this.isEdit = true;
-                this.showDialog();
-            });
+        // this.branchService
+        //     .getBranchDetail(branchId)
+        //     .subscribe((response: Branch) => {
+        //         this.formData = response;
+        //         console.log('response', response)
+        //         this.isEdit = true;
+        //         this.showDialog();
+        //     });
+        this.router.navigate([`/uikit/branch/${branchId}`]).then()
+    }
+
+    onAddBranch() {
+        this.router.navigate([`/uikit/branch/create`]).then()
     }
 
     onDelete(branchId) {

@@ -8,6 +8,7 @@ import AppConstant from 'src/app/utilities/app-constants';
 import { StoreFormComponent } from './components/store-form/store-form.component';
 import { PageFilterStore, StoreService } from 'src/app/service/store.service';
 import { Store } from 'src/app/models/store.model';
+import {Router} from "@angular/router";
 
 @Component({
     templateUrl: './store.component.html',
@@ -68,7 +69,8 @@ export class StoreComponent implements OnInit {
         private messageService: MessageService,
         private readonly storeService: StoreService,
         private readonly translateService: TranslateService,
-        private readonly confirmationService: ConfirmationService
+        private readonly confirmationService: ConfirmationService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -127,13 +129,18 @@ export class StoreComponent implements OnInit {
     }
 
     getDetail(storeId) {
-        this.storeService
-            .getStoreDetail(storeId)
-            .subscribe((response: Store) => {
-                this.formData = response;
-                this.isEdit = true;
-                this.showDialog();
-            });
+        // this.storeService
+        //     .getStoreDetail(storeId)
+        //     .subscribe((response: Store) => {
+        //         this.formData = response;
+        //         this.isEdit = true;
+        //         this.showDialog();
+        //     });
+        this.router.navigate([`/uikit/store/${storeId}`]).then()
+    }
+
+    onAddStore() {
+        this.router.navigate([`/uikit/store/create`]).then()
     }
 
     onDelete(storeId) {

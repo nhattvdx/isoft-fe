@@ -1,0 +1,67 @@
+<div class="grid">
+    <div class="col-12 p-0">
+        <div class="card card-table">
+            <h5 [translate]="isEdit ? 'label.incoming_text_edit' : 'label.incoming_text_add'"></h5>
+            <div class="p-fluid formgrid grid mt-4">
+                <div class="field col">
+                    <label for="name">Tên văn bản<span class="text-pink-400">*</span></label>
+                    <input pInputText id="name" type="text" class="w-full">
+                </div>
+                <div class="field col">
+                    <label for="toDate">Ngày đến</label>
+                    <p-calendar id="toDate" inputId="toDate" class="w-full"
+                                dateFormat="dd/mm/yy" [(ngModel)]="incomingTextModel.toDate"></p-calendar>
+                </div>
+            </div>
+            <div class="formgrid grid mt-4">
+                <div class="field col">
+                    <label for="unitName">Đơn vị ban hành</label>
+                    <input pInputText id="unitName" type="text" class="w-full">
+                </div>
+                <div class="field col">
+                    <label for="textNo">Số hiệu văn bản</label>
+                    <input pInputText id="textNo" type="text" class="w-full">
+                </div>
+            </div>
+            <div class="p-fluid formgrid grid mt-4">
+                <div class="field col">
+                    <label for="textDate">Ngày văn bản</label>
+                    <p-calendar id="textDate" inputId="textDate" class="w-full"
+                                dateFormat="dd/mm/yy" [(ngModel)]="incomingTextModel.textDate"></p-calendar>
+                </div>
+                <div class="field col">
+                    <label for="quote">Trích yếu nội dung</label>
+                    <input pInputText id="quote" type="text" class="w-full">
+                </div>
+            </div>
+            <div class="formgrid grid mt-4">
+                <div class="field col">
+                    <label for="signer">Người ký tên</label>
+                    <input pInputText id="signer" type="text" class="w-full">
+                </div>
+                <div class="field col">
+                    <label for="deptReceived">Phòng ban nhận</label>
+                    <input pInputText id="deptReceived" type="text" class="w-full">
+                </div>
+            </div>
+            <div class="formgrid grid mt-4">
+                <div class="field col">
+                    <label for="reveiver">Người nhận</label>
+                    <input pInputText id="reveiver" type="text" class="w-full">
+                </div>
+                <div class="field col">
+                    <label for="upload">Upload file</label>
+                    <p-fileUpload id="upload" #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
+                                  maxFileSize="1000000" (onUpload)="onUploadFile($event)" [auto]="true"
+                                  chooseLabel="Tải lên"></p-fileUpload>
+                </div>
+            </div>
+            <div class="w-full col-12 flex align-items-center justify-content-center mt-5">
+                <button pButton pRipple type="button" class="p-button-info" (click)="onSave()">Lưu</button>
+                <button pButton pRipple type="button" class="p-button-outlined p-button-secondary ml-4"
+                        (click)="onBack()">Quay lại
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
