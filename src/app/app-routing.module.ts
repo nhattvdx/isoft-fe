@@ -94,6 +94,7 @@ import {BranchFormComponent} from "./components/employee-module/branch/component
 import {
     DepartmentFormComponent
 } from "./components/employee-module/department/components/department-form/department-form.component";
+import {StoreFormComponent} from "./components/employee-module/store/components/store-form/store-form.component";
 
 @NgModule({
     imports: [
@@ -129,6 +130,10 @@ import {
                         {
                             path: 'store',
                             component: StoreComponent,
+                        },
+                        {
+                            path: 'store/:id',
+                            component: StoreFormComponent,
                         },
                         {
                             path: 'employee-type',

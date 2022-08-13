@@ -5,6 +5,7 @@ import {MessageService} from 'primeng/api';
 import {StoreService} from 'src/app/service/store.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -34,7 +35,9 @@ export class StoreFormComponent implements OnInit, OnChanges {
         private fb: FormBuilder,
         private translateService: TranslateService,
         private messageService: MessageService,
-        private storeService: StoreService
+        private storeService: StoreService,
+        private router: Router,
+        private route: ActivatedRoute,
     ) {
         this.storeForm = this.fb.group(
             {
@@ -70,6 +73,16 @@ export class StoreFormComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+        const param = this.route.snapshot.paramMap.get('id')
+        switch (param) {
+            case 'create':
+                this.isEdit = false
+                break
+            default:
+                this.isEdit = true
+                this.getStoreDetail(param)
+                break
+        }
     }
 
     checkValidValidator(fieldName: string) {
@@ -97,6 +110,19 @@ export class StoreFormComponent implements OnInit, OnChanges {
         return false;
     }
 
+    getStoreDetail(id) {
+        this.storeService.getStoreDetail(id).subscribe((res) => {
+            this.storeForm.setValue({
+                id: res?.id,
+                code: res?.code,
+                name: res?.name,
+                managerName: res?.managerName,
+            });
+        }, error => {
+            this.messageService.add({severity: 'error', detail: 'Lỗi lấy dữ liệu'})
+        })
+    }
+
     onSubmit() {
         this.isSubmitted = true;
         this.isInvalidForm = false;
@@ -120,13 +146,15 @@ export class StoreFormComponent implements OnInit, OnChanges {
         // this.onCancel.emit({});
         if (this.isEdit) {
             this.storeService
-                .updateStore(newData, this.formData.id)
+                .updateStore(newData, this.storeForm.value.id)
                 .subscribe((res: any) => {
                     if (res?.code === 400) {
                         this.messageService.add({severity: 'error', detail: res?.msg || ''})
                         return
                     } else {
                         this.onCancel.emit({});
+                        this.router.navigate([`/uikit/store`]).then()
+                        this.messageService.add({severity:'success',detail:'Cập nhật thành công'})
                     }
                 });
         } else {
@@ -136,6 +164,8 @@ export class StoreFormComponent implements OnInit, OnChanges {
                     return
                 } else {
                     this.onCancel.emit({});
+                    this.router.navigate([`/uikit/store`]).then()
+                    this.messageService.add({severity:'success',detail:'Thêm mới thành công'})
                 }
             });
         }
@@ -147,5 +177,9 @@ export class StoreFormComponent implements OnInit, OnChanges {
             newData.id = 0;
         }
         return newData;
+    }
+
+    onBack() {
+        this.router.navigate([`/uikit/store`]).then()
     }
 }
