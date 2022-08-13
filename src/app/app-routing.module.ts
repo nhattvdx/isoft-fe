@@ -95,6 +95,9 @@ import {
     DepartmentFormComponent
 } from "./components/employee-module/department/components/department-form/department-form.component";
 import {StoreFormComponent} from "./components/employee-module/store/components/store-form/store-form.component";
+import {
+    EmployeeTypeFormComponent
+} from "./components/employee-module/employee-type/employee-type-form/employee-type-form.component";
 
 @NgModule({
     imports: [
@@ -138,6 +141,10 @@ import {StoreFormComponent} from "./components/employee-module/store/components/
                         {
                             path: 'employee-type',
                             component: EmployeeTypeComponent,
+                        },
+                        {
+                            path: 'employee-type/:id',
+                            component: EmployeeTypeFormComponent,
                         },
                         {
                             path: 'specialized',
