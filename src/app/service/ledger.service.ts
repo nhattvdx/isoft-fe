@@ -30,8 +30,8 @@ export class LedgerService {
     public getLedgerCollection(
         request: LedgerRequestModel
     ): Observable<TypeData<Ledger>> {
-        const url: string = this._baseUrl + '/Ledgers/get-page';
-        return this.httpClient.post(url, request).pipe(
+        const url: string = this._baseUrl + '/Ledgers';
+        return this.httpClient.get(url, { params: { ...request } }).pipe(
             map((ledgers: TypeData<Ledger>) => {
                 return ledgers;
             })

@@ -89,7 +89,7 @@ export class AriseComponent implements OnInit {
 
     ngOnInit() {
         let winWidth = screen.width;
-        //this.searchLedgers();
+        this.searchLedgers();
     }
     public searchLedgers() {
         this.transferModel.typeData = this.newLedger.isInternal;
