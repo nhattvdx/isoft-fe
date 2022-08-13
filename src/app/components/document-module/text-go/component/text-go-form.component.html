@@ -4,48 +4,49 @@
             <h5 [translate]="isEdit ? 'label.incoming_text_edit' : 'label.incoming_text_add'"></h5>
             <div class="p-fluid formgrid grid mt-4">
                 <div class="field col">
-                    <label for="name" class="text-color">Loại văn bản<span class="text-pink-400">*</span></label>
-                    <p-dropdown id="name" [options]="textGoTypes" [(ngModel)]="textGoModel.type" optionLabel="name"></p-dropdown>
+                    <label for="name">Loại văn bản<span class="text-pink-400">*</span></label>
+                    <p-dropdown id="name" [options]="textGoTypes" [(ngModel)]="textGoModel.type"
+                                optionLabel="name"></p-dropdown>
                 </div>
                 <div class="field col">
-                    <label for="textNo" class="text-color">Số hiệu văn bản</label>
+                    <label for="textNo">Số hiệu văn bản</label>
                     <input pInputText id="textNo" type="text" class="w-full">
                 </div>
             </div>
             <div class="p-fluid formgrid grid mt-4">
                 <div class="field col">
-                    <label for="textDate" class="text-color">Ngày văn bản</label>
+                    <label for="textDate">Ngày văn bản</label>
                     <p-calendar id="textDate" inputId="textDate" class="w-full"
                                 dateFormat="dd/mm/yy" [(ngModel)]="textGoModel.textDate"></p-calendar>
                 </div>
                 <div class="field col">
-                    <label for="deptReceived" class="text-color">Phòng ban nhận</label>
+                    <label for="deptReceived">Phòng ban nhận</label>
                     <input pInputText id="deptReceived" type="text" class="w-full">
                 </div>
             </div>
             <div class="formgrid grid mt-4">
                 <div class="field col">
-                    <label for="editor" class="text-color">Người soạn thảo</label>
+                    <label for="editor">Người soạn thảo</label>
                     <input pInputText id="editor" type="text" class="w-full">
                 </div>
                 <div class="field col">
-                    <label for="quote" class="text-color">Trích yếu nội dung</label>
+                    <label for="quote">Trích yếu nội dung</label>
                     <input pInputText id="quote" type="text" class="w-full">
                 </div>
             </div>
             <div class="formgrid grid mt-4">
                 <div class="field col">
-                    <label for="signer" class="text-color">Người ký tên</label>
+                    <label for="signer">Người ký tên</label>
                     <input pInputText id="signer" type="text" class="w-full">
                 </div>
                 <div class="field col">
-                    <label for="address" class="text-color">Nơi nhận</label>
+                    <label for="address">Nơi nhận</label>
                     <input pInputText id="address" type="text" class="w-full">
                 </div>
             </div>
             <div class="formgrid grid mt-4">
                 <div class="field col">
-                    <label for="upload" class="text-color">Upload file</label>
+                    <label for="upload">Upload file</label>
                     <p-fileUpload id="upload" #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*"
                                   maxFileSize="1000000" (onUpload)="onUploadFile($event)" [auto]="true"
                                   chooseLabel="Tải lên"></p-fileUpload>
@@ -53,7 +54,9 @@
             </div>
             <div class="w-full col-12 flex align-items-center justify-content-center mt-5">
                 <button pButton pRipple type="button" class="p-button-info" (click)="onSave()">Lưu</button>
-                <button pButton pRipple type="button" class="p-button-outlined p-button-secondary ml-4" (click)="onBack()">Quay lại</button>
+                <button pButton pRipple type="button" class="p-button-outlined p-button-secondary ml-4"
+                        (click)="onBack()">Quay lại
+                </button>
             </div>
         </div>
     </div>

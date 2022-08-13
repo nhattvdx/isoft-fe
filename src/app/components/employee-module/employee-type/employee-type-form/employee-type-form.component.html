@@ -33,7 +33,7 @@
             <form [formGroup]="ContractTypeForm">
                 <div class="p-fluid formgrid grid mt-4">
                     <div class="field col">
-                        <label htmlFor="code" class="text-color">{{'label.code' | translate}}<span class="text-pink-400">*</span></label>
+                        <label htmlFor="code">{{'label.code' | translate}}<span class="text-pink-400">*</span></label>
                         <input pInputText id="code" [(ngModel)]="ContractTypeForm.value.code" formControlName="code"
                                [ngClass]="checkValidValidator('code')"/>
                         <small *ngIf="checkValidValidator('code')" class="p-error"
@@ -42,7 +42,7 @@
                 </div>
                 <div class="p-fluid formgrid grid mt-4">
                     <div class="field col">
-                        <label htmlFor="name" class="text-color">{{'label.name' | translate}}<span class="text-pink-400">*</span></label>
+                        <label htmlFor="name">{{'label.name' | translate}}<span class="text-pink-400">*</span></label>
                         <input pInputText id="name" [(ngModel)]="ContractTypeForm.value.name" formControlName="name"
                                [ngClass]="checkValidValidator('name')" />
                         <small *ngIf="checkValidValidator('name')" class="p-error" [innerHTML]="'info.name' | translate"></small>
