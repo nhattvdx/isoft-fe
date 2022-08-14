@@ -197,12 +197,12 @@ import { TimekeepingPositionFormComponent } from './components/employee-module/t
 import { JobTitleDetailsFormComponent } from './components/employee-module/job-title-details/job-title-details-form/job-title-details-form.component';
 import { IsTableComponent } from './shared/is-table/is-table.component';
 import { DirectivesModule } from './shared/directives/directives.module';
-import { RoomTableFormComponent } from './components/sell-module/setup-module/room-table/room-table-form/room-table-form.component';
 import { IncomingTextFormComponent } from "./components/document-module/incoming-text/component/incoming-text-form.component";
 import { PipesModule } from './shared/pipes/pipes.module';
 import { AriseFilterComponent } from './components/accounting-module/arise/arise-filter/arise-filter.component';
 import { AddLedgerComponent } from './components/accounting-module/arise/add-ledger/add-arise.component';
 import { TextGoFormComponent } from './components/document-module/text-go/component/text-go-form.component';
+import { RoomTableFormComponent } from './components/sell-module/setup-module/room-table/component/room-table-form/room-table-form.component';
 export function createTranslateLoader(http: HttpBackend) {
     return new TranslateHttpLoader(
         new HttpClient(http),
