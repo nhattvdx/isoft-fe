@@ -1,12 +1,20 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
-import {MessageService} from 'primeng/api';
-import {DepartmentService} from 'src/app/service/department.service';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+    ViewChild,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
+import { DepartmentService } from 'src/app/service/department.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
-import {ActivatedRoute, Router} from "@angular/router";
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-department-form',
@@ -39,15 +47,13 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
         private messageService: MessageService,
         private departmentService: DepartmentService,
         private router: Router,
-        private route: ActivatedRoute,
+        private route: ActivatedRoute
     ) {
-        this.departmentForm = this.fb.group(
-            {
-                id: [''],
-                code: ['', [Validators.required]],
-                name: ['', [Validators.required]]
-            }
-        );
+        this.departmentForm = this.fb.group({
+            id: [''],
+            code: ['', [Validators.required]],
+            name: ['', [Validators.required]],
+        });
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -56,14 +62,20 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
             this.formData &&
             Object.keys(this.formData).length > 0
         ) {
-            this.title = AppUtil.translate(this.translateService, 'label.edit_department');
+            this.title = AppUtil.translate(
+                this.translateService,
+                'label.edit_department'
+            );
             this.departmentForm.setValue({
                 id: this.formData.id,
                 code: this.formData.code,
                 name: this.formData.name,
             });
         } else {
-            this.title = AppUtil.translate(this.translateService, 'label.add_department');
+            this.title = AppUtil.translate(
+                this.translateService,
+                'label.add_department'
+            );
         }
     }
 
@@ -72,26 +84,15 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
         this.departmentForm.reset();
     }
 
-    ngOnInit() {
-        const param = this.route.snapshot.paramMap.get('id')
-        switch (param) {
-            case 'create':
-                this.isEdit = false
-                break
-            default:
-                this.isEdit = true
-                this.getDepartmentDetail(param)
-                break
-        }
-    }
+    ngOnInit() {}
 
     checkValidValidator(fieldName: string) {
         return ((this.departmentForm.controls[fieldName].dirty ||
-                this.departmentForm.controls[fieldName].touched) &&
+            this.departmentForm.controls[fieldName].touched) &&
             this.departmentForm.controls[fieldName].invalid) ||
-        (this.isInvalidForm &&
-            this.departmentForm.controls[fieldName].invalid) ||
-        (fieldName === 'code' && this.existCode)
+            (this.isInvalidForm &&
+                this.departmentForm.controls[fieldName].invalid) ||
+            (fieldName === 'code' && this.existCode)
             ? 'ng-invalid ng-dirty'
             : '';
     }
@@ -100,7 +101,7 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
         for (let i = 0; i < fieldNames.length; i++) {
             if (
                 ((this.departmentForm.controls[fieldNames[i]].dirty ||
-                        this.departmentForm.controls[fieldNames[i]].touched) &&
+                    this.departmentForm.controls[fieldNames[i]].touched) &&
                     this.departmentForm.controls[fieldNames[i]].invalid) ||
                 (this.isInvalidForm &&
                     this.departmentForm.controls[fieldNames[i]].invalid)
@@ -112,15 +113,21 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
     }
 
     getDepartmentDetail(id) {
-        this.departmentService.getDepartmentDetail(id).subscribe((res) => {
-            this.departmentForm.setValue({
-                id: res?.id,
-                code: res?.code,
-                name: res?.name,
-            });
-        }, error => {
-            this.messageService.add({severity: 'error', detail: 'Lỗi lấy dữ liệu'})
-        })
+        this.departmentService.getDepartmentDetail(id).subscribe(
+            (res) => {
+                this.departmentForm.setValue({
+                    id: res?.id,
+                    code: res?.code,
+                    name: res?.name,
+                });
+            },
+            (error) => {
+                this.messageService.add({
+                    severity: 'error',
+                    detail: 'Lỗi lấy dữ liệu',
+                });
+            }
+        );
     }
 
     onSubmit() {
@@ -149,21 +156,25 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
                 .subscribe((res: any) => {
                     if (res.status != 603) {
                         this.onCancel.emit({});
-                        this.router.navigate([`/uikit/department`]).then()
-                        this.messageService.add({severity:'success',detail:'Cập nhật thành công'})
-                    }
-                    else this.existCode = true;
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Cập nhật thành công',
+                        });
+                    } else this.existCode = true;
                 });
         } else {
-            this.departmentService.createDepartment(newData).subscribe((res: any) => {
-                console.log(res);
-                if (res.status != 603) {
-                    this.onCancel.emit({});
-                    this.router.navigate([`/uikit/department`]).then()
-                    this.messageService.add({severity:'success',detail:'Thêm mới thành công'})
-                }
-                else this.existCode = true;
-            });
+            this.departmentService
+                .createDepartment(newData)
+                .subscribe((res: any) => {
+                    console.log(res);
+                    if (res.status != 603) {
+                        this.onCancel.emit({});
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Thêm mới thành công',
+                        });
+                    } else this.existCode = true;
+                });
         }
     }
 
@@ -176,14 +187,12 @@ export class DepartmentFormComponent implements OnInit, OnChanges {
     }
 
     onChangeCode() {
-        console.log('on change code');
         if (this.existCode) {
             this.existCode = false;
-            console.log('exist code ', this.existCode);
         }
     }
 
     onBack() {
-        this.router.navigate([`/uikit/department`]).then()
+        this.onCancel.emit({});
     }
 }

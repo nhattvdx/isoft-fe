@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MessageService, ConfirmationService } from 'primeng/api'
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { TypeData } from 'src/app/models/common.model';
 import { environment } from 'src/environments/environment';
 import AppUtil from 'src/app/utilities/app-util';
@@ -8,7 +8,7 @@ import AppConstant from 'src/app/utilities/app-constants';
 import { StoreFormComponent } from './components/store-form/store-form.component';
 import { PageFilterStore, StoreService } from 'src/app/service/store.service';
 import { Store } from 'src/app/models/store.model';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './store.component.html',
@@ -32,9 +32,7 @@ import {Router} from "@angular/router";
 })
 export class StoreComponent implements OnInit {
     public appConstant = AppConstant;
-    @ViewChild('storeForm') storeFormComponent:
-        | StoreFormComponent
-        | undefined;
+    @ViewChild('storeForm') storeFormComponent: StoreFormComponent | undefined;
 
     loading: boolean = true;
 
@@ -46,7 +44,7 @@ export class StoreComponent implements OnInit {
     public getParams: PageFilterStore = {
         page: 1,
         pageSize: 10,
-        searchText: ''
+        searchText: '',
     };
     public totalRecords = 0;
     public totalPages = 0;
@@ -116,7 +114,6 @@ export class StoreComponent implements OnInit {
         Object.keys(this.getParams).forEach(
             (k) => this.getParams[k] == null && delete this.getParams[k]
         );
-        console.log('this params', this.getParams);
         this.pendingRequest = this.storeService
             .getListStore(this.getParams)
             .subscribe((response: TypeData<Store>) => {
@@ -129,18 +126,18 @@ export class StoreComponent implements OnInit {
     }
 
     getDetail(storeId) {
-        // this.storeService
-        //     .getStoreDetail(storeId)
-        //     .subscribe((response: Store) => {
-        //         this.formData = response;
-        //         this.isEdit = true;
-        //         this.showDialog();
-        //     });
-        this.router.navigate([`/uikit/store/${storeId}`]).then()
+        this.storeService
+            .getStoreDetail(storeId)
+            .subscribe((response: Store) => {
+                this.formData = response;
+                this.isEdit = true;
+                this.showDialog();
+            });
     }
 
     onAddStore() {
-        this.router.navigate([`/uikit/store/create`]).then()
+        this.isEdit = false;
+        this.showDialog();
     }
 
     onDelete(storeId) {

@@ -100,16 +100,8 @@ import { RoomTableFormComponent } from './components/sell-module/setup-module/ro
                             component: BranchComponent,
                         },
                         {
-                            path: 'branch/:id',
-                            component: BranchFormComponent,
-                        },
-                        {
                             path: 'store',
                             component: StoreComponent,
-                        },
-                        {
-                            path: 'store/:id',
-                            component: StoreFormComponent,
                         },
                         {
                             path: 'employee-type',
