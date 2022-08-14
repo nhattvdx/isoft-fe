@@ -26,8 +26,7 @@
                 </div>
                 <div class="p-fluid formgrid grid mt-4">
                     <div class="field col">
-                        <label htmlFor="floorId">{{ "label.group" | translate
-                            }}</label>
+                        <label htmlFor="floorId">{{ "label.group" | translate }}</label>
                         <p-dropdown id="floorId" [options]="dataDropdown" [optionLabel]="'name'" [optionValue]="'id'"
                             showClear="true" [formControlName]="'floorId'" [appendTo]="'body'"
                             [placeholder]="'label.empty' | translate" [filter]="true" filterBy="name"></p-dropdown>
@@ -35,24 +34,21 @@
                 </div>
                 <div class="p-fluid formgrid grid mt-4">
                     <div class="field col">
-                        <label htmlFor="position">{{ "label.number_ordinal" | translate
-                            }}</label>
+                        <label htmlFor="position">{{ "label.number_ordinal" | translate }}</label>
                         <input pInputText id="position" [(ngModel)]="roomTableForm.value.position"
                             formControlName="position" />
                     </div>
                 </div>
                 <div class="p-fluid formgrid grid mt-4">
                     <div class="field col">
-                        <label htmlFor="numberSeat">{{ "label.number_or_seats" | translate
-                            }}</label>
+                        <label htmlFor="numberSeat">{{ "label.number_or_seats" | translate }}</label>
                         <input pInputText id="numberSeat" [(ngModel)]="roomTableForm.value.numberSeat"
                             formControlName="numberSeat" />
                     </div>
                 </div>
                 <div class="p-fluid formgrid grid mt-4">
                     <div class="field col">
-                        <label htmlFor="description">{{ "label.description" | translate
-                            }}</label>
+                        <label htmlFor="description">{{ "label.description" | translate }}</label>
                         <input pInputText id="description" [(ngModel)]="roomTableForm.value.description"
                             formControlName="description" />
                     </div>
