@@ -77,7 +77,7 @@
         "recruit": "Tuyển dụng",
         "news": "Tin tức",
         "social_network": "Các mạng xã hội",
-        "contract_type_management":"Loại nhân sự"
+        "contract_type_management": "Loại nhân sự"
     },
     "label": {
         "empty": " ",
@@ -253,6 +253,8 @@
         "excel": "Excel",
         "edit_branch": "Sửa thông tin chi nhánh",
         "add_branch": "Thêm chi nhánh",
+        "month":"Tháng",
+        "recording_date":"Ngày ghi sổ",
         "incoming_text_management": "Quản lý công văn đến",
         "incoming_text_name": "Tên văn bản",
         "incoming_text_to_date": "Ngày đến",
@@ -277,7 +279,18 @@
         "text_go_receive_dept": "Phòng ban nhận",
         "text_go_receiver": "Người nhận",
         "text_go_address_received": "Nơi nhận",
-        "text_go_editor": "Người soạn thảo"
+        "text_go_editor": "Người soạn thảo",
+        "table_floor_management": "Quản lý Lầu/Phòng, Bàn",
+        "name_table": "Tên bàn",
+        "name_room_floor": "Lầu/ Phòng",
+        "number_ordinal": "Số thứ tự",
+        "number_or_seats": "Số ghế",
+        "name_room_table": "Tên phòng bàn",
+        "code_room_table": "Mã phòng bàn",
+        "group": "Nhóm",
+        "description": "Mô tả",
+        "add_room_table": "Thêm mới Lầu/Phòng, Bàn",
+        "edit_room_table": "Chỉnh sửa Lầu/Phòng, Bàn"
     },
     "button": {
         "sign_in": "Đăng nhập",
@@ -297,8 +310,7 @@
         "saveF8": "Lưu (F8)",
         "save_add_F9": "Lưu và thêm mới (F9)"
     },
-    "type": {
-    },
+    "type": {},
     "success": {
         "change_pass_successfully": "Đổi mật khẩu thành công",
         "create": "Tạo thông tin thành công",
@@ -322,10 +334,12 @@
         "delete_Position_content": "Bạn có chắc muốn xóa chức danh này?",
         "delete_PositionDetail_header": "Xóa chi tiết chức danh",
         "delete_PositionDetail_content": "Bạn có chắc muốn xóa chi tiết chức danh này?",
-        "delete_incoming_text_header":"Xóa công văn đến",
-        "delete_incoming_text_content":"Bạn có chắc muốn xóa công văn đến này?",
-        "delete_text_go_header":"Xóa công văn đi",
-        "delete_text_go_content":"Bạn có chắc muốn xóa công văn đi này?"
+        "delete_incoming_text_header": "Xóa công văn đến",
+        "delete_incoming_text_content": "Bạn có chắc muốn xóa công văn đến này?",
+        "delete_text_go_header": "Xóa công văn đi",
+        "delete_text_go_content": "Bạn có chắc muốn xóa công văn đi này?",
+        "delete_room_table_header": "Xoá lầu/phòng, bàn",
+        "delete_room_table": "Bạn có chắc muốn xoá lầu/phòng, bàn này?"
     },
     "error": {
         "0": "Đã có sự cố xảy ra. Vui lòng liên hệ nhà quản trị",
@@ -343,7 +357,5 @@
         "code": "Thông tin mã không đúng",
         "name": "Thông tin tên không đúng"
     },
-    "warning": {
-
-    }
+    "warning": {}
 }
