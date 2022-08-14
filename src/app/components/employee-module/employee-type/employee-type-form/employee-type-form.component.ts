@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
@@ -6,24 +13,23 @@ import AppConstant from 'src/app/utilities/app-constants';
 import AppData from 'src/app/utilities/app-data';
 import AppUtil from 'src/app/utilities/app-util';
 import { ContractTypeService } from 'src/app/service/contract-type.service';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-employee-type-form',
-  templateUrl: './employee-type-form.component.html',
-  styles: [
-      `
-          :host ::ng-deep {
-              #phonePrefix .p-dropdown {
-                  width: 93px;
-              }
-          }
-      `,
-  ],
+    selector: 'app-employee-type-form',
+    templateUrl: './employee-type-form.component.html',
+    styles: [
+        `
+            :host ::ng-deep {
+                #phonePrefix .p-dropdown {
+                    width: 93px;
+                }
+            }
+        `,
+    ],
 })
 export class EmployeeTypeFormComponent implements OnInit {
-
-  public appConstant = AppConstant;
+    public appConstant = AppConstant;
     @Input('formData') formData: any = {};
     @Input('isReset') isReset: boolean = false;
     @Input('isEdit') isEdit: boolean = false;
@@ -46,15 +52,13 @@ export class EmployeeTypeFormComponent implements OnInit {
         private messageService: MessageService,
         private ContractTypeService: ContractTypeService,
         private router: Router,
-        private route: ActivatedRoute,
+        private route: ActivatedRoute
     ) {
-        this.ContractTypeForm = this.fb.group(
-            {
-                id: [''],
-                code: ['', [Validators.required]],
-                name: ['', [Validators.required]]
-            }
-        );
+        this.ContractTypeForm = this.fb.group({
+            id: [''],
+            code: ['', [Validators.required]],
+            name: ['', [Validators.required]],
+        });
     }
     ngOnChanges(changes: SimpleChanges): void {
         if (
@@ -62,14 +66,20 @@ export class EmployeeTypeFormComponent implements OnInit {
             this.formData &&
             Object.keys(this.formData).length > 0
         ) {
-            this.title = AppUtil.translate(this.translateService, 'label.edit_ContractType');
+            this.title = AppUtil.translate(
+                this.translateService,
+                'label.edit_ContractType'
+            );
             this.ContractTypeForm.setValue({
                 id: this.formData.id,
                 code: this.formData.code,
                 name: this.formData.name,
             });
         } else {
-            this.title = AppUtil.translate(this.translateService, 'label.add_ContractType');
+            this.title = AppUtil.translate(
+                this.translateService,
+                'label.add_ContractType'
+            );
         }
     }
 
@@ -78,19 +88,7 @@ export class EmployeeTypeFormComponent implements OnInit {
         this.ContractTypeForm.reset();
     }
 
-    ngOnInit() {
-        this.countryCodes = AppUtil.getCountries();
-        const param = this.route.snapshot.paramMap.get('id')
-        switch (param) {
-            case 'create':
-                this.isEdit = false
-                break
-            default:
-                this.isEdit = true
-                this.getContractTypeDetail(param)
-                break
-        }
-    }
+    ngOnInit() {}
 
     checkValidValidator(fieldName: string) {
         return ((this.ContractTypeForm.controls[fieldName].dirty ||
@@ -117,15 +115,21 @@ export class EmployeeTypeFormComponent implements OnInit {
         return false;
     }
     getContractTypeDetail(id) {
-        this.ContractTypeService.getContractTypeDetail(id).subscribe((res) => {
-            this.ContractTypeForm.setValue({
-                id: res?.id,
-                code: res?.code,
-                name: res?.name,
-            });
-        }, error => {
-            this.messageService.add({severity: 'error', detail: 'Lỗi lấy dữ liệu'})
-        })
+        this.ContractTypeService.getContractTypeDetail(id).subscribe(
+            (res) => {
+                this.ContractTypeForm.setValue({
+                    id: res?.id,
+                    code: res?.code,
+                    name: res?.name,
+                });
+            },
+            (error) => {
+                this.messageService.add({
+                    severity: 'error',
+                    detail: 'Lỗi lấy dữ liệu',
+                });
+            }
+        );
     }
     onSubmit() {
         this.isSubmitted = true;
@@ -146,39 +150,44 @@ export class EmployeeTypeFormComponent implements OnInit {
             AppUtil.cleanObject(this.ContractTypeForm.value)
         );
         if (this.isEdit) {
-            this.ContractTypeService
-                .updateContractType(newData, this.ContractTypeForm.value.id)
-                .subscribe((res) => {
-                    var result = res as any;
-                    if(result && !result.succeeded){
-                        this.messageService.add({
-                            severity: 'error',
-                            detail: result?.message || ''
-                        })
-                        return;
-                    }
-                    else {
-                        this.onCancel.emit({});
-                        this.router.navigate([`/uikit/employee-type`]).then()
-                        this.messageService.add({severity:'success',detail:'Cập nhật thành công'})
-                    }
-                });
-        } else {
-            this.ContractTypeService.createContractType(newData).subscribe((res) => {
+            this.ContractTypeService.updateContractType(
+                newData,
+                this.ContractTypeForm.value.id
+            ).subscribe((res) => {
                 var result = res as any;
-                if(result && !result.succeeded){
+                if (result && !result.succeeded) {
                     this.messageService.add({
                         severity: 'error',
-                        detail: result?.message || ''
-                    })
-                    return
-                }
-                else {
+                        detail: result?.message || '',
+                    });
+                    return;
+                } else {
                     this.onCancel.emit({});
-                    this.router.navigate([`/uikit/employee-type`]).then()
-                    this.messageService.add({severity:'success',detail:'Thêm mới thành công'})
+                    this.messageService.add({
+                        severity: 'success',
+                        detail: 'Cập nhật thành công',
+                    });
                 }
             });
+        } else {
+            this.ContractTypeService.createContractType(newData).subscribe(
+                (res) => {
+                    var result = res as any;
+                    if (result && !result.succeeded) {
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: result?.message || '',
+                        });
+                        return;
+                    } else {
+                        this.onCancel.emit({});
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Thêm mới thành công',
+                        });
+                    }
+                }
+            );
         }
     }
 
@@ -195,6 +204,6 @@ export class EmployeeTypeFormComponent implements OnInit {
     }
 
     onBack() {
-        this.router.navigate([`/uikit/employee-type`]).then()
+        this.onCancel.emit({});
     }
 }

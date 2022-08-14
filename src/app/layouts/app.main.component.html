@@ -1,4 +1,5 @@
-<div class="layout-wrapper" [ngClass]="{'layout-overlay':isOverlay(),
+<div class="layout-wrapper"
+    [ngClass]="{'layout-overlay':isOverlay(),
                                 'layout-static':isStatic(),
                                 'layout-theme-light':!config.dark,
                                 'layout-theme-dark':config.dark,
@@ -6,16 +7,17 @@
                                 'layout-static-sidebar-inactive': staticMenuInactive,
                                 'layout-mobile-sidebar-active':menuActiveMobile,
                                 'p-ripple-disabled': !config.ripple, 'p-input-filled': config.inputStyle === 'filled'}">
-    <app-topbar></app-topbar>
-    <div class="layout-sidebar sidebar-custom">
+
+    <app-topbar *ngIf="!isLargeScreen()"></app-topbar>
+    <div *ngIf="!isLargeScreen()" class="layout-sidebar sidebar-custom">
         <app-menu></app-menu>
     </div>
-    <div class="layout-main-container">
+    <div [ngClass]="{'layout-main-container': !isLargeScreen()}" class="layout-main-container">
         <div class="layout-main">
             <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>
     </div>
-        <app-config></app-config>
-        <div *ngIf="menuActiveMobile" class="layout-mask p-component-overlay"></div>
+    <app-config></app-config>
+    <div *ngIf="menuActiveMobile" class="layout-mask p-component-overlay"></div>
 </div>

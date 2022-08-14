@@ -1,21 +1,30 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
-import {MessageService} from 'primeng/api';
-import {BranchService} from 'src/app/service/branch.service';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
+import { BranchService } from 'src/app/service/branch.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
-import {HttpErrorResponse} from "@angular/common/http";
-import {ActivatedRoute, Router} from '@angular/router';
-
+import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-branch-form',
     templateUrl: './branch-form.component.html',
-    styles: [
-        `
-        `,
-    ],
+    styles: [``],
 })
 export class BranchFormComponent implements OnInit, OnChanges {
     public appConstant = AppConstant;
@@ -38,16 +47,14 @@ export class BranchFormComponent implements OnInit, OnChanges {
         private messageService: MessageService,
         private branchService: BranchService,
         private router: Router,
-        private route: ActivatedRoute,
+        private route: ActivatedRoute
     ) {
-        this.branchForm = this.fb.group(
-            {
-                id: [''],
-                code: ['', [Validators.required]],
-                name: ['', [Validators.required]],
-                managerName: ['', [Validators.required]]
-            }
-        );
+        this.branchForm = this.fb.group({
+            id: [''],
+            code: ['', [Validators.required]],
+            name: ['', [Validators.required]],
+            managerName: ['', [Validators.required]],
+        });
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -56,16 +63,22 @@ export class BranchFormComponent implements OnInit, OnChanges {
             this.formData &&
             Object.keys(this.formData).length > 0
         ) {
-            this.title = AppUtil.translate(this.translateService, 'label.edit_branch');
+            this.title = AppUtil.translate(
+                this.translateService,
+                'label.edit_branch'
+            );
             this.branchForm.setValue({
                 id: this.formData.id,
                 code: this.formData.code,
                 name: this.formData.name,
                 managerName: this.formData.managerName,
             });
-            console.log('this.branchForm', this.branchForm)
+            console.log('this.branchForm', this.branchForm);
         } else {
-            this.title = AppUtil.translate(this.translateService, 'label.add_branch');
+            this.title = AppUtil.translate(
+                this.translateService,
+                'label.add_branch'
+            );
         }
     }
 
@@ -75,24 +88,23 @@ export class BranchFormComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        const param = this.route.snapshot.paramMap.get('id')
-        switch (param) {
-            case 'create':
-                this.isEdit = false
-                break
-            default:
-                this.isEdit = true
-                this.getBranchDetail(param)
-                break
-        }
+        // const param = this.route.snapshot.paramMap.get('id');
+        // switch (param) {
+        //     case 'create':
+        //         this.isEdit = false;
+        //         break;
+        //     default:
+        //         this.isEdit = true;
+        //         this.getBranchDetail(param);
+        //         break;
+        // }
     }
 
     checkValidValidator(fieldName: string) {
         return ((this.branchForm.controls[fieldName].dirty ||
-                this.branchForm.controls[fieldName].touched) &&
+            this.branchForm.controls[fieldName].touched) &&
             this.branchForm.controls[fieldName].invalid) ||
-        (this.isInvalidForm &&
-            this.branchForm.controls[fieldName].invalid)
+            (this.isInvalidForm && this.branchForm.controls[fieldName].invalid)
             ? 'ng-invalid ng-dirty'
             : '';
     }
@@ -101,7 +113,7 @@ export class BranchFormComponent implements OnInit, OnChanges {
         for (let i = 0; i < fieldNames.length; i++) {
             if (
                 ((this.branchForm.controls[fieldNames[i]].dirty ||
-                        this.branchForm.controls[fieldNames[i]].touched) &&
+                    this.branchForm.controls[fieldNames[i]].touched) &&
                     this.branchForm.controls[fieldNames[i]].invalid) ||
                 (this.isInvalidForm &&
                     this.branchForm.controls[fieldNames[i]].invalid)
@@ -113,16 +125,22 @@ export class BranchFormComponent implements OnInit, OnChanges {
     }
 
     getBranchDetail(id) {
-        this.branchService.getBranchDetail(id).subscribe((res) => {
-            this.branchForm.setValue({
-                id: res?.id,
-                code: res?.code,
-                name: res?.name,
-                managerName: res?.managerName,
-            });
-        }, error => {
-            this.messageService.add({severity: 'error', detail: 'Lỗi lấy dữ liệu'})
-        })
+        this.branchService.getBranchDetail(id).subscribe(
+            (res) => {
+                this.branchForm.setValue({
+                    id: res?.id,
+                    code: res?.code,
+                    name: res?.name,
+                    managerName: res?.managerName,
+                });
+            },
+            (error) => {
+                this.messageService.add({
+                    severity: 'error',
+                    detail: 'Lỗi lấy dữ liệu',
+                });
+            }
+        );
     }
 
     onSubmit() {
@@ -152,33 +170,43 @@ export class BranchFormComponent implements OnInit, OnChanges {
                     if (res?.code === 400) {
                         this.messageService.add({
                             severity: 'error',
-                            detail: res?.msg || ''
-                        })
-                        return
+                            detail: res?.msg || '',
+                        });
+                        return;
                     } else {
                         this.onCancel.emit({});
-                        this.router.navigate([`/uikit/branch`]).then()
-                        this.messageService.add({severity:'success',detail:'Cập nhật thành công'})
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Cập nhật thành công',
+                        });
                     }
                 });
         } else {
-            this.branchService.createBranch(newData).subscribe((res: any) => {
-                if (res?.code === 400) {
-                    this.messageService.add({severity: 'error', detail: res?.msg || ''})
-                    return
-                } else {
-                    this.onCancel.emit({});
-                    this.router.navigate([`/uikit/branch`]).then()
-                    this.messageService.add({severity:'success',detail:'Thêm mới thành công'})
+            this.branchService.createBranch(newData).subscribe(
+                (res: any) => {
+                    if (res?.code === 400) {
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: res?.msg || '',
+                        });
+                        return;
+                    } else {
+                        this.onCancel.emit({});
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Thêm mới thành công',
+                        });
+                    }
+                },
+                (err) => {
+                    console.log('err', err);
                 }
-            }, err => {
-                console.log('err', err)
-            });
+            );
         }
     }
 
     onBack() {
-        this.router.navigate([`/uikit/branch`]).then()
+        this.onCancel.emit({});
     }
 
     cleanObject(data) {
