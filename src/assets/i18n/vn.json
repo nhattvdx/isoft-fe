@@ -288,9 +288,7 @@
         "name_room_table": "Tên phòng bàn",
         "code_room_table": "Mã phòng bàn",
         "group": "Nhóm",
-        "description": "Mô tả",
-        "add_room_table": "Thêm mới Lầu/Phòng, Bàn",
-        "edit_room_table": "Chỉnh sửa Lầu/Phòng, Bàn"
+        "description": "Mô tả"
     },
     "button": {
         "sign_in": "Đăng nhập",
