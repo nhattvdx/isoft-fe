@@ -53,7 +53,7 @@ export class TimekeepingPositionComponent implements OnInit {
         pageSize: 5,
         sortField: 'id',
         isSort: true,
-        searchText: ''
+        searchText: '',
     };
     public totalRecords = 0;
     public totalPages = 0;
@@ -136,42 +136,42 @@ export class TimekeepingPositionComponent implements OnInit {
             (k) => this.getParams[k] == null && delete this.getParams[k]
         );
         console.log('this params', this.getParams);
-        this.pendingRequest = this.TargetService
-            .getListTarget(this.getParams)
-            .subscribe((response: TypeData<Target>) => {
-                AppUtil.scrollToTop();
-                this.lstTargets = response.data;
-                this.totalRecords = response.totalItems || 0;
-                this.totalPages = response.totalItems / response.pageSize + 1;
-                this.loading = false;
-            });
+        this.pendingRequest = this.TargetService.getListTarget(
+            this.getParams
+        ).subscribe((response: TypeData<Target>) => {
+            AppUtil.scrollToTop();
+            this.lstTargets = response.data;
+            this.totalRecords = response.totalItems || 0;
+            this.totalPages = response.totalItems / response.pageSize + 1;
+            this.loading = false;
+        });
     }
 
     getDetail(TargetId) {
-        this.TargetService
-            .getTargetDetail(TargetId)
-            .subscribe((response: Target) => {
+        this.TargetService.getTargetDetail(TargetId).subscribe(
+            (response: Target) => {
                 this.formData = response;
                 this.isEdit = true;
                 this.showDialog();
-            });
+            }
+        );
     }
 
     onDelete(TargetId) {
         let message;
         this.translateService
-            .get('question.delete_Target_content')
+            .get('question.delete_timekeeping')
             .subscribe((res) => {
                 message = res;
             });
         this.confirmationService.confirm({
             message: message,
             accept: () => {
-                this.TargetService
-                    .deleteTarget(TargetId)
-                    .subscribe((response: any) => {
+                this.TargetService.deleteTarget(TargetId).subscribe(
+                    (response: any) => {
                         this.getTargets();
-                    });
+                    }
+                );
             },
         });
     }

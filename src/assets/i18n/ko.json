@@ -218,7 +218,24 @@
         "edit_branch": "[KO]Edit branch",
         "add_branch": "[KO]Add branch",
         "month": "[KO]Month",
-        "recording_date":"[KO]Recording date"
+        "recording_date": "[KO]Recording date",
+        "timekeeping_position_management": "[KO]Time keeping position management",
+        "timekeeping_position_add": "[KO]Add time keeping position",
+        "timekeeping_position_update": "[KO]Update time keeping position",
+        "numerical_order": "[KO]Numerical order",
+        "name_target": "[KO]Name target",
+        "effective": "[KO]Effective",
+        "present": "[KO]Present",
+        "reality": "[KO]Reality",
+        "number_contact": "[KO]Number contact",
+        "date_export_receipt": "[KO]Date export receipt",
+        "unit_price": "[KO]Unit price",
+        "sum_price": "[KO]Sum price",
+        "time_start": "[KO]Time start",
+        "time_end": "[KO]Time end",
+        "status_active": "[KO]Status active",
+        "cooperate": "[KO]Cooperate",
+        "stop_cooperate": "[KO]Stop cooperate"
     },
     "button": {
         "sign_in": "[KO]Sign In",
@@ -242,7 +259,9 @@
         "delete_user_header": "[KO]Delete personnel",
         "delete_user_content": "[KO]Are you sure you want to delete this user?",
         "delete_department_header": "[KO]Delete department",
-        "delete_department_content": "[KO]Are you sure you want to delete this department?"
+        "delete_department_content": "[KO]Are you sure you want to delete this department?",
+        "delete_timekeeping_header": "[KO]Delete timekeeping",
+        "delete_timekeeping": "[KO]Are you sure you want to delete this timekeeping?"
     },
     "success": {
         "change_pass_successfully": "[KO]Change password successfully",
