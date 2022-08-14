@@ -225,7 +225,9 @@
         "group": "[KO]Group",
         "description": "[KO]Description",
         "add_room_table": "[KO]Add new room table",
-        "edit_room_table": "[KO]Edit room table"
+        "edit_room_table": "[KO]Edit room table",
+        "desk": "[KO]Desk",
+        "floor": "[KO]Floor"
     },
     "button": {
         "sign_in": "[KO]Sign In",

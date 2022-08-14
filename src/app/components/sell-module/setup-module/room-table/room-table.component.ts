@@ -8,6 +8,7 @@ import { RoomTableService } from 'src/app/service/room-table.service';
 import AppUtil from 'src/app/utilities/app-util';
 import { environment } from 'src/environments/environment';
 import { RoomTable } from './roomtable.model';
+import { PageFilterRoomTable } from 'src/app/service/room-table.service.';
 
 @Component({
     selector: 'app-room-table',
@@ -26,6 +27,14 @@ import { RoomTable } from './roomtable.model';
             :host ::ng-deep .p-progressbar {
                 height: 0.5rem;
             }
+            :host ::ng-deep .p-panel .p-panel-header .p-panel-header-icon {
+                position: absolute;
+                top: 80px;
+                right: 30px;
+            }
+            :host ::ng-deep .p-button {
+                height: 40px;
+            }
         `,
     ],
 })
@@ -41,11 +50,12 @@ export class RoomTableComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef;
 
-    public getParams: PageFilterUser = {
+    public getParams: PageFilterRoomTable = {
         page: 1,
         pageSize: 5,
         sortField: 'id',
         isSort: true,
+        status: '0',
         searchText: '',
     };
     public totalRecords = 0;
@@ -64,6 +74,8 @@ export class RoomTableComponent implements OnInit {
     isEdit: boolean = false;
     isReset: boolean = false;
 
+    floors: RoomTable[];
+
     pendingRequest: any;
 
     constructor(
@@ -80,6 +92,7 @@ export class RoomTableComponent implements OnInit {
         AppUtil.getSortTypes(this.translateService).subscribe((res) => {
             this.sortTypes = res;
         });
+        this.getFloors();
     }
 
     onSearch(event) {
@@ -97,6 +110,13 @@ export class RoomTableComponent implements OnInit {
 
     clearFilter(columnFilter: ColumnFilter, field: string) {
         columnFilter.clearFilter();
+    }
+
+    getFloors() {
+        this.roomTableServices.getListNoQuery().subscribe((res) => {
+            this.floors =
+                res.data.filter((item) => item.floorId === 0) || [];
+        });
     }
 
     getRoomTable(event?: any, isExport: boolean = false): void {
@@ -163,5 +183,9 @@ export class RoomTableComponent implements OnInit {
 
     baseUrlImage(image) {
         return `${environment.serverURL}/${image}`;
+    }
+
+    checkCodeRequired(deskFloor) {
+        return deskFloor.code === 'Floor' || deskFloor.code === 'Live';
     }
 }

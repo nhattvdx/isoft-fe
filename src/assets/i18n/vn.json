@@ -286,7 +286,9 @@
         "group": "Nhóm",
         "description": "Mô tả",
         "add_room_table": "Thêm mới một Lầu/Phòng, Bàn",
-        "edit_room_table": "Chỉnh sửa Lầu/Phòng, Bàn"
+        "edit_room_table": "Chỉnh sửa Lầu/Phòng, Bàn",
+        "desk": "Bàn",
+        "floor": "Lầu/Phòng"
     },
     "button": {
         "sign_in": "Đăng nhập",

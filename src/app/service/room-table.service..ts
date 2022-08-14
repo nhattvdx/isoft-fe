@@ -7,7 +7,9 @@ import { Page, TypeData } from '../models/common.model';
 import AppConstant from '../utilities/app-constants';
 import { RoomTable } from '../models/room-table.model';
 
-export interface PageFilterRoomTable extends Page {}
+export interface PageFilterRoomTable extends Page {
+    status: string;
+}
 
 let _prefix = `${AppConstant.DEFAULT_URLS.API}/DeskFloors`;
 

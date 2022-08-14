@@ -60,10 +60,6 @@ export class RoomTableFormComponent implements OnInit {
             this.formData &&
             Object.keys(this.formData).length > 0
         ) {
-            this.title = AppUtil.translate(
-                this.translateService,
-                'label.edit_room_table'
-            );
             this.roomTableForm.setValue({
                 name: this.formData.name,
                 code: this.formData.code,
@@ -72,11 +68,6 @@ export class RoomTableFormComponent implements OnInit {
                 numberSeat: this.formData.numberSeat,
                 description: this.formData.description,
             });
-        } else {
-            this.title = AppUtil.translate(
-                this.translateService,
-                'label.add_room_table'
-            );
         }
     }
 

@@ -268,7 +268,9 @@
         "group": "Group",
         "description": "Description",
         "add_room_table": "Add new room table",
-        "edit_room_table": "Edit room table"
+        "edit_room_table": "Edit room table",
+        "desk": "Desk",
+        "floor": "Floor"
     },
     "button": {
         "sign_in": "Sign In",
