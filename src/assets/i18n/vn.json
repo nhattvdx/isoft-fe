@@ -76,8 +76,7 @@
         "product": "Sản phẩm",
         "recruit": "Tuyển dụng",
         "news": "Tin tức",
-        "social_network": "Các mạng xã hội",
-        "contract_type_management": "Loại nhân sự"
+        "social_network": "Các mạng xã hội"
     },
     "label": {
         "empty": " ",
@@ -120,9 +119,6 @@
         "department_management": "Quản lý danh sách phòng ban",
         "add_department": "Thêm mới phòng ban",
         "edit_department": "Cập nhật phòng ban",
-        "room_table_management": "Quản lý danh sách bàn lầu",
-        "add_room_table": "Thêm mới bàn lầu",
-        "edit_room_table": "Cập nhật bàn lầu",
         "key_word": "Từ khóa",
         "sort_field": "Trường sắp xếp",
         "sort_type": "Loại sắp xếp",
@@ -280,7 +276,7 @@
         "text_go_receiver": "Người nhận",
         "text_go_address_received": "Nơi nhận",
         "text_go_editor": "Người soạn thảo",
-        "table_floor_management": "Quản lý Lầu/Phòng, Bàn",
+        "table_floor_management": "Quản lý danh sách Lầu/Phòng, Bàn",
         "name_table": "Tên bàn",
         "name_room_floor": "Lầu/ Phòng",
         "number_ordinal": "Số thứ tự",
@@ -305,7 +301,9 @@
         "time_end": "Thời gian kết thúc",
         "status_active": "Trạng thái hoạt động",
         "cooperate": "Hợp tác",
-        "stop_cooperate": "Ngừng hợp tác"
+        "stop_cooperate": "Ngừng hợp tác",
+        "add_room_table": "Thêm mới một Lầu/Phòng, Bàn",
+        "edit_room_table": "Chỉnh sửa Lầu/Phòng, Bàn"
     },
     "button": {
         "sign_in": "Đăng nhập",

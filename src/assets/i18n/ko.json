@@ -76,8 +76,7 @@
         "product": "[KO]Product",
         "recruit": "[KO]Recruit",
         "news": "[KO]News",
-        "social_network": "[KO]Social network",
-        "contract_type_management": "Loại nhân sự"
+        "social_network": "[KO]Social network"
     },
     "label": {
         "empty": " ",
@@ -102,9 +101,6 @@
         "department_management": "부서 관리",
         "add_department": "부서 추가",
         "edit_department": "부서 편집",
-        "room_table_management": "룸 테이블 관리",
-        "add_room_table": "회의실 테이블 추가",
-        "edit_room_table": "방 테이블 편집",
         "key_word": "키워드",
         "sort_field": "정렬 필드",
         "sort_type": "정렬 유형",
@@ -235,7 +231,18 @@
         "time_end": "[KO]Time end",
         "status_active": "[KO]Status active",
         "cooperate": "[KO]Cooperate",
-        "stop_cooperate": "[KO]Stop cooperate"
+        "stop_cooperate": "[KO]Stop cooperate",
+        "table_floor_management": "[KO]Table floor management",
+        "name_table": "[KO]Table name",
+        "name_room_floor": "[KO]Table/floor name",
+        "number_ordinal": "[KO]Number ordinal",
+        "number_or_seats": "[KO]Number or seats",
+        "name_room_table": "[KO]Room table name",
+        "code_room_table": "[KO]Room table code",
+        "group": "[KO]Group",
+        "description": "[KO]Description",
+        "add_room_table": "[KO]Add new room table",
+        "edit_room_table": "[KO]Edit room table"
     },
     "button": {
         "sign_in": "[KO]Sign In",
