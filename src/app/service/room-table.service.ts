@@ -1,11 +1,14 @@
+import { RoomTable } from './../models/room-table.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { RoomTable } from '../components/sell-module/setup-module/room-table/roomtable.model';
-import { Page, TypeData } from '../models/common.model';
 import AppConstant from '../utilities/app-constants';
+import { Page, TypeData } from '../models/common.model';
 
-export interface PageFilterBranch extends Page {}
+export interface PageFilterRoomTable extends Page {
+    floorId: number;
+    isFloor: string;
+}
 
 let _prefix = `${AppConstant.DEFAULT_URLS.API}/DeskFloors`;
 
@@ -16,6 +19,9 @@ export class RoomTableService {
     constructor(private readonly httpClient: HttpClient) {}
 
     public getList(params): Observable<TypeData<RoomTable>> {
+        if(params.floorId === 0) {
+            delete params.floorId;
+        }
         return this.httpClient.get(`${_prefix}`, { params }).pipe(
             map((data: TypeData<RoomTable>) => {
                 return data;

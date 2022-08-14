@@ -35,7 +35,7 @@
                         <div class="grid p-fluid">
                             <div class="field col-12 md:col-6 lg:col-3">
                                 <label class="font-bold" [translate]="'label.name_room_floor'"></label>
-                                <p-dropdown [(ngModel)]="getParams.userId" (onChange)="getUsers()" [options]="floors"
+                                <p-dropdown [(ngModel)]="getParams.floorId" (onChange)="getRoomTable()" [options]="floors" showClear="true"
                                     [optionLabel]="'name'" [optionValue]="'id'" [placeholder]="'label.empty' | translate"></p-dropdown>
                             </div>
 
@@ -55,14 +55,14 @@
                                 <label class="font-bold" [translate]="'label.type'"></label>
                                 <div class="flex">
                                     <div class="field-radiobutton md:pr-6 mt-2 pt-1">
-                                        <p-radioButton id="status1" name="status" value="1" [(ngModel)]="getParams.status" checked
+                                        <p-radioButton id="isFloor1" name="isFloor" value="true" [(ngModel)]="getParams.isFloor" checked
                                             [ngModelOptions]="{ standalone: true }" (ngModelChange)="getRoomTable()"></p-radioButton>
-                                        <label for="status1" [translate]="'label.floor'"></label>
+                                        <label for="isFloor1" [translate]="'label.floor'"></label>
                                     </div>
                                     <div class="field-radiobutton mt-2 pt-1">
-                                        <p-radioButton id="status2" name="status" value="0" [(ngModel)]="getParams.status"
+                                        <p-radioButton id="isFloor2" name="isFloor" value="false" [(ngModel)]="getParams.isFloor"
                                             [ngModelOptions]="{ standalone: true }" (ngModelChange)="getRoomTable()"></p-radioButton>
-                                        <label for="status2" [translate]="'label.desk'"></label>
+                                        <label for="isFloor2" [translate]="'label.desk'"></label>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                 <span [translate]="'label.name'"></span>
                             </div>
                         </th>
-                        <th class="w-2">
+                        <th *ngIf="getParams.isFloor === 'false'" class="w-2">
                             <div class="flex justify-content-between align-items-center">
                                 <span [translate]="'label.name_room_floor'"></span>
                             </div>
@@ -101,16 +101,13 @@
                                 <span [translate]="'label.number_or_seats'"></span>
                             </div>
                         </th>
-                        <th *ngIf="isMobile" class="w-2">
+                        <th class="w-4">
                             <div class="flex justify-content-between align-items-center">
                                 <span [translate]="'label.note'"></span>
                             </div>
                         </th>
-                        <th *ngIf="!isMobile" class="w-2" alignFrozen="right" pFrozenColumn [frozen]="true">
-                            <div class="flex justify-content-between align-items-center">
-                                <span [translate]="'label.note'"></span>
-                            </div>
-                        </th>
+                        <th *ngIf="isMobile" class="w-2"></th>
+                        <th *ngIf="!isMobile" class="w-2" alignFrozen="right" pFrozenColumn [frozen]="true"></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-deskFloor>
@@ -122,25 +119,28 @@
                             <span class="p-column-title" [translate]="'label.code'"></span>{{ deskFloor.code }}
                         </td>
                         <td class="w-2">
-                            <span class="p-column-title" [translate]="'label.code'"></span>{{ deskFloor.name }}
+                            <span class="p-column-title" [translate]="'label.name'"></span>{{ deskFloor.name }}
+                        </td>
+                        <td *ngIf="getParams.isFloor === 'false'" class="w-2">
+                            <span class="p-column-title" [translate]="'label.name_room_floor'"></span>{{ deskFloor.floorName }}
                         </td>
                         <td class="w-2">
-                            <span class="p-column-title" [translate]="'label.name'"></span>{{ getFloorName(deskFloor.floorId) }}
+                            <span class="p-column-title" [translate]="'label.number_ordinal'"></span>{{ deskFloor.position }}
                         </td>
                         <td class="w-2">
-                            <span class="p-column-title" [translate]="'label.name'"></span>{{ deskFloor.position }}
+                            <span class="p-column-title" [translate]="'label.number_or_seats'"></span>{{ deskFloor.numberSeat }}
                         </td>
-                        <td class="w-2">
-                            <span class="p-column-title" [translate]="'label.name'"></span>{{ deskFloor.numberSeat }}
+                        <td class="w-4">
+                            <span class="p-column-title" [translate]="'label.note'"></span>{{ deskFloor.note }}
                         </td>
-                        <td *ngIf="isMobile" class="w-2">
+                        <td *ngIf="isMobile" class="w-2" style="height: 70px;">
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-warning" icon="pi pi-pencil"
                                 (click)="getDetail(deskFloor.id)"></button>
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-danger" icon="pi pi-trash"
                                 (click)="onDelete(deskFloor.id)"></button>
                         </td>
                         <td *ngIf="!isMobile" alignFrozen="right" pFrozenColumn [frozen]="true"
-                            class="w-2 flex justify-content-start md:justify-content-center">
+                            class="w-2 flex justify-content-start md:justify-content-center" style="height: 70px;">
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-warning" icon="pi pi-pencil"
                                 (click)="getDetail(deskFloor.id)"></button>
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-danger" icon="pi pi-trash" (click)="onDelete(deskFloor.id)"></button>

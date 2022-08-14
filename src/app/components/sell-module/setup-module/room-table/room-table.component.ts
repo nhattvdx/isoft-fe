@@ -2,13 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ColumnFilter, Table } from 'primeng/table';
-import { PageFilterUser } from 'src/app/service/user.service';
 import { Router } from '@angular/router';
-import { RoomTableService } from 'src/app/service/room-table.service';
+import { PageFilterRoomTable, RoomTableService } from 'src/app/service/room-table.service';
 import AppUtil from 'src/app/utilities/app-util';
 import { environment } from 'src/environments/environment';
-import { RoomTable } from './roomtable.model';
-import { PageFilterRoomTable } from 'src/app/service/room-table.service.';
+import { RoomTable } from 'src/app/models/room-table.model';
 
 @Component({
     selector: 'app-room-table',
@@ -55,7 +53,8 @@ export class RoomTableComponent implements OnInit {
         pageSize: 5,
         sortField: 'id',
         isSort: true,
-        status: '0',
+        floorId: 0,
+        isFloor: 'true',
         searchText: '',
     };
     public totalRecords = 0;
@@ -86,7 +85,7 @@ export class RoomTableComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
+        AppUtil.getRoomTableSortTypes(this.translateService).subscribe((res) => {
             this.sortFields = res;
         });
         AppUtil.getSortTypes(this.translateService).subscribe((res) => {
@@ -171,14 +170,6 @@ export class RoomTableComponent implements OnInit {
                     });
             },
         });
-    }
-
-    getFloorName(floorId: number) {
-        if (floorId === 0) {
-            return '';
-        }
-        let floor = this.deskFloors.find((x) => x.id === floorId);
-        return floor ? floor.name : '';
     }
 
     baseUrlImage(image) {

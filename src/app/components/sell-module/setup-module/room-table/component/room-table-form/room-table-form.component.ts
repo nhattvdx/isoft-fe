@@ -10,10 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { RoomTable } from 'src/app/models/room-table.model';
 import { RoomTableService } from 'src/app/service/room-table.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
-import { RoomTable } from '../../roomtable.model';
 
 @Component({
     selector: 'app-room-table-form',
