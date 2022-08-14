@@ -1,16 +1,16 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {MessageService, ConfirmationService} from 'primeng/api'
-import {ColumnFilter, Table} from 'primeng/table';
-import {TypeData} from 'src/app/models/common.model';
-import {ContractType} from 'src/app/models/contract-type.model';
-import {ContractTypeService} from 'src/app/service/contract-type.service';
-import {PageFilterUser} from 'src/app/service/user.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ColumnFilter, Table } from 'primeng/table';
+import { TypeData } from 'src/app/models/common.model';
+import { ContractType } from 'src/app/models/contract-type.model';
+import { ContractTypeService } from 'src/app/service/contract-type.service';
+import { PageFilterUser } from 'src/app/service/user.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
-import {environment} from 'src/environments/environment';
-import {EmployeeTypeFormComponent} from './employee-type-form/employee-type-form.component';
-import {Router} from "@angular/router";
+import { environment } from 'src/environments/environment';
+import { EmployeeTypeFormComponent } from './employee-type-form/employee-type-form.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-employee-type',
@@ -55,7 +55,7 @@ export class EmployeeTypeComponent implements OnInit {
         pageSize: 5,
         sortField: 'id',
         isSort: true,
-        searchText: ''
+        searchText: '',
     };
     public totalRecords = 0;
     public totalPages = 0;
@@ -80,8 +80,7 @@ export class EmployeeTypeComponent implements OnInit {
         private readonly translateService: TranslateService,
         private readonly confirmationService: ConfirmationService,
         private router: Router
-    ) {
-    }
+    ) {}
 
     ngOnInit() {
         AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
@@ -91,7 +90,6 @@ export class EmployeeTypeComponent implements OnInit {
             this.sortTypes = res;
         });
     }
-
 
     onSearch(event) {
         if (event.key === 'Enter') {
@@ -131,31 +129,30 @@ export class EmployeeTypeComponent implements OnInit {
         Object.keys(this.getParams).forEach(
             (k) => this.getParams[k] == null && delete this.getParams[k]
         );
-        console.log('this params', this.getParams);
-        this.pendingRequest = this.ContractTypeService
-            .getListContractType(this.getParams)
-            .subscribe((response: TypeData<ContractType>) => {
-                AppUtil.scrollToTop();
-                this.lstContractTypes = response.data;
-                this.totalRecords = response.totalItems || 0;
-                this.totalPages = response.totalItems / response.pageSize + 1;
-                this.loading = false;
-            });
+        this.pendingRequest = this.ContractTypeService.getListContractType(
+            this.getParams
+        ).subscribe((response: TypeData<ContractType>) => {
+            AppUtil.scrollToTop();
+            this.lstContractTypes = response.data;
+            this.totalRecords = response.totalItems || 0;
+            this.totalPages = response.totalItems / response.pageSize + 1;
+            this.loading = false;
+        });
     }
 
     getDetail(ContractTypeId) {
-        // this.ContractTypeService
-        //     .getContractTypeDetail(ContractTypeId)
-        //     .subscribe((response: ContractType) => {
-        //         this.formData = response;
-        //         this.isEdit = true;
-        //         this.showDialog();
-        //     });
-        this.router.navigate([`/uikit/employee-type/${ContractTypeId}`]).then()
+        this.ContractTypeService.getContractTypeDetail(
+            ContractTypeId
+        ).subscribe((response: ContractType) => {
+            this.formData = response;
+            this.isEdit = true;
+            this.showDialog();
+        });
     }
 
     onAddContractType() {
-        this.router.navigate([`/uikit/employee-type/create`]).then()
+        this.isEdit = false;
+        this.showDialog();
     }
 
     onDelete(ContractTypeId) {
@@ -168,11 +165,11 @@ export class EmployeeTypeComponent implements OnInit {
         this.confirmationService.confirm({
             message: message,
             accept: () => {
-                this.ContractTypeService
-                    .deleteContractType(ContractTypeId)
-                    .subscribe((response: any) => {
-                        this.getContractTypes();
-                    });
+                this.ContractTypeService.deleteContractType(
+                    ContractTypeId
+                ).subscribe((response: any) => {
+                    this.getContractTypes();
+                });
             },
         });
     }

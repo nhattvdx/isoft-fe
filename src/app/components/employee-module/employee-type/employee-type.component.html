@@ -1,29 +1,27 @@
-<div class="grid">
+<div *ngIf="!display" class="grid">
     <div class="col-12">
         <div class="card card-table">
             <h5 [translate]="'label.contract_type_management'"></h5>
             <p-table #dt1 [value]="lstContractTypes" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
-                     styleClass="p-datatable-gridlines sidebar-custom" [paginator]="true"
-                     [responsiveLayout]="isMobile? 'stack': 'scroll'"
-                     [totalRecords]="totalRecords" [rowsPerPageOptions]="[5, 10, 25, 50]" [showCurrentPageReport]="true"
-                     [lazy]="true" (onLazyLoad)="getContractTypes($event)" scrollDirection="both"
-                     [scrollable]="!isMobile"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(first)]="first">
+                styleClass="p-datatable-gridlines sidebar-custom" [paginator]="true"
+                [responsiveLayout]="isMobile? 'stack': 'scroll'" [totalRecords]="totalRecords"
+                [rowsPerPageOptions]="[5, 10, 25, 50]" [showCurrentPageReport]="true" [lazy]="true"
+                (onLazyLoad)="getContractTypes($event)" scrollDirection="both" [scrollable]="!isMobile"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(first)]="first">
                 <ng-template pTemplate="caption">
                     <div class="flex justify-content-start md:justify-content-between flex-column md:flex-row">
                         <span class="p-input-icon-left mb-2">
                             <i class="pi pi-search"></i>
                             <input #filter [(ngModel)]="getParams.searchText" pInputText type="text"
-                                   (keypress)="onSearch($event)"
-                                   [placeholder]="'label.search' | translate" class="w-full"/>
+                                (keypress)="onSearch($event)" [placeholder]="'label.search' | translate"
+                                class="w-full" />
                         </span>
                         <div class="flex justify-content-between md:justify-content-end mt-2 md:mt-0">
                             <button pButton [label]="'button.export' | translate" class="p-button-warning mb-2 mr-2"
-                                    icon="pi pi-download"
-                                    (click)="getReligions(null, true)"></button>
+                                icon="pi pi-download" (click)="getReligions(null, true)"></button>
                             <!-- add button -->
                             <button pButton [label]="'button.add' | translate" class="mb-2" icon="pi pi-user-plus"
-                                    (click)="onAddContractType()"></button>
+                                (click)="onAddContractType()"></button>
                         </div>
                     </div>
                 </ng-template>
@@ -61,16 +59,16 @@
                         </td>
                         <td *ngIf="isMobile" class="w-3">
                             <button pButton class="p-button-warning" icon="pi pi-pencil"
-                                    (click)="getDetail(user.id)"></button>
+                                (click)="getDetail(user.id)"></button>
                             <button pButton class="p-button-danger" icon="pi pi-trash"
-                                    (click)="onDelete(user.id)"></button>
+                                (click)="onDelete(user.id)"></button>
                         </td>
                         <td *ngIf="!isMobile" alignFrozen="right" pFrozenColumn [frozen]="true"
                             class="w-3 flex justify-content-start md:justify-content-center">
                             <button pButton class="p-button-warning" icon="pi pi-pencil"
-                                    (click)="getDetail(user.id)"></button>
+                                (click)="getDetail(user.id)"></button>
                             <button pButton class="p-button-danger" icon="pi pi-trash"
-                                    (click)="onDelete(user.id)"></button>
+                                (click)="onDelete(user.id)"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -89,8 +87,9 @@
     </div>
 </div>
 
-<!--<app-employee-type-form #ContractTypeForm [formData]="formData" [isReset]="isReset"-->
-<!--    [display]="display" (onCancel)="display = false; getContractTypes(null, false); isReset = false;" [isEdit]="isEdit"></app-employee-type-form>-->
+<app-employee-type-form #ContractTypeForm [formData]="formData" [isReset]="isReset" [display]="display"
+    (onCancel)="display = false; getContractTypes(null, false); isReset = false;" [isEdit]="isEdit">
+</app-employee-type-form>
 
 <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{'min-width': '45vw'}">
     <ng-template pTemplate="header">
@@ -98,8 +97,8 @@
     </ng-template>
     <ng-template pTemplate="footer">
         <button type="button" pButton icon="pi pi-times" [label]="'button.back' | translate"
-                (click)="cd.reject()"></button>
+            (click)="cd.reject()"></button>
         <button class="p-button-danger" type="button" pButton icon="pi pi-check" [label]="'button.remove' | translate"
-                (click)="cd.accept()"></button>
+            (click)="cd.accept()"></button>
     </ng-template>
 </p-confirmDialog>

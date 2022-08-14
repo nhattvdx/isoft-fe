@@ -100,16 +100,8 @@ import { AppMainComponent } from './layouts/app.main.component';
                             component: BranchComponent,
                         },
                         {
-                            path: 'branch/:id',
-                            component: BranchFormComponent,
-                        },
-                        {
                             path: 'store',
                             component: StoreComponent,
-                        },
-                        {
-                            path: 'store/:id',
-                            component: StoreFormComponent,
                         },
                         {
                             path: 'employee-type',
