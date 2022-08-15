@@ -1,3 +1,5 @@
+import {User} from "./user.model";
+
 export interface WorkflowModel {
     id?: number;
     name?: string;
@@ -28,4 +30,12 @@ export interface WorkflowModel {
 export interface UserAvatarModel {
     fullName?: string,
     avatar?: string
+}
+
+export interface GanttModel {
+    month?: Date
+    todo?: WorkflowModel[]
+    inProgress?: WorkflowModel[]
+    done?: WorkflowModel[]
+    user?: User
 }
