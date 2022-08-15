@@ -130,6 +130,10 @@ export class WorkflowFormComponent implements OnInit {
     onChangeSelected(event) {
     }
 
+    onBack() {
+        this.router.navigate(['/uikit/workflow'])
+    }
+
     onAddCheckList() {
         if (this.itemCheckList?.trim()?.length > 0) {
             this.checkList.push({
