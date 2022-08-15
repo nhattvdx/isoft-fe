@@ -216,7 +216,80 @@
             <p-calendar showIcon="true" [(ngModel)]="ganttWork.month" view="month" dateFormat="mm/yy"></p-calendar>
         </div>
     </div>
-    <div *ngIf="activeItem?.id === '4'"></div>
+    <div *ngIf="activeItem?.id === '4'" class="">
+        <div class="flex align-items-center justify-content-start p-2">
+            <img [src]="ganttWork.user.avatar" class="h-3rem w-3rem">
+            <p class="pl-3 font-semibold text-blue-400">{{ganttWork.user.fullname}}(5/15)</p>
+        </div>
+        <div class="w-full grid">
+            <div class="col-4">
+                <p-virtualScroller [value]="ganttWork.todo" scrollHeight="calc(100vh - 350px)" [itemSize]="100">
+                    <ng-template pTemplate="header">
+                        <div class="flex align-items-center justify-content-start bg-teal-400 p-3">
+                            <p class="text-white">Chưa bắt đầu</p>
+                        </div>
+                    </ng-template>
+                    <ng-template let-work pTemplate="item">
+                        <div pDraggable="jobs" (onDragStart)="dragStart(work)" (onDragEnd)="dragEnd()"
+                             class="flex flex-column align-items-start justify-content-center surface-50 p-2">
+                            <div
+                                class="w-full flex flex-column align-items-start justify-content-start border-left-3 border-teal-400 bg-white p-2">
+                                <p>{{work.name}}</p>
+                                <p>{{work.date | date:'dd/MM/yyyy'}}</p>
+                                <p>
+                                    <i [className]="work.icon"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-virtualScroller>
+            </div>
+            <div class="col-4">
+                <p-virtualScroller [value]="ganttWork.inProgress" scrollHeight="calc(100vh - 350px)" [itemSize]="100">
+                    <ng-template pTemplate="header">
+                        <div class="flex align-items-center justify-content-start bg-green-400 p-3">
+                            <p class="text-white">Đang tiến hành</p>
+                        </div>
+                    </ng-template>
+                    <ng-template let-work pTemplate="item">
+                        <div pDroppable="jobs" (onDrop)="drop()"
+                             class="flex flex-column align-items-start justify-content-center surface-50 p-2">
+                            <div
+                                class="w-full flex flex-column align-items-start justify-content-start border-left-3 border-green-400 bg-white p-2">
+                                <p>{{work.name}}</p>
+                                <p>{{work.date | date:'dd/MM/yyyy'}}</p>
+                                <p>
+                                    <i [className]="work.icon"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-virtualScroller>
+            </div>
+            <div class="col-4">
+                <p-virtualScroller [value]="ganttWork.done" scrollHeight="calc(100vh - 350px)" [itemSize]="100">
+                    <ng-template pTemplate="header">
+                        <div class="flex align-items-center justify-content-start bg-indigo-400 p-3">
+                            <p class="text-white">Hoàn thành</p>
+                        </div>
+                    </ng-template>
+                    <ng-template let-work pTemplate="item">
+                        <div pDroppable="jobs" (onDrop)="drop()"
+                             class="flex flex-column align-items-start justify-content-center surface-50 p-2">
+                            <div
+                                class="w-full flex flex-column align-items-start justify-content-start border-left-3 border-indigo-400 bg-white p-2">
+                                <p>{{work.name}}</p>
+                                <p>{{work.date | date:'dd/MM/yyyy'}}</p>
+                                <p>
+                                    <i [className]="work.icon"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-virtualScroller>
+            </div>
+        </div>
+    </div>
 </div>
 <p-overlayPanel #op class="px-0">
     <ng-template pTemplate>

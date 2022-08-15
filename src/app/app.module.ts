@@ -235,6 +235,7 @@ import {PipesModule} from './shared/pipes/pipes.module';
 import {QlFormatsComponent} from './shared/ql-formats/ql-formats.component';
 import {SpinnerOverlayComponent} from './shared/spinner-overlay/spinner-overlay.component';
 import {WorkflowFormComponent} from "./components/workflow-module/workflow/workflow-form/workflow-form.component";
+import {DragDropModule} from "primeng/dragdrop";
 
 export function createTranslateLoader(http: HttpBackend) {
     return new TranslateHttpLoader(
@@ -347,6 +348,7 @@ export function createTranslateLoader(http: HttpBackend) {
             },
         }),
         DirectivesModule,
+        DragDropModule,
     ],
     declarations: [
         // others component
