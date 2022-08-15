@@ -15,6 +15,7 @@ import AppData from 'src/app/utilities/app-data';
 import AppUtil from 'src/app/utilities/app-util';
 import { SymbolService } from 'src/app/service/symbol.service';
 import * as moment from 'moment';
+import appUtil from 'src/app/utilities/app-util';
 
 @Component({
     selector: 'app-shift-form',
@@ -34,6 +35,7 @@ import * as moment from 'moment';
 })
 export class ShiftFormComponent implements OnInit, OnChanges {
     public appConstant = AppConstant;
+    public appUtil = appUtil;
     @Input('formData') formData: any = {};
     @Input('isReset') isReset: boolean = false;
     @Input('isEdit') isEdit: boolean = false;
@@ -81,11 +83,15 @@ export class ShiftFormComponent implements OnInit, OnChanges {
                 id: this.formData.id,
                 code: this.formData.code,
                 name: this.formData.name,
-                timeIn: moment(this.formData.timeIn).format(
-                    this.appConstant.FORMAT_DATE.T_DATE
+                timeIn: new Date(
+                    moment(this.formData.timeIn).format(
+                        this.appConstant.FORMAT_DATE.T_DATE
+                    )
                 ),
-                timeOut: moment(this.formData.timeOut).format(
-                    this.appConstant.FORMAT_DATE.T_DATE
+                timeOut: new Date(
+                    moment(this.formData.timeOut).format(
+                        this.appConstant.FORMAT_DATE.T_DATE
+                    )
                 ),
                 timeTotal: this.formData.timeTotal,
                 note: this.formData.note,
@@ -150,6 +156,7 @@ export class ShiftFormComponent implements OnInit, OnChanges {
             AppUtil.cleanObject(this.SymbolForm.value)
         );
         this.onCancel.emit({});
+        console.log(newData);
         if (this.isEdit) {
             this.SymbolService.updateSymbol(
                 newData,
@@ -169,6 +176,19 @@ export class ShiftFormComponent implements OnInit, OnChanges {
         if (!(newData.id > 0)) {
             newData.id = 0;
         }
+        newData.timeIn =
+            this.appUtil.formatLocalTimezone(
+                moment(newData.timeIn).format(
+                    this.appConstant.FORMAT_DATE.T_DATE
+                )
+            ) || null;
+        newData.timeOut =
+            this.appUtil.formatLocalTimezone(
+                moment(newData.timeOut).format(
+                    this.appConstant.FORMAT_DATE.T_DATE
+                )
+            ) || null;
+
         return newData;
     }
 

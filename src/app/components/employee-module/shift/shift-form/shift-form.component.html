@@ -36,22 +36,24 @@
                     <div class="field col-12 md:col-6 flex flex-column">
                         <label htmlFor="code">{{'label.code' | translate}}</label>
                         <input pInputText id="code" [(ngModel)]="SymbolForm.value.code" formControlName="code" />
+                        <small *ngIf="checkValidValidator('code')" class="p-error"
+                            [innerHTML]="'info.code' | translate"></small>
                     </div>
                     <div class="field col-12 md:col-6 flex flex-column">
                         <label htmlFor="name">{{'label.name' | translate}}</label>
                         <input pInputText id="name" [(ngModel)]="SymbolForm.value.name" formControlName="name" />
+                        <small *ngIf="checkValidValidator('name')" class="p-error"
+                            [innerHTML]="'info.name' | translate"></small>
                     </div>
                     <div class="field col-12 md:col-6 flex flex-column">
                         <label htmlFor="time_in">{{'label.time_in' | translate}}</label>
-                        <!-- <p-calendar [(ngModel)]="SymbolForm.value.timeIn" [timeOnly]="true" [hourFormat]="24"
-                            inputId="timeonly"></p-calendar> -->
-                        <p-inputMask mask="99:99" [(ngModel)]="SymbolForm.value.timeIn" formControlName="timeIn"
-                            slotChar="HH:mm"></p-inputMask>
+                        <p-calendar [(ngModel)]="SymbolForm.value.timeIn" [timeOnly]="true" formControlName="timeIn"
+                            [hourFormat]="24" inputId="timeonly"></p-calendar>
                     </div>
                     <div class="field col-12 md:col-6 flex flex-column">
                         <label htmlFor="time_out">{{'label.time_out' | translate}}</label>
-                        <p-inputMask mask="99:99" [(ngModel)]="SymbolForm.value.timeOut" formControlName="timeOut"
-                            slotChar="HH:mm"></p-inputMask>
+                        <p-calendar [(ngModel)]="SymbolForm.value.timeOut" [timeOnly]="true" formControlName="timeOut"
+                            [hourFormat]="24" inputId="timeonly"></p-calendar>
                     </div>
                     <div class="field col-12 md:col-6 flex flex-column">
                         <label htmlFor="sum">{{'label.sum' | translate}}</label>
