@@ -6,7 +6,7 @@ export interface WorkflowModel {
     deadLineConverted?: number;
     cratedPerson?: string;
     responsiblePerson?: UserAvatarModel[];
-    project?: string;
+    project?: number;
     tag?: string;
     userCreated?: number;
     viewer?: number;
@@ -18,6 +18,11 @@ export interface WorkflowModel {
     dueDate?: Date;
     responsibleUserCreated?: UserAvatarModel;
     dueDateMode?: string;
+    createPersons?: UserAvatarModel[];
+    joinedPersons?: UserAvatarModel[];
+    viewedPersons?: UserAvatarModel[];
+    content?: string
+    department?: number
 }
 
 export interface UserAvatarModel {

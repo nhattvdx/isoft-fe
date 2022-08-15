@@ -243,6 +243,13 @@
         "description": "[KO]Description",
         "add_room_table": "[KO]Add new room table",
         "edit_room_table": "[KO]Edit room table",
+        "shift_management": "[KO]Shift management",
+        "shift_add": "[KO]Add new shift",
+        "shift_update": "[KO]Update shift",
+        "shift_name": "[KO]Shift name",
+        "time_in": "[KO]Start time",
+        "time_out": "[KO]End time",
+        "sum": "[KO]Sum",
         "desk": "[KO]Desk",
         "floor": "[KO]Floor"
     },
@@ -270,7 +277,9 @@
         "delete_department_header": "[KO]Delete department",
         "delete_department_content": "[KO]Are you sure you want to delete this department?",
         "delete_timekeeping_header": "[KO]Delete timekeeping",
-        "delete_timekeeping": "[KO]Are you sure you want to delete this timekeeping?"
+        "delete_timekeeping": "[KO]Are you sure you want to delete this timekeeping?",
+        "delete_shift_header": "[KO]Delete shift",
+        "delete_shift": "[KO]Are you sure you want to delete this shift?"
     },
     "success": {
         "change_pass_successfully": "[KO]Change password successfully",

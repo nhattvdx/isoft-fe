@@ -1,0 +1,186 @@
+<div class="card card-table">
+    <h5>{{isEdit ? ('label.workflow_edit' | translate) : ('label.workflow_add' | translate)}}</h5>
+    <div class="field grid mb-3">
+        <label for="title" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Tiêu đề</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <input pInputText id="title" type="text" class="w-full" [(ngModel)]="workflowModel.name"
+                   placeholder="Nhập tiêu đề công việc">
+        </div>
+    </div>
+    <div class="field grid mb-3">
+        <label for="content" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Nội dung</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <textarea id="content" rows="6" pInputTextarea class="w-full"
+                      [(ngModel)]="workflowModel.content" placeholder="Nhập nội dung công việc"></textarea>
+        </div>
+    </div>
+    <div class="field grid mb-3">
+        <label for="responsible" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Trách
+            nhiệm</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10 flex align-items-center justify-content-start">
+            <p-multiSelect id="responsible" [options]="users" [(ngModel)]="workflowModel.responsiblePerson"
+                           defaultLabel="Chọn người chịu trách nhiệm" optionLabel="fullName"
+                           class="multiselect-custom flex-1">
+                <ng-template let-value pTemplate="selectedItems">
+                    <div class="w-full h-full">
+                        <p-avatarGroup styleClass="mb-0">
+                            <p-avatar *ngFor="let selectedUser of workflowModel.responsiblePerson"
+                                      [image]="selectedUser.avatar"
+                                      shape="circle" [title]="selectedUser.fullName"></p-avatar>
+                        </p-avatarGroup>
+                        <div *ngIf="!workflowModel.responsiblePerson || workflowModel.responsiblePerson?.length === 0"
+                             class="p-2">
+                            Chọn người chịu trách nhiệm
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template let-user pTemplate="item">
+                    <div class="flex align-items-center justify-content-start">
+                        <img class="h-2rem w-2rem mr-3" [src]="user.avatar"/>
+                        <p>{{user.fullName}}</p>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
+            <p-selectButton [options]="userTypeOptions" [(ngModel)]="userTypesSelected" multiple="multiple"
+                            optionLabel="name"
+                            optionValue="value" class="ml-3" (onChange)="onChangeSelected($event)"></p-selectButton>
+        </div>
+    </div>
+    <div *ngIf="userTypesSelected?.includes(1)" class="field grid mb-3">
+        <label for="createdBy" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Tạo bởi</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <p-multiSelect id="createdBy" [options]="users" [(ngModel)]="workflowModel.createPersons"
+                           defaultLabel="Chọn người chịu trách nhiệm" optionLabel="fullName"
+                           class="multiselect-custom w-full">
+                <ng-template let-value pTemplate="selectedItems">
+                    <div class="w-full h-full">
+                        <p-avatarGroup styleClass="mb-0">
+                            <p-avatar *ngFor="let selectedUser of workflowModel.createPersons"
+                                      [image]="selectedUser.avatar"
+                                      shape="circle" [title]="selectedUser.fullName"></p-avatar>
+                        </p-avatarGroup>
+                        <div *ngIf="!workflowModel.createPersons || workflowModel.createPersons?.length === 0"
+                             class="p-2">
+                            Chọn người tạo
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template let-user pTemplate="item">
+                    <div class="flex align-items-center justify-content-start">
+                        <img class="h-2rem w-2rem mr-3" [src]="user.avatar"/>
+                        <p>{{user.fullName}}</p>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
+        </div>
+    </div>
+    <div *ngIf="userTypesSelected?.includes(2)" class="field grid mb-3">
+        <label for="joined" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Tham gia</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <p-multiSelect id="joined" [options]="users" [(ngModel)]="workflowModel.joinedPersons"
+                           defaultLabel="Chọn người chịu trách nhiệm" optionLabel="fullName"
+                           class="multiselect-custom">
+                <ng-template let-value pTemplate="selectedItems">
+                    <div class="w-full h-full">
+                        <p-avatarGroup styleClass="mb-0">
+                            <p-avatar *ngFor="let selectedUser of workflowModel.joinedPersons"
+                                      [image]="selectedUser.avatar"
+                                      shape="circle" [title]="selectedUser.fullName"></p-avatar>
+                        </p-avatarGroup>
+                        <div *ngIf="!workflowModel.joinedPersons || workflowModel.joinedPersons.length === 0"
+                             class="p-2">
+                            Chọn người tham gia
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template let-user pTemplate="item">
+                    <div class="flex align-items-center justify-content-start">
+                        <img class="h-2rem w-2rem mr-3" [src]="user.avatar"/>
+                        <p>{{user.fullName}}</p>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
+        </div>
+    </div>
+    <div *ngIf="userTypesSelected?.includes(3)" class="field grid mb-3">
+        <label for="viewedBy" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Quan sát</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <p-multiSelect id="viewedBy" [options]="users" [(ngModel)]="workflowModel.viewedPersons"
+                           defaultLabel="Chọn người chịu trách nhiệm" optionLabel="fullName"
+                           class="multiselect-custom">
+                <ng-template let-value pTemplate="selectedItems">
+                    <div class="w-full h-full">
+                        <p-avatarGroup styleClass="mb-0">
+                            <p-avatar *ngFor="let selectedUser of workflowModel.viewedPersons"
+                                      [image]="selectedUser.avatar"
+                                      shape="circle" [title]="selectedUser.fullName"></p-avatar>
+                        </p-avatarGroup>
+                        <div *ngIf="!workflowModel.viewedPersons || workflowModel.viewedPersons.length === 0"
+                             class="p-2">
+                            Chọn người quan sát
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template let-user pTemplate="item">
+                    <div class="flex align-items-center justify-content-start">
+                        <img class="h-2rem w-2rem mr-3" [src]="user.avatar"/>
+                        <p>{{user.fullName}}</p>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
+        </div>
+    </div>
+    <div class="field grid mb-3">
+        <label for="parentProject" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Dự án
+            cha</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <p-dropdown id="parentProject" [options]="parentProjects" [(ngModel)]="workflowModel.project"
+                        placeholder="Chọn dự án cha"
+                        optionLabel="name"></p-dropdown>
+        </div>
+    </div>
+    <div class="field grid mb-3">
+        <label for="viewer" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Người được xem</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <p-dropdown id="viewer" [options]="viewers" [(ngModel)]="workflowModel.viewer"
+                        placeholder="Chọn người được xem"
+                        optionLabel="name"></p-dropdown>
+        </div>
+    </div>
+    <div class="field grid mb-3">
+        <label for="department" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Phòng ban</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <p-dropdown id="department" [options]="departments" [(ngModel)]="workflowModel.department"
+                        placeholder="Chọn phòng ban"
+                        optionLabel="name"></p-dropdown>
+        </div>
+    </div>
+    <div class="field grid mb-3">
+        <label for="deadline" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Hạn chót</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <p-calendar id="deadline" [(ngModel)]="workflowModel.deadLine" dateFormat="dd/mm/yy"
+                        showIcon="true" class="w-full"></p-calendar>
+        </div>
+    </div>
+    <div class="field grid mb-3">
+        <label class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Tạo checklist kiểm tra</label>
+        <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
+            <div class="flex flex-column align-items-start justify-content-start max-h-16rem overflow-y-auto">
+                <div *ngFor="let item of checkList"
+                     class="w-full flex flex-row align-items-start justify-content-start mb-3">
+                    <p-checkbox [(ngModel)]="item.checked" [binary]="true" inputId="binary"></p-checkbox>
+                    <p class="pl-3">{{item.value}}</p>
+                </div>
+            </div>
+            <div class="p-inputgroup">
+                <input type="text" pInputText placeholder="Nhập nội dung kiểm tra" [(ngModel)]="itemCheckList">
+                <button type="button" pButton pRipple icon="pi pi-plus" styleClass="p-button-warn"
+                        (click)="onAddCheckList()"></button>
+            </div>
+        </div>
+    </div>
+    <div class="w-full flex align-items-center justify-content-center">
+        <button pButton>Lưu</button>
+        <button pButton class="p-button-outlined p-button-secondary ml-3" (click)="onBack()">Quay lại</button>
+    </div>
+</div>

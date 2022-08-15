@@ -304,8 +304,18 @@
         "stop_cooperate": "Ngừng hợp tác",
         "add_room_table": "Thêm mới một Lầu/Phòng, Bàn",
         "edit_room_table": "Chỉnh sửa Lầu/Phòng, Bàn",
+        "shift_management": "Quản lý ca làm việc",
+        "shift_add": "Thêm ca làm việc",
+        "shift_update": "Cập nhật ca làm việc",
+        "shift_name": "Tên ca làm việc",
+        "time_in": "Giờ vào",
+        "time_out": "Giờ ra",
+        "sum": "Tổng",
         "desk": "Bàn",
-        "floor": "Lầu/Phòng"
+        "floor": "Lầu/Phòng",
+        "workflow_management": "Quản lý công việc",
+        "workflow_edit": "Chỉnh sửa công việc",
+        "workflow_add": "Thêm mới công việc"
     },
     "button": {
         "sign_in": "Đăng nhập",
@@ -356,7 +366,9 @@
         "delete_room_table_header": "Xoá lầu/phòng, bàn",
         "delete_room_table": "Bạn có chắc muốn xoá lầu/phòng, bàn này?",
         "delete_timekeeping_header": "Xóa vị trí chấm công",
-        "delete_timekeeping": "Bạn có chắc xoá vị trí chấm công này?"
+        "delete_timekeeping": "Bạn có chắc xoá vị trí chấm công này?",
+        "delete_shift_header": "Xóa ca làm việc",
+        "delete_shift": "Bạn có chắc xoá ca làm việc này?"
     },
     "error": {
         "0": "Đã có sự cố xảy ra. Vui lòng liên hệ nhà quản trị",
