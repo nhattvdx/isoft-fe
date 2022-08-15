@@ -14,6 +14,7 @@ import AppConstant from 'src/app/utilities/app-constants';
 import AppData from 'src/app/utilities/app-data';
 import AppUtil from 'src/app/utilities/app-util';
 import { TargetService } from 'src/app/service/target.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-timekeeping-position-form',
@@ -30,6 +31,7 @@ import { TargetService } from 'src/app/service/target.service';
 })
 export class TimekeepingPositionFormComponent implements OnInit, OnChanges {
     public appConstant = AppConstant;
+    public appUtil = AppUtil;
     @Input('formData') formData: any = {};
     @Input('isReset') isReset: boolean = false;
     @Input('isEdit') isEdit: boolean = false;
@@ -89,11 +91,17 @@ export class TimekeepingPositionFormComponent implements OnInit, OnChanges {
                 present: this.formData.present,
                 nameContact: this.formData.nameContact,
                 id: this.formData.id,
-                dateInvoice: this.formData.dateInvoice,
+                dateInvoice: moment(this.formData.dateInvoice).format(
+                    this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+                ),
                 unitPrice: this.formData.unitPrice,
                 total: this.formData.total,
-                startDate: this.formData.startDate,
-                endDate: this.formData.endDate,
+                startDate: moment(this.formData.startDate).format(
+                    this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+                ),
+                endDate: moment(this.formData.endDate).format(
+                    this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+                ),
                 phone: this.formData.phone,
                 identityCode: this.formData.identityCode,
                 note: this.formData.note,
@@ -159,6 +167,7 @@ export class TimekeepingPositionFormComponent implements OnInit, OnChanges {
         let newData = this.cleanObject(
             AppUtil.cleanObject(this.TargetForm.value)
         );
+        console.log(newData);
         this.onCancel.emit({});
         if (this.isEdit) {
             this.TargetService.updateTarget(
@@ -179,6 +188,24 @@ export class TimekeepingPositionFormComponent implements OnInit, OnChanges {
         if (!(newData.id > 0)) {
             newData.id = 0;
         }
+        newData.dateInvoice = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.dateInvoice,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
+        newData.startDate = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.startDate,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
+        newData.endDate = this.appUtil.formatLocalTimezone(
+            moment(
+                newData.endDate,
+                this.appConstant.FORMAT_DATE.VN_DATE_PIPE_SHORT_DATE
+            ).format(this.appConstant.FORMAT_DATE.T_DATE)
+        );
         return newData;
     }
 
