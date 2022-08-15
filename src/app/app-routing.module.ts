@@ -220,10 +220,6 @@ import {WorkflowFormComponent} from "./components/workflow-module/workflow/workf
                                     component: RoomTableComponent,
                                 },
                                 {
-                                    path: 'room-table/:id',
-                                    component: RoomTableFormComponent,
-                                },
-                                {
                                     path: 'quota',
                                     component: QuotaComponent,
                                 },

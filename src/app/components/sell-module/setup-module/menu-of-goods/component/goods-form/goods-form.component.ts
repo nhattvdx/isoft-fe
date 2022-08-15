@@ -16,10 +16,10 @@ import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
 
 @Component({
-    selector: 'app-room-table-form',
-    templateUrl: './room-table-form.component.html',
+    selector: 'app-goods-form',
+    templateUrl: './goods-form.component.html',
 })
-export class RoomTableFormComponent implements OnInit {
+export class GoodsFormComponent implements OnInit {
     public appConstant = AppConstant;
     @Input('formData') formData: any = {};
     @Input('isEdit') isEdit: boolean = false;

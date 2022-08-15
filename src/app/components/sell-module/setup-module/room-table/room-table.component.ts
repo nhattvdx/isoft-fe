@@ -7,12 +7,12 @@ import { PageFilterRoomTable, RoomTableService } from 'src/app/service/room-tabl
 import AppUtil from 'src/app/utilities/app-util';
 import { environment } from 'src/environments/environment';
 import { RoomTable } from 'src/app/models/room-table.model';
+import { RoomTableFormComponent } from './component/room-table-form/room-table-form.component';
 
 @Component({
     selector: 'app-room-table',
     templateUrl: './room-table.component.html',
     providers: [MessageService, ConfirmationService],
-
     styleUrls: ['../../../../../assets/demo/badges.scss'],
     styles: [
         `
@@ -37,6 +37,7 @@ import { RoomTable } from 'src/app/models/room-table.model';
     ],
 })
 export class RoomTableComponent implements OnInit {
+    @ViewChild('roomTableForm') roomTableForm: RoomTableFormComponent;
     loading: boolean = true;
 
     sortFields: any[] = [];
@@ -85,9 +86,11 @@ export class RoomTableComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        AppUtil.getRoomTableSortTypes(this.translateService).subscribe((res) => {
-            this.sortFields = res;
-        });
+        AppUtil.getRoomTableSortTypes(this.translateService).subscribe(
+            (res) => {
+                this.sortFields = res;
+            }
+        );
         AppUtil.getSortTypes(this.translateService).subscribe((res) => {
             this.sortTypes = res;
         });
@@ -113,8 +116,7 @@ export class RoomTableComponent implements OnInit {
 
     getFloors() {
         this.roomTableServices.getListNoQuery().subscribe((res) => {
-            this.floors =
-                res.data.filter((item) => item.floorId === 0) || [];
+            this.floors = res.data.filter((item) => item.floorId === 0) || [];
         });
     }
 
@@ -142,15 +144,14 @@ export class RoomTableComponent implements OnInit {
     }
 
     getDetail(id) {
-        this.router.navigate([`/uikit/setup/room-table/${id}`]).then();
+        this.roomTableForm.getDetail(id);
+        this.display = true;
     }
 
     onAddRoomTable() {
-        this.router
-            .navigate([`/uikit/setup/room-table/create`], {
-                skipLocationChange: true,
-            })
-            .then();
+        this.isEdit = false;
+        this.roomTableForm.onReset();
+        this.display = true;
     }
 
     onDelete(id) {

@@ -1,5 +1,5 @@
-<div class="grid">
-    <div class="col-12">
+<div *ngIf="!display" class="grid my-2">
+    <div class="col-12 p-0">
         <div class="card card-table">
             <div class="py-2 flex flex-column sm:flex-row align-items-center sm:justify-content-between">
                 <h5 [translate]="'label.table_floor_management'"></h5>
@@ -101,13 +101,8 @@
                                 <span [translate]="'label.number_or_seats'"></span>
                             </div>
                         </th>
-                        <th class="w-4">
-                            <div class="flex justify-content-between align-items-center">
-                                <span [translate]="'label.note'"></span>
-                            </div>
-                        </th>
-                        <th *ngIf="isMobile" class="w-2"></th>
-                        <th *ngIf="!isMobile" class="w-2" alignFrozen="right" pFrozenColumn [frozen]="true"></th>
+                        <th *ngIf="isMobile"></th>
+                        <th *ngIf="!isMobile" style="width:200px" alignFrozen="right" pFrozenColumn [frozen]="true"></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-deskFloor>
@@ -130,17 +125,14 @@
                         <td class="w-2">
                             <span class="p-column-title" [translate]="'label.number_or_seats'"></span>{{ deskFloor.numberSeat }}
                         </td>
-                        <td class="w-4">
-                            <span class="p-column-title" [translate]="'label.note'"></span>{{ deskFloor.note }}
-                        </td>
-                        <td *ngIf="isMobile" class="w-2" style="height: 70px;">
+                        <td *ngIf="isMobile" style="height: 70px;">
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-warning" icon="pi pi-pencil"
                                 (click)="getDetail(deskFloor.id)"></button>
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-danger" icon="pi pi-trash"
                                 (click)="onDelete(deskFloor.id)"></button>
                         </td>
                         <td *ngIf="!isMobile" alignFrozen="right" pFrozenColumn [frozen]="true"
-                            class="w-2 flex justify-content-start md:justify-content-center" style="height: 70px;">
+                            class="flex justify-content-start md:justify-content-center" style="height: 70px; width:200px">
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-warning" icon="pi pi-pencil"
                                 (click)="getDetail(deskFloor.id)"></button>
                             <button *ngIf="!checkCodeRequired(deskFloor)" pButton class="p-button-danger" icon="pi pi-trash" (click)="onDelete(deskFloor.id)"></button>
@@ -161,6 +153,9 @@
         </div>
     </div>
 </div>
+
+<app-room-table-form #roomTableForm [formData]="formData" [display]="display" (onCancel)="display = false; getRoomTable(null, false); isReset = false;" [isEdit]="isEdit"></app-room-table-form>
+
 
 <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{ 'min-width': '45vw' }">
     <ng-template pTemplate="header">

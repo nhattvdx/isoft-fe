@@ -1,3 +1,4 @@
+import { GoodsFormComponent } from './components/sell-module/setup-module/menu-of-goods/component/goods-form/goods-form.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {
@@ -425,6 +426,7 @@ export function createTranslateLoader(http: HttpBackend) {
         QuotaComponent,
         ComboComponent,
         MenuOfGoodsComponent,
+        GoodsFormComponent,
         InventoryControlComponent,
         DefectiveGoodsComponent,
         AccountingLinkComponent,
