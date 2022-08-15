@@ -3,14 +3,15 @@
     <div class="field grid mb-3">
         <label for="title" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Tiêu đề</label>
         <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
-            <input pInputText id="title" type="text" class="w-full" [(ngModel)]="workflowModel.name">
+            <input pInputText id="title" type="text" class="w-full" [(ngModel)]="workflowModel.name"
+                   placeholder="Nhập tiêu đề công việc">
         </div>
     </div>
     <div class="field grid mb-3">
         <label for="content" class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Nội dung</label>
         <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
             <textarea id="content" rows="6" pInputTextarea class="w-full"
-                      [(ngModel)]="workflowModel.content"></textarea>
+                      [(ngModel)]="workflowModel.content" placeholder="Nhập nội dung công việc"></textarea>
         </div>
     </div>
     <div class="field grid mb-3">
@@ -165,7 +166,8 @@
         <label class="col-2 sm:col-12 md:col-2 ld:col-2 xl:col-2 align-items-start">Tạo checklist kiểm tra</label>
         <div class="col-10 sm:col-12 md:col-10 ld:col-10 xl:col-10">
             <div class="flex flex-column align-items-start justify-content-start max-h-16rem overflow-y-auto">
-                <div *ngFor="let item of checkList" class="w-full flex flex-row align-items-start justify-content-start mb-3">
+                <div *ngFor="let item of checkList"
+                     class="w-full flex flex-row align-items-start justify-content-start mb-3">
                     <p-checkbox [(ngModel)]="item.checked" [binary]="true" inputId="binary"></p-checkbox>
                     <p class="pl-3">{{item.value}}</p>
                 </div>
