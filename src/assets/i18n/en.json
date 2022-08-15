@@ -285,7 +285,14 @@
         "group": "Group",
         "description": "Description",
         "add_room_table": "Add new room table",
-        "edit_room_table": "Edit room table"
+        "edit_room_table": "Edit room table",
+        "shift_management": "Shift management",
+        "shift_add": "Add new shift",
+        "shift_update": "Update shift",
+        "shift_name": "Shift name",
+        "time_in": "Start time",
+        "time_out": "End time",
+        "sum": "Sum"
     },
     "button": {
         "sign_in": "Sign In",
@@ -327,7 +334,9 @@
         "delete_text_go_header": "Delete document",
         "delete_text_go_content": "Are you sure you want to delete this document?",
         "delete_timekeeping_header": "Delete timekeeping",
-        "delete_timekeeping": "Are you sure you want to delete this timekeeping?"
+        "delete_timekeeping": "Are you sure you want to delete this timekeeping?",
+        "delete_shift_header": "Delete shift",
+        "delete_shift": "Are you sure you want to delete this shift?"
     },
     "success": {
         "change_pass_successfully": "Change password successfully",
