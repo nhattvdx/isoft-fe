@@ -71,6 +71,7 @@ import { WorkflowTypeComponent } from './components/workflow-module/workflow-typ
 import { WorkflowComponent } from './components/workflow-module/workflow/workflow.component';
 import { AuthGuard } from './interceptor/auth-guard.service';
 import { AppMainComponent } from './layouts/app.main.component';
+import {WorkflowFormComponent} from "./components/workflow-module/workflow/workflow-form/workflow-form.component";
 
 @NgModule({
     imports: [
@@ -80,7 +81,7 @@ import { AppMainComponent } from './layouts/app.main.component';
                 { path: 'forgot-password', component: ForgotPasswordComponent },
                 {
                     path: 'uikit',
-                    canActivate: [AuthGuard],
+                    // canActivate: [AuthGuard],
                     component: AppMainComponent,
                     children: [
                         { path: '', component: DashboardComponent },
@@ -178,6 +179,10 @@ import { AppMainComponent } from './layouts/app.main.component';
                         {
                             path: 'workflow',
                             component: WorkflowComponent,
+                        },
+                        {
+                            path: 'workflow/:id',
+                            component: WorkflowFormComponent,
                         },
                         {
                             path: 'workflow-type',

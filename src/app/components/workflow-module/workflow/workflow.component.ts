@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {Page, TypeData} from "../../../models/common.model";
 import {WorkflowModel} from "../../../models/workflow.model";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-workflow',
@@ -78,7 +79,9 @@ export class WorkflowComponent implements OnInit {
         month: new Date()
     }
 
-    constructor() {
+    constructor(
+        private router: Router
+    ) {
     }
 
     ngOnInit(): void {
@@ -109,5 +112,9 @@ export class WorkflowComponent implements OnInit {
     }
 
     getWorkList(event) {
+    }
+
+    onAddWorkflow() {
+        this.router.navigate([`/uikit/workflow/create`]).then()
     }
 }

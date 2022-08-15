@@ -312,7 +312,10 @@
         "time_out": "Giờ ra",
         "sum": "Tổng",
         "desk": "Bàn",
-        "floor": "Lầu/Phòng"
+        "floor": "Lầu/Phòng",
+        "workflow_management": "Quản lý công việc",
+        "workflow_edit": "Chỉnh sửa công việc",
+        "workflow_add": "Thêm mới công việc"
     },
     "button": {
         "sign_in": "Đăng nhập",
