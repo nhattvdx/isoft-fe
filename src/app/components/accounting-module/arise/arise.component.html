@@ -1,5 +1,5 @@
 <div class="card card-table">
-    <h5 [translate]="'left_menu.arise'"></h5>
+    <!-- <h5 [translate]="'left_menu.arise'"></h5> -->
     <app-arise-filter [filter]="paramToGetLedgers" (filterChange)="filterChange($event)"></app-arise-filter>
     <div style="height: 30vh !important">
         <p-table #dt1 [value]="ledgersCollection" dataKey="id" [rows]="5" [rowHover]="true" [paginator]="true"

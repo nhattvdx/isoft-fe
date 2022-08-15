@@ -356,6 +356,30 @@ const AppUtil = {
             })
         );
     },
+    getRoomTableSortTypes(translateService: TranslateService): any {
+        return this.translateList(
+            translateService,
+            ['label.id', 'label.code', 'label.name'],
+            {}
+        ).pipe(
+            map((trans) => {
+                return [
+                    {
+                        code: 'id',
+                        label: trans['label.id'],
+                    },
+                    {
+                        code: 'code',
+                        label: trans['label.code'],
+                    },
+                    {
+                        code: 'name',
+                        label: trans['label.name'],
+                    },
+                ];
+            })
+        );
+    },
     getSortTypes(translateService: TranslateService): any {
         return this.translateList(
             translateService,

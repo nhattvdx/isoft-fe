@@ -1,216 +1,296 @@
-<div class="flex gap-2 py-2">
-    <button type="button" pButton label="F8. Lưu" class="p-button-sm p-button-primary" icon="pi pi-check"></button>
-    <button type="button" pButton label="F9. Hủy" class="p-button-sm p-button-secondary" icon="pi pi-trash"></button>
-    <button type="button" pButton label="F2. Thêm định khoản" class="p-button-sm p-button-success"
-        icon="pi pi-check"></button>
-    <button type="button" pButton label="F4. Thêm hóa đơn" class="p-button-sm p-button-warning"
-        icon="pi pi-check"></button>
-    <button type="button" pButton label="F8. Định khoản thuế" class="p-button-sm p-button-help"
-        icon="pi pi-check"></button>
-</div>
-<div class="text-sm">
-    <div class="grid">
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Mã</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Ngày nhập</label>
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 58%;"></p-inputMask>
-            </div>
-        </div>
-        <div class="col-8">
-        </div>
+<div class="flex flex-column-reverse md:flex-column">
+    <div class="flex flex-wrap pt-5 pb-2 gap-2">
+        <button type="button" pButton label="F8. Lưu" class="p-button-sm p-button-primary" icon="pi pi-check"></button>
+        <button type="button" pButton label="F9. Hủy" class="p-button-sm p-button-secondary"
+            icon="pi pi-trash"></button>
+        <button type="button" pButton label="F2. Thêm định khoản" class="p-button-sm p-button-success"
+            icon="pi pi-check"></button>
+        <button type="button" pButton label="F4. Thêm hóa đơn" class="p-button-sm p-button-warning"
+            icon="pi pi-check"></button>
+        <button type="button" pButton label="F8. Định khoản thuế" class="p-button-sm p-button-help"
+            icon="pi pi-check"></button>
     </div>
-    <div class="grid pb-2">
-        <div class="col-4">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Người nộp</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
+    <div class="text-sm">
+        <div class="grid gap-0 pt-2 pb-4">
+            <div class="col-12 md:col-2 py-0">
+                <div class="field field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4" [translate]="'label.code'"></label>
+                    <input type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText />
+                </div>
             </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Địa chỉ</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
+            <div class="col-12 md:col-2 py-0">
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Ngày nhập</label>
+                    <p-inputMask mask="99/99/9999" class="p-inputtext-sm w-8"></p-inputMask>
+                </div>
             </div>
-        </div>
-        <div class="col-8">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 10%;">Diễn giải</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 100%;" />
+            <div class="col-12 md:col-8 py-0">
             </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 10%;">Ctừ kèm</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 100%;" />
+            <div class="col-12 md:col-4 py-0">
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4 md:w-2">Người nộp</label>
+                    <input type="text" class="p-inputtext-sm w-8 md:w-10" pInputText />
+                </div>
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4 md:w-2">Địa chỉ</label>
+                    <input type="text" class="p-inputtext-sm w-8 md:w-10" pInputText />
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="grid pb-2" style="border-top: 1px solid black;">
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Loại H.Đơn</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Số sê ri</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Số H.đơn</label>
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 58%;"></p-inputMask>
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Ngày H.Đơn</label>
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 58%;"></p-inputMask>
+            <div class="col-12 md:col-8 py-0">
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4 md:w-2">Diễn giải</label>
+                    <input type="text" class="p-inputtext-sm w-8 md:w-10" pInputText />
+                </div>
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4 md:w-2">Ctừ kèm</label>
+                    <input type="text" class="p-inputtext-sm w-8 md:w-10" pInputText />
+                </div>
             </div>
         </div>
-        <div class="col-8">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 10%;">Mã số thuế</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 100%;" />
+        <div class="grid pt-2 pb-4" style="border-top: 1px solid black;">
+            <div class="col-12 md:col-2  py-0">
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Loại H.Đơn</label>
+                    <input [(ngModel)]="ledger.invoiceCode" type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText />
+                </div>
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Số sê ri</label>
+                    <input type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                        [disabled]="ledger.invoiceCode?.length<=0" />
+                </div>
             </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 10%;">Đơn vị</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 100%;" />
+            <div class="col-12 md:col-2  py-0">
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Số H.đơn</label>
+                    <input type="text" class="p-inputtext-sm w-8" pInputText
+                        [disabled]="ledger.invoiceCode?.length<=0" />
+                </div>
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Ngày H.Đơn</label>
+                    <p-inputMask mask="99/99/9999" class="p-inputtext-sm w-8"
+                        [disabled]="ledger.invoiceCode?.length<=0">
+                    </p-inputMask>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="grid pb-2" style="border-top: 1px solid black;">
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Tk nợ</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
+            <div class="col-12 md:col-4 py-0">
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Mã số thuế</label>
+                    <input type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                        [disabled]="ledger.invoiceCode?.length<=0" />
+                </div>
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Đơn vị</label>
+                    <input type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                        [disabled]="ledger.invoiceCode?.length<=0" />
+                </div>
             </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">C.tiết nợ 1</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">C.tiết nợ 2</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 100%;"></p-inputMask>
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 100%;"></p-inputMask>
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 100%;"></p-inputMask>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Số tồn cuối</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Số tồn cuối</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Số tồn cuối</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 30%;">Mã dự án</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 70%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 30%;">Tháng khấu hao</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 70%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 30%;">Ngoại tệ</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 70%;" />
+            <div class="col-12 md:col-4 py-0">
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Địa chỉ</label>
+                    <input type="text" class="p-inputtext-sm w-8" pInputText
+                        [disabled]="ledger.invoiceCode?.length<=0" />
+                </div>
+                <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                    <label class="w-4">Sản Phẩm</label>
+                    <input type="text" class="p-inputtext-sm w-8" pInputText
+                        [disabled]="ledger.invoiceCode?.length<=0" />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="grid pb-2">
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">T.K Có</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
+        <div class="grid gap-0" style="border-top: 1px solid black;">
+            <div class="col-12 md:col-8 pt-3 pb-4 px-0">
+                <div class="grid py-2 md:p-0">
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Tk nợ</label>
+                            <input [(ngModel)]="ledger.debitCode" type="text" class="p-inputtext-sm w-8 md:ml-1"
+                                pInputText />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4 block md:hidden">&nbsp;</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:w-12" pInputText disabled />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Số tồn cuối</label>
+                            <input type="text" class="p-inputtext-sm w-8" pInputText disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid py-2 md:p-0">
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">C.tiết nợ 1</label>
+                            <input type="text" class="p-inputtext-sm" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                                [disabled]="ledger.debitCode?.length<=0" />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4 block md:hidden">&nbsp;</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:w-12" pInputText disabled />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Số tồn cuối</label>
+                            <input type="text" class="p-inputtext-sm w-8" pInputText disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid py-2 md:p-0">
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">C.tiết nợ 2</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                                [disabled]="ledger.debitCode?.length<=0" />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4 block md:hidden">&nbsp;</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:w-12" pInputText disabled />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Số tồn cuối</label>
+                            <input type="text" class="p-inputtext-sm w-8" pInputText disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid py-2 md:px-0 md:pb-0">
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">T.K Có</label>
+                            <input [(ngModel)]="ledger.debitCode" type="text" class="p-inputtext-sm w-8 md:ml-1"
+                                pInputText />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4 block md:hidden">&nbsp;</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:w-12" pInputText disabled />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Số tồn cuối</label>
+                            <input type="text" class="p-inputtext-sm w-8" pInputText disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid py-2 md:p-0">
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">C.tiết Có 1</label>
+                            <input type="text" class="p-inputtext-sm" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                                [disabled]="ledger.debitCode?.length<=0" />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4 block md:hidden">&nbsp;</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:w-12" pInputText disabled />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Số tồn cuối</label>
+                            <input type="text" class="p-inputtext-sm w-8" pInputText disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid py-2 md:p-0">
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">C.tiết Có 2</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                                [disabled]="ledger.debitCode?.length<=0" />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4 block md:hidden">&nbsp;</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:w-12" pInputText disabled />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Số tồn cuối</label>
+                            <input type="text" class="p-inputtext-sm w-8" pInputText disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid py-2 md:px-0 md:pb-0">
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Mã kho</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:ml-1" pInputText
+                                [disabled]="ledger.debitCode?.length<=0" />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-3 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4 block md:hidden">&nbsp;</label>
+                            <input type="text" class="p-inputtext-sm w-8 md:w-12" pInputText disabled />
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 py-0 md:py-1">
+                        <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                            <label class="w-4">Số tồn cuối</label>
+                            <input type="text" class="p-inputtext-sm w-8" pInputText disabled />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">C.tiết Có 1</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">C.tiết Có 2</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 100%;"></p-inputMask>
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 100%;"></p-inputMask>
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 100%;"></p-inputMask>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Số tồn cuối</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Số tồn cuối</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Số tồn cuối</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 30%;">Tỷ giá</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 70%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 30%;">Số lượng</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 70%;" />
-            </div>
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 30%;">Đơn giá</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 70%;" />
-            </div>
-        </div>
-    </div>
-    <div class="grid pb-2">
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 42%;">Mã kho</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 58%;" />
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <p-inputMask mask="99/99/9999" class="p-inputtext-sm" style="width: 100%;"></p-inputMask>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 20%;">Số tồn cuối</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 80%;" />
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="flex align-items-center gap-1" style="font-weight: bold;">
-                <label style="width: 30%;">Thành tiền</label>
-                <input type="text" class="p-inputtext-sm" pInputText style="width: 70%;" />
+            <div class="col-12 md:col-4 pt-2 pb-4">
+                <div>
+                    <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                        <label class="w-4">Mã dự án</label>
+                        <input type="text" class="p-inputtext-sm w-8" pInputText
+                            [disabled]="ledger.debitCode?.length<=0" />
+                    </div>
+                    <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                        <label class="w-4">Tháng khấu hao</label>
+                        <input type="text" class="p-inputtext-sm w-8" pInputText
+                            [disabled]="ledger.debitCode?.length<=0" />
+                    </div>
+
+                </div>
+                <div class="pt-2">
+                    <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                        <label class="w-4">Ngoại tệ</label>
+                        <input type="text" class="p-inputtext-sm w-8" pInputText
+                            [disabled]="ledger.debitCode?.length<=0" />
+                    </div>
+                    <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                        <label class="w-4">Tỷ giá</label>
+                        <input type="text" class="p-inputtext-sm w-8" pInputText
+                            [disabled]="ledger.creditCode?.length<=0" />
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                        <label class="w-4">Số lượng</label>
+                        <input type="text" class="p-inputtext-sm w-8" pInputText
+                            [disabled]="ledger.creditCode?.length<=0" />
+                    </div>
+                    <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                        <label class="w-4">Đơn giá</label>
+                        <input type="text" class="p-inputtext-sm w-8" pInputText
+                            [disabled]="ledger.creditCode?.length<=0" />
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <div class="field flex align-items-center gap-1" style="font-weight: bold;">
+                        <label class="w-4">Thành tiền</label>
+                        <input type="text" class="p-inputtext-sm w-8" pInputText />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

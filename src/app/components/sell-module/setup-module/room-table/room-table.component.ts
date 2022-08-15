@@ -2,12 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ColumnFilter, Table } from 'primeng/table';
-import { PageFilterUser } from 'src/app/service/user.service';
 import { Router } from '@angular/router';
-import { RoomTableService } from 'src/app/service/room-table.service';
+import { PageFilterRoomTable, RoomTableService } from 'src/app/service/room-table.service';
 import AppUtil from 'src/app/utilities/app-util';
 import { environment } from 'src/environments/environment';
-import { RoomTable } from './roomtable.model';
+import { RoomTable } from 'src/app/models/room-table.model';
 
 @Component({
     selector: 'app-room-table',
@@ -26,6 +25,14 @@ import { RoomTable } from './roomtable.model';
             :host ::ng-deep .p-progressbar {
                 height: 0.5rem;
             }
+            :host ::ng-deep .p-panel .p-panel-header .p-panel-header-icon {
+                position: absolute;
+                top: 80px;
+                right: 30px;
+            }
+            :host ::ng-deep .p-button {
+                height: 40px;
+            }
         `,
     ],
 })
@@ -41,11 +48,13 @@ export class RoomTableComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef;
 
-    public getParams: PageFilterUser = {
+    public getParams: PageFilterRoomTable = {
         page: 1,
         pageSize: 5,
         sortField: 'id',
         isSort: true,
+        floorId: 0,
+        isFloor: 'true',
         searchText: '',
     };
     public totalRecords = 0;
@@ -64,6 +73,8 @@ export class RoomTableComponent implements OnInit {
     isEdit: boolean = false;
     isReset: boolean = false;
 
+    floors: RoomTable[];
+
     pendingRequest: any;
 
     constructor(
@@ -74,12 +85,13 @@ export class RoomTableComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        AppUtil.getUserSortTypes(this.translateService).subscribe((res) => {
+        AppUtil.getRoomTableSortTypes(this.translateService).subscribe((res) => {
             this.sortFields = res;
         });
         AppUtil.getSortTypes(this.translateService).subscribe((res) => {
             this.sortTypes = res;
         });
+        this.getFloors();
     }
 
     onSearch(event) {
@@ -97,6 +109,13 @@ export class RoomTableComponent implements OnInit {
 
     clearFilter(columnFilter: ColumnFilter, field: string) {
         columnFilter.clearFilter();
+    }
+
+    getFloors() {
+        this.roomTableServices.getListNoQuery().subscribe((res) => {
+            this.floors =
+                res.data.filter((item) => item.floorId === 0) || [];
+        });
     }
 
     getRoomTable(event?: any, isExport: boolean = false): void {
@@ -153,15 +172,11 @@ export class RoomTableComponent implements OnInit {
         });
     }
 
-    getFloorName(floorId: number) {
-        if (floorId === 0) {
-            return '';
-        }
-        let floor = this.deskFloors.find((x) => x.id === floorId);
-        return floor ? floor.name : '';
-    }
-
     baseUrlImage(image) {
         return `${environment.serverURL}/${image}`;
+    }
+
+    checkCodeRequired(deskFloor) {
+        return deskFloor.code === 'Floor' || deskFloor.code === 'Live';
     }
 }

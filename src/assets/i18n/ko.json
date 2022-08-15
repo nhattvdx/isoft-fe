@@ -249,7 +249,9 @@
         "shift_name": "[KO]Shift name",
         "time_in": "[KO]Start time",
         "time_out": "[KO]End time",
-        "sum": "[KO]Sum"
+        "sum": "[KO]Sum",
+        "desk": "[KO]Desk",
+        "floor": "[KO]Floor"
     },
     "button": {
         "sign_in": "[KO]Sign In",

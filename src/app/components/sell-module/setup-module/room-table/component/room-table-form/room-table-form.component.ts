@@ -10,10 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { RoomTable } from 'src/app/models/room-table.model';
 import { RoomTableService } from 'src/app/service/room-table.service';
 import AppConstant from 'src/app/utilities/app-constants';
 import AppUtil from 'src/app/utilities/app-util';
-import { RoomTable } from '../../roomtable.model';
 
 @Component({
     selector: 'app-room-table-form',
@@ -60,10 +60,6 @@ export class RoomTableFormComponent implements OnInit {
             this.formData &&
             Object.keys(this.formData).length > 0
         ) {
-            this.title = AppUtil.translate(
-                this.translateService,
-                'label.edit_room_table'
-            );
             this.roomTableForm.setValue({
                 name: this.formData.name,
                 code: this.formData.code,
@@ -72,11 +68,6 @@ export class RoomTableFormComponent implements OnInit {
                 numberSeat: this.formData.numberSeat,
                 description: this.formData.description,
             });
-        } else {
-            this.title = AppUtil.translate(
-                this.translateService,
-                'label.add_room_table'
-            );
         }
     }
 

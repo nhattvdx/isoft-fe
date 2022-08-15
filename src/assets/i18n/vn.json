@@ -310,7 +310,9 @@
         "shift_name": "Tên ca làm việc",
         "time_in": "Giờ vào",
         "time_out": "Giờ ra",
-        "sum": "Tổng"
+        "sum": "Tổng",
+        "desk": "Bàn",
+        "floor": "Lầu/Phòng"
     },
     "button": {
         "sign_in": "Đăng nhập",

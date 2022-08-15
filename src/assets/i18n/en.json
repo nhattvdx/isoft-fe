@@ -292,7 +292,9 @@
         "shift_name": "Shift name",
         "time_in": "Start time",
         "time_out": "End time",
-        "sum": "Sum"
+        "sum": "Sum",
+        "desk": "Desk",
+        "floor": "Floor"
     },
     "button": {
         "sign_in": "Sign In",
