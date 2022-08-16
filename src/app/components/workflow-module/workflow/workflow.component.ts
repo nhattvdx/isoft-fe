@@ -3,6 +3,8 @@ import {MenuItem} from "primeng/api";
 import {Page, TypeData} from "../../../models/common.model";
 import {GanttModel, WorkflowModel} from "../../../models/workflow.model";
 import {Router} from "@angular/router";
+import {CalendarOptions} from "@fullcalendar/angular";
+import {addDays} from 'date-fns';
 
 @Component({
     selector: 'app-workflow',
@@ -88,6 +90,9 @@ export class WorkflowComponent implements OnInit {
     }
     draggedJob: WorkflowModel
 
+    events: any[] = []
+    calendarOption: CalendarOptions
+
     constructor(
         private router: Router
     ) {
@@ -132,7 +137,38 @@ export class WorkflowComponent implements OnInit {
                 name: `Done ${i + 1}`,
                 createdDate: new Date()
             })
+            this.events.push({
+                id: i + 1,
+                title: `Event ${i + 1}`,
+                start: addDays(new Date(), i),
+                end: addDays(new Date(), i + 3)
+            })
         }
+        console.log('events', this.events)
+        this.calendarOption = {
+            initialDate: new Date(),
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridWeek'
+            },
+            buttonText: {
+                today: 'Hôm nay',
+                month: 'Tháng',
+                week: 'Tuần'
+            },
+            titleFormat: {
+                month: '2-digit',
+                year: 'numeric'
+            },
+            editable: true,
+            selectable: true,
+            selectMirror: true,
+            dayMaxEvents: true,
+            events: this.events
+        }
+
     }
 
     getWorkList(event) {

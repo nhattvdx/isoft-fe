@@ -1,4 +1,6 @@
-import { GoodsFormComponent } from './components/sell-module/setup-module/menu-of-goods/component/goods-form/goods-form.component';
+import {
+    GoodsFormComponent
+} from './components/sell-module/setup-module/menu-of-goods/component/goods-form/goods-form.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {
@@ -237,6 +239,9 @@ import {QlFormatsComponent} from './shared/ql-formats/ql-formats.component';
 import {SpinnerOverlayComponent} from './shared/spinner-overlay/spinner-overlay.component';
 import {WorkflowFormComponent} from "./components/workflow-module/workflow/workflow-form/workflow-form.component";
 import {DragDropModule} from "primeng/dragdrop";
+import {FullCalendarModule} from "@fullcalendar/angular";
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 export function createTranslateLoader(http: HttpBackend) {
     return new TranslateHttpLoader(
@@ -245,6 +250,11 @@ export function createTranslateLoader(http: HttpBackend) {
         '.json'
     );
 }
+
+FullCalendarModule.registerPlugins([
+    dayGridPlugin,
+    interactionPlugin
+])
 
 @NgModule({
     imports: [
@@ -350,6 +360,7 @@ export function createTranslateLoader(http: HttpBackend) {
         }),
         DirectivesModule,
         DragDropModule,
+        FullCalendarModule
     ],
     declarations: [
         // others component

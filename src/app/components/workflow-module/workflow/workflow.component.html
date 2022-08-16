@@ -212,8 +212,9 @@
         </div>
     </div>
     <div *ngIf="activeItem?.id === '3'">
-        <div class="w-full h-full flex flex-column align-items-start justify-content-start">
-            <p-calendar showIcon="true" [(ngModel)]="ganttWork.month" view="month" dateFormat="mm/yy"></p-calendar>
+        <div class="w-full h-full flex flex-column align-items-start justify-content-start py-2">
+<!--            <p-calendar showIcon="true" [(ngModel)]="ganttWork.month" view="month" dateFormat="mm/yy"></p-calendar>-->
+            <full-calendar class="w-full" [options]="calendarOption"></full-calendar>
         </div>
     </div>
     <div *ngIf="activeItem?.id === '4'" class="">
