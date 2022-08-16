@@ -39,7 +39,7 @@ export class WorkflowComponent implements OnInit {
         },
         {
             id: '4',
-            label: 'Gantt',
+            label: 'Kanban',
             icon: 'pi pi-fw pi-chart-line',
             command: (event) => {
                 this.activeItem = event.item
@@ -144,7 +144,6 @@ export class WorkflowComponent implements OnInit {
                 end: addDays(new Date(), i + 3)
             })
         }
-        console.log('events', this.events)
         this.calendarOption = {
             initialDate: new Date(),
             initialView: 'dayGridMonth',
