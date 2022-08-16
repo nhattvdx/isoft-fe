@@ -150,12 +150,13 @@ export class WorkflowComponent implements OnInit {
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,dayGridWeek'
+                right: 'dayGridMonth,dayGridWeek,dayGridDay'
             },
             buttonText: {
                 today: 'Hôm nay',
                 month: 'Tháng',
-                week: 'Tuần'
+                week: 'Tuần',
+                day: 'Ngày'
             },
             titleFormat: {
                 month: '2-digit',
